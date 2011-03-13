@@ -376,12 +376,12 @@ class Reports_Controller extends Main_Controller {
 			// Validate Personal Information
 			if (!empty($_POST['person_first']))
 			{
-				$post->add_rules('person_first', 'length[3,100]');
+				$post->add_rules('person_first', 'length[1,100]');
 			}
 
 			if (!empty($_POST['person_last']))
 			{
-				$post->add_rules('person_last', 'length[3,100]');
+				$post->add_rules('person_last', 'length[1,100]');
 			}
 
 			if (!empty($_POST['person_email']))

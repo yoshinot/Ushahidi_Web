@@ -786,12 +786,12 @@ class Admin_Reports_Api_Object extends Api_Object_Core {
             // Validate Personal Information
             if ( ! empty($post->person_first)) 
             {
-                $post->add_rules('person_first', 'length[3,100]');
+                $post->add_rules('person_first', 'length[1,100]');
             }
 
             if ( ! empty($post->person_last)) 
             {
-                $post->add_rules('person_last', 'length[3,100]');
+                $post->add_rules('person_last', 'length[1,100]');
             }
 
             if ( ! empty($post->person_email)) 
