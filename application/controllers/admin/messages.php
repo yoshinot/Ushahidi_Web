@@ -90,6 +90,9 @@ class Messages_Controller extends Admin_Controller
             }
         }
 
+        // filtering RT and QT
+        $filter .= " AND message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%'";
+
         // check, has the form been submitted?
         $form_error = FALSE;
         $form_saved = FALSE;
