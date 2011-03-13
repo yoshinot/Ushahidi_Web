@@ -4,7 +4,7 @@
  * then a full URL will be used, eg: http://localhost/ushahidi/. If it only includes
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
-$config['site_domain'] = '/';
+$config['site_domain'] = '/ushahidi';
 
 /**
  * Force a default protocol to be used by the site. If no site_protocol is
@@ -89,7 +89,7 @@ $config['render_stats'] = TRUE;
 
 /**
  * Turn MHI on or off. This is an advanced feature that will drastically alter
- * the way your deployment works. Please read documentation before proceeding.
+ * the way your instance works. Please read documentation before proceeding.
  *
  * @see [A URL not yet created]
  */
