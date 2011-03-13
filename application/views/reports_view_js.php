@@ -121,7 +121,7 @@
 						minlength: 3
 					},
 					captcha: {
-						required: true
+						required: false
 					}
 				},
 				messages: {
