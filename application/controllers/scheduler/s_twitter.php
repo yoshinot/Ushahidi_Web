@@ -121,7 +121,7 @@ class S_Twitter_Controller extends Controller {
 
 		foreach($tweet_results as $tweet) {
 			// continue if tweet is RT
-			if (preg_match('//^(.+?) *(R|Q)T( |:)*(@[a-zA-Z0-9_]+)( |:)/u', $tweet->{'text'}) === 1) {
+			if (preg_match('/^(.+?) *(R|Q)T( |:)*(@[a-zA-Z0-9_]+)( |:)/u', $tweet->{'text'}) === 1) {
 				continue;
 			}
 			$reporter = ORM::factory('reporter')
