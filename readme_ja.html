@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Ushahidi - Readme</title>
+<link href="media/css/admin/login.css" rel="stylesheet" type="text/css" />
+<link href="media/css/readme.css" rel="stylesheet" type="text/css" />
+</head>
+<html>
+    <body>
+        <div id="ushahidi_readme_container">
+            <div id="ushahidi_login_logo">
+                <img src="media/img/admin/logo_login.gif" width="400" 
+                height="80" />
+            </div>
+        <div id="ushahidi_readme">
+            <h1>ようこそ!</h1>
+            <p>Ushahidiのご利用ありがとうございます。我々はできるだけスムーズにセットアップとインストレーションの手順が見つかることを希望しています。アクティブなコミュニティがありますので行き詰まったりした場合には、フォーラムに目を通して<a href="http://forums.ushahidi.com/">何らかの支援を受けてください</a>。フォーラムに加え、我々にはプラットフォームについての<a href="http://wiki.ushahidi.com/doku.php">より詳細な情報がある</a>Wikiがあります。</p>
+          <h1>システム要件</h1>
+<ol>
+      <li><a href="http://www.alanwood.net/unicode/">Unicode support</a>のあるサーバ。</li>
+                    <li> <a href="http://www.mysql.com/" title="http://www.mysql.com/" rel="nofollow">MySQL</a> バージョン 5.0 以上。</li>
+                    <li>PHP バージョン 5.2.3 以上。</li>
+                    <li>HTTP サーバ。Ushahidiが構築されている<a href="http://kohana.com">Kohana</a>フレームワークは次のWebサーバでの動作が確認されています: <a href="http://httpd.apache.org/docs/1.3/">Apache 1.3</a>+, <a href="http://httpd.apache.org/">Apache2.0</a>+, <a href="http://www.lighttpd.net/">lighttpd</a>, 及び<a href="http://www.iis.net/" title="Microsoft Internet Information Services">MS IIS</a>。</li>
+          </ol>
+          <h2>必須エクステンション</h2>
+          <p>以下はUshahidiを正しく動作させるためにあなたのサーバにインストールされていなければならないPHPエクステンションのリストです。</p>
+                <ol>
+                <li><a href="http://php.net/pcre">PCRE</a> はUTF-8の機能を正しく動作させるためには ?enable-utf8 及び ?enable-unicode-properties でコンパイルされていなければなりません。</li>
+                    <li> <a href="http://php.net/iconv">iconv</a> はUTF-8音訳に必須です。</li>
+                    <li><a href="http://php.net/mcrypt">mcrypt</a> は暗号化に必須です。</li>
+                    <li><a href="http://php.net/spl">SPL</a> はいくつかのコアライブラリに必須です。</li>
+                    <li> <a href="http://php.net/mbstring">mbstring</a> はKohanaのUTF-8機能をスピードアップします。</li>
+                    <li><a href="http://php.net/mysql">MySQL</a> はデータベースアクセスに必要です</li>
+          </ol>
+                <p class="feedback info-light"><em> あなたのサーバにインストール済のエクステンションを確認したいですか? </em><a href="http://jontangerine.com/silo/php/phpinfo/"><em>その手順はこちら</em></a>。</p>
+
+<h1>セットアップ事前準備</h1>
+            <p>Ushahiduインストールの前にあなたのサーバのファイルとフォルダにいくつか書き込み権限を与える必要があります。あなたのサーバで以下のファイルとフォルダが書き込み可能になっているか確認してください:</p>
+            <ul>
+                <li><code>application/config/config.php</code></li>
+                <li><code>application/config</code></li>
+                <li><code>application/cache</code></li>
+                <li><code>application/logs</code></li>
+                <li><code>media/uploads</code></li>
+                <li><code>.htaccess</code></li>
+            </ul>
+            <p class="feedback info-light"><em>OSによりファイルパーミッションの構成手順は様々に異なります。こちらにいくつかのOS用のパーミッションについての役に立つリンクがあります。<a href="http://www.washington.edu/computing/unix/permissions.html">Windows</a> 及び<a href="http://support.microsoft.com/kb/308419">Unix</a> オペレーティングシステム。</em></p>
+          <h1>インストレーションガイド</h1>
+          <p>Ushahidi は手動でもWebインストーラ経由でもインストールできます。Ushahidiをインストールする最も簡単な方法はWebインストーラを使う方法で、全てステップバイステップで案内してくれます。</p>
+<h2> Web インストーラ</h2>
+                <ol>
+                    <li>解凍したUshahidi のファイル群をあなたのサーバにアップロード。</li>
+                    <li>あなたのWebサーバで適切なファイルが書き込み可能になっていることを確認(上記 &quot;セットアップ事前準備&quot; 参照)します。</li>
+                    <li>ブラウザに<code>http://[Your Ushahidi URL]/installer</code> を入力し、ステップバイステップの命令に従います。</li>
+                </ol>
+
+          <h2>手動インストレーション</h2>
+                <ol>
+                    <li>解凍したUshahidi ファイル群をあなたのサーバにアップロード。</li>
+                    <li>データベースを作成し、接続できているかどうか注意してください。</li>
+                    <li>あなたのWebサーバで適切なファイルが書き込み可能になっていることを確認(上記 &quot;セットアップ事前準備&quot; 参照)。</li>
+                    <li><code>./application/config/database.template.php</code> を <code>./application/config/database.php</code>にコピーまたはリネーム。</li>
+                    <li><code>database.php</code> を編集してデータベース接続情報を書き込んでください。</li>
+                    <li><code>./application/config/config.template.php</code> を <code>./application/config/config.php</code>にコピーまたはリネーム。</li>
+                    <li><code>config.php</code> を編集して適切な値を設定してください。ファイル内のコメントを見れば正確な設定値が分かります。たいていの場合、その多くは変更不要です。</li>
+                    <li>次のファイル内のSQL記述を実行してあなたのデータベース内に適切なテーブルを作成します。: <code>./sql/ushahidi.sql</code></li>
+                    <li>あなたのサイトをブラウズします:
+                      <Ul>
+<li> URL: <code>http://[Your Ushahidi URL]/</code></li>
+<li>管理エリア: <code>http://[Your Ushahidi URL]/admin</code></li>
+                        <li>ユーザ: <code>admin</code></li>
+                        <li>パスワード: <code>admin</code></li>
+                      </ul>
+                    </li>
+                </ol>
+                <p class="feedback info-light"><em><strong>注意:</strong> あなたのインスタンスを完全に最適化するにはまだいくつかの設定と構成があります。これらの設定についての詳細は<a href="http://wiki.ushahidi.com/doku.php?id=how_to_use_ushahidi_alpha">我々のwiki上</a>にあります。</em></p>
+          
+          
+          <h1>オンライン リソース</h1>
+          <p>より詳細なリファレンスとドキュメントは <a href="http://wiki.ushahidi.com/doku.php">我々のwiki</a>を参照ください。同様に、もっと質問や興味があればお気軽に<a href="http://forums.ushahidi.com/">我々のフォーラム</a>にお立ち寄りください。</p>
+</div>
+        </div>
+</body>
+</html>

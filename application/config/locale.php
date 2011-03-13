@@ -7,13 +7,14 @@
  * for OS's that don't support the first (e.g. Windows). The first valid locale in the array will be used.
  * @see http://php.net/setlocale
  */
-$config['language'] = array('en_US', 'English_United States');
+//$config['language'] = array('en_US', 'English_United States');
+$config['language'] = array('ja_JP', 'Japanese_Japan');
 
 /**
  * All Available Languages
  * Activate new languages by adding them to this array
  */
-$config['all_languages'] = array ( 'en_US'=>'English (US)', 'fr_FR'=>'Français' );
+$config['all_languages'] = array ( 'en_US'=>'English (US)', 'fr_FR'=>'Français', 'ja_JP'=>'Japanese' );
 
 /**
  * Locale timezone. Defaults to use the server timezone.
