@@ -53,7 +53,7 @@ class S_Twitter_Controller extends Controller {
 				$have_results = TRUE; //just starting us off as true, although there may be no results
 				while($have_results == TRUE AND $page <= 2){ //This loop is for pagination of rss results
 					$hashtag = trim(str_replace('#','',$hashtag));
-					$twitter_url = 'http://search.twitter.com/search.json?q=%23'.$hashtag.'&rpp=100&page='.$page;
+					$twitter_url = 'http://search.twitter.com/search.json?q=%23'.$hashtag.'+-RT+-QT&rpp=100&page='.$page.$last_tweet_id;
 					$curl_handle = curl_init();
 					curl_setopt($curl_handle,CURLOPT_URL,$twitter_url);
 					curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,4); //Since Twitter is down a lot, set timeout to 4 secs
