@@ -90,6 +90,10 @@ class S_Twitter_Controller extends Controller {
 		$tweet_results = $tweets->{'results'};
 
 		foreach($tweet_results as $tweet) {
+			// continue if tweet is RT
+			if (preg_match('/^(.+?) *(R|Q)T( |:)*(@[a-zA-Z0-9_]+)( |:)/u', $tweet->{'text'}) === 1) {
+				continue;
+			}
 			$reporter = ORM::factory('reporter')
 				->where('service_id', $service->id)
 				->where('service_account', $tweet->{'from_user'})
