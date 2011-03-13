@@ -457,7 +457,7 @@ class Json_Controller extends Template_Controller
                 $json_item .= "\"type\":\"Feature\",";
                 $json_item .= "\"properties\": {";
                 $json_item .= "\"id\": \"".$row->id."\", ";
-                $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" . url::base() . "reports/view/" . $row->id . "'>" . htmlentities($row->incident_title) . "</a>")) . "\",";
+                $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" . url::base() . "reports/view/" . $row->id . "'>" . htmlentities($row->incident_title, ENT_QUOTES, mb_internal_encoding()) . "</a>")) . "\",";
                 $json_item .= "\"category\":[0], ";
                 $json_item .= "\"timestamp\": \"" . strtotime($row->incident_date) . "\"";
                 $json_item .= "},";
@@ -474,7 +474,7 @@ class Json_Controller extends Template_Controller
             $json_item .= "\"type\":\"Feature\",";
             $json_item .= "\"properties\": {";
             $json_item .= "\"id\": \"".$marker->id."\", ";
-            $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" . url::base() . "reports/view/" . $marker->id . "'>" . htmlentities($marker->incident_title) . "</a>")) . "\",";
+            $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='" . url::base() . "reports/view/" . $marker->id . "'>" . htmlentities($marker->incident_title, ENT_QUOTES, mb_internal_encoding()) . "</a>")) . "\",";
             $json_item .= "\"category\":[0], ";
             $json_item .= "\"timestamp\": \"" . strtotime($marker->incident_date) . "\"";
             $json_item .= "},";
@@ -807,7 +807,7 @@ class Json_Controller extends Template_Controller
                     $json_item .= "\"type\":\"Feature\",";
                     $json_item .= "\"properties\": {";
                     $json_item .= "\"id\": \"".$marker->incident_id."\", \n";
-                    $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='http://" . $sharing_url . "/reports/view/" . $marker->incident_id . "'>" . htmlentities($marker->incident_title) . "</a>")) . "\",";
+                    $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href='http://" . $sharing_url . "/reports/view/" . $marker->incident_id . "'>" . htmlentities($marker->incident_title, ENT_QUOTES, mb_internal_encoding()) . "</a>")) . "\",";
 
                     $json_item .= "\"icon\": \"\", ";
                     $json_item .= "\"color\": \"".$sharing_color ."\", \n";
