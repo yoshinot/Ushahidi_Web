@@ -20,12 +20,12 @@ $config['default'] = array
         'connection'    => array
         (
                 'type'     => 'mysql',
-                'user'     => 'root',     //ユーザー
-                'pass'     => 'nikomiunko',  //パスワード
-                'host'     => 'localhost', //DBサーバ
+                'user'     => 'osm',     //ユーザー
+                'pass'     => 'osmosm',  //パスワード
+                'host'     => 'dbmaster', //DBサーバ
                 'port'     => FALSE,
                 'socket'   => FALSE,
-                'database' => 'ushahidi_dev' //DB名
+                'database' => 'ushahidi' //DB名
         ),
         'character_set' => 'utf8',
         'table_prefix'  => '',
