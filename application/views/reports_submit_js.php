@@ -86,11 +86,11 @@
 						minlength: 1
 					},
 					latitude: {
-						required: false,
+						required: true,
 						range: [-90,90]
 					},
 					longitude: {
-						required: false,
+						required: true,
 						range: [-180,180]
 					},
 					location_name: {
