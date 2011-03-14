@@ -91,7 +91,7 @@ class Messages_Controller extends Admin_Controller
         }
 
         // filtering RT and QT
-        $rt_filter .= " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
+        $rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
         $filter .= " AND".$rt_filter;
 
         // check, has the form been submitted?
