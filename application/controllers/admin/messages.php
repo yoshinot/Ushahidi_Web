@@ -91,7 +91,8 @@ class Messages_Controller extends Admin_Controller
         }
 
         // filtering RT and QT
-        $filter .= " AND message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%'";
+        $rt_filter .= " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
+        $filter .= " AND".$rt_filter;
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -196,6 +197,7 @@ class Messages_Controller extends Admin_Controller
                                                         ->join('reporter','message.reporter_id','reporter.id')
                                                         ->where('service_id', $service_id)
                                                         ->where('message_type', 1)
+                                                        ->where($rt_filter)
                                                         ->count_all();
             
         // Trusted
