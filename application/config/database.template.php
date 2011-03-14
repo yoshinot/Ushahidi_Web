@@ -34,6 +34,28 @@ $config['default'] = array
 	'escape'        => TRUE
 );
 
+# MySQL Slave Setting
+$config['slave'] = array
+(
+  # TODO
+	'benchmark'     => TRUE,
+	'persistent'    => FALSE,
+	'connection'    => array
+	(
+		'type'     => 'mysql',
+		'user'     => 'username',
+		'pass'     => 'password',
+		'host'     => 'localhost',
+		'port'     => FALSE,
+		'socket'   => FALSE,
+		'database' => 'db'
+	),
+	'character_set' => 'utf8',
+	'table_prefix'  => '',
+	'object'        => TRUE,
+	'cache'         => FALSE,
+	'escape'        => TRUE
+);
 
 
 /*
