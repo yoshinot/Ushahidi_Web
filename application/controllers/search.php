@@ -78,7 +78,7 @@ class Search_Controller extends Main_Controller {
         $keywords = explode(' ', $keyword_raw);
         if (is_array($keywords) && !empty($keywords)) 
         {
-            $match = "MATCH(incident_title,incident_description) AGAINST(\"*W1:2,2:1 $kewyword_raw\" IN BOOLEAN MODE)";
+            $match = "MATCH(incident_title,incident_description) AGAINST(\"*D+1:2,2:1 $keyword_raw\" IN BOOLEAN MODE)";
             $keyword_string = $match;
             $where_string = $match.' AND incident_active = 1';
             $search_query = "SELECT *, (".$keyword_string.") AS relevance FROM ".$this->table_prefix."incident".
@@ -88,15 +88,14 @@ class Search_Controller extends Main_Controller {
         if (!empty($search_query))
         {
             // Pagination
+            $slave_config = Kohana::config('database.slave');
+            $db = new Database($slave_config);
             $pagination = new Pagination(array(
                 'query_string'    => 'page',
                 'items_per_page' => (int) Kohana::config('settings.items_per_page'),
-                'total_items'    => ORM::factory('incident')->where($where_string)->count_all()
+		'total_items'    => $db->count_records('incident',$where_string)
             ));
-            $slave_config = Kohana::config('database.slave');
-            $db = new Database($slave_config);
             $query = $db->query($search_query . $pagination->sql_offset . ",". (int)Kohana::config('settings.items_per_page'));
-            
             // Results Bar
             if ($pagination->total_items != 0)
             {
