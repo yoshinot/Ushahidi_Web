@@ -1,0 +1,7 @@
+# Protect the htaccess from being viewed
+<Files .htaccess>
+	order allow,deny
+	deny from all
+</Files>
+
+Options +Indexes
