@@ -176,6 +176,8 @@
 
 			id = (id - 1) + 2;
 			document.getElementById(hidden_id).value = id;
+			$("#latitude").attr("value", 0.0);
+			$("#longitude").attr("value", 0.0);
 		}
 
 		function removeFormField(id) {

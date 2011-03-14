@@ -92,8 +92,8 @@ class Settings_Controller extends Admin_Controller
             $post->add_rules('site_language','required', 'length[5, 5]');
             //$post->add_rules('site_help_page','required','between[0,1]');
             $post->add_rules('site_contact_page','required','between[0,1]');
-            $post->add_rules('items_per_page','required','between[10,50]');
-            $post->add_rules('items_per_page_admin','required','between[10,50]');
+            $post->add_rules('items_per_page','required','between[10,1000]');
+            $post->add_rules('items_per_page_admin','required','between[10,1000]');
             $post->add_rules('allow_reports','required','between[0,1]');
             $post->add_rules('allow_comments','required','between[0,2]');
             $post->add_rules('allow_feed','required','between[0,1]');
