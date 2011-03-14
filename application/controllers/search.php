@@ -74,6 +74,7 @@ class Search_Controller extends Main_Controller {
         {
             $keyword_raw = "";
         }
+                
         $keywords = explode(' ', $keyword_raw);
         if (is_array($keywords) && !empty($keywords)) 
         {
@@ -95,10 +96,8 @@ class Search_Controller extends Main_Controller {
                     // Give relevancy weighting
                     // Title weight = 2
                     // Description weight = 1
-                    $keyword_string = $keyword_string.$plus.
-                       "MATCH(incident_title,incident_description) AGAINST(\"*W1:2,2:1 $chunk\" IN BOOLEAN MODE) AS relevance";
-                    $where_string = $where_string.$or.
-                       "MATCH(incident_title,incident_description) AGAINST(\"*W1:2,2:1 $chunk\" IN BOOLEAN MODE)";
+                    $keyword_string = $keyword_string.$plus."(CASE WHEN incident_title LIKE '%$chunk%' THEN 2 ELSE 0 END) + (CASE WHEN incident_description LIKE '%$chunk%' THEN 1 ELSE 0 END)";
+                    $where_string = $where_string.$or."incident_title LIKE '%$chunk%' OR incident_description LIKE '%$chunk%'";
                     $i++;
                 }
             }
@@ -107,21 +106,22 @@ class Search_Controller extends Main_Controller {
             {
                 // Limit the result set to only those reports that have been approved	
                 $where_string .= ' AND incident_active = 1';
-                $search_query = "SELECT *, ".$keyword_string." FROM ".$this->table_prefix."incident WHERE ".$where_string." ORDER BY relevance DESC LIMIT ";
+                $search_query = "SELECT *, (".$keyword_string.") AS relevance FROM ".$this->table_prefix."incident WHERE (".$where_string.") ORDER BY relevance DESC LIMIT ";
             }
         }
         
         if (!empty($search_query))
         {
             // Pagination
-            $slave_config = Kohana::config('database.slave');
-            $db = new Database($slave_config);
             $pagination = new Pagination(array(
                 'query_string'    => 'page',
                 'items_per_page' => (int) Kohana::config('settings.items_per_page'),
-                'total_items'    => $db->count_records('incident',$where_string)
+                'total_items'    => ORM::factory('incident')->where($where_string)->count_all()
             ));
+            
+            $db = new Database();
             $query = $db->query($search_query . $pagination->sql_offset . ",". (int)Kohana::config('settings.items_per_page'));
+            
             // Results Bar
             if ($pagination->total_items != 0)
             {
