@@ -95,7 +95,7 @@
 					},
 					location_name: {
 						required: function(element) {
-							if ($('#latitude').val() == '0.0' && $('#longitude').val() == '0.0') {
+							if ($('#latitude').val() == 0 && $('#longitude').val() == 0) {
 								return false;
 							} else {
 								return ($('#location_name').val() != '');
@@ -182,8 +182,6 @@
 
 			id = (id - 1) + 2;
 			document.getElementById(hidden_id).value = id;
-			$("#latitude").attr("value", 0.0);
-			$("#longitude").attr("value", 0.0);
 		}
 
 		function removeFormField(id) {
@@ -284,6 +282,8 @@
 				$("#latitude").attr("value", lonlat2.lat);
 				$("#longitude").attr("value", lonlat2.lon);
 			});
+			$("#latitude").attr("value", 0.0);
+			$("#longitude").attr("value", 0.0);
 			
 			// Detect Dropdown Select
 			$("#select_city").change(function() {
