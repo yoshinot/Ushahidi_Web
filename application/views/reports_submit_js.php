@@ -95,7 +95,7 @@
 					},
 					location_name: {
 						required: function(element) {
-							if ($('#latitude').val() == '0.0' && $('#longitude').val == '0.0') {
+							if ($('#latitude').val() == '0.0' && $('#longitude').val() == '0.0') {
 								return false;
 							} else {
 								return ($('#location_name').val() != '');
