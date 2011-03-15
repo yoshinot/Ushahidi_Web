@@ -94,7 +94,13 @@
 						range: [-180,180]
 					},
 					location_name: {
-						required: true
+						required: function(element) {
+							if ($('#latitude').val() == '0.0' && $('#longitude').val() == '0.0') {
+								return false;
+							} else {
+								return ($('#location_name').val() != '');
+							}
+						}
 					},
 					"incident_news[]": {
 						url: true
