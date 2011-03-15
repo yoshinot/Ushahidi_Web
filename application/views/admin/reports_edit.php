@@ -53,6 +53,7 @@
 							<h3><?php echo $id ? Kohana::lang('ui_main.edit_report') : Kohana::lang('ui_main.new_report'); ?></h3>
 							<div class="btns" style="float:right;">
 								<ul>
+									<li><a href="<?php echo url::site(); ?>reports/view/<?php echo $id; ?>" target="_blank"><?php echo strtoupper(Kohana::lang('ui_main.view_report'));?></a></li>
 									<li><a href="#" class="btn_save"><?php echo strtoupper(Kohana::lang('ui_main.save_report'));?></a></li>
 									<li><a href="#" class="btn_save_close"><?php echo strtoupper(Kohana::lang('ui_main.save_close'));?></a></li>
 									<li><a href="<?php echo url::base().'admin/reports/';?>" class="btns_red"><?php echo strtoupper(Kohana::lang('ui_main.cancel'));?></a>&nbsp;&nbsp;&nbsp;</li>
