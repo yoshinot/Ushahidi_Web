@@ -34,6 +34,28 @@ $config['default'] = array
         'escape'        => TRUE
  );
 
+$config['slave'] = array
+ (
+        'benchmark'     => TRUE,
+        'persistent'    => FALSE,
+        'connection'    => array
+        (
+                'type'     => 'mysql',
+                'user'     => 'osm',     //ユーザー
+                'pass'     => 'osmosm',  //パスワード
+                'host'     => 'dbslave', //DBサーバ
+                'port'     => FALSE,
+                'socket'   => FALSE,
+                'database' => 'ushahidi' //DB名
+        ),
+        'character_set' => 'utf8',
+        'table_prefix'  => '',
+        'object'        => TRUE,
+        'cache'         => FALSE,
+        'escape'        => TRUE
+ );
+
+
 
 /*
  *  ----  MHI db routing below.
@@ -42,6 +64,7 @@ $config['default'] = array
 
 $subdomain = '';
 if(substr_count($_SERVER["HTTP_HOST"],'.') > 1) $subdomain = substr($_SERVER["HTTP_HOST"],0,strpos($_SERVER["HTTP_HOST"],'.'));
+
 
 /**
 * If MHI is enabled, determine the appropriate database settings

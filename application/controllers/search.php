@@ -78,50 +78,24 @@ class Search_Controller extends Main_Controller {
         $keywords = explode(' ', $keyword_raw);
         if (is_array($keywords) && !empty($keywords)) 
         {
-            array_change_key_case($keywords, CASE_LOWER);
-            $i = 0;
-            
-            foreach($keywords as $value)
-            {
-                if ( ! in_array($value,$stop_words) && !empty($value))
-                {
-                    $chunk = mysql_real_escape_string($value);
-                    
-                    if ($i > 0)
-                    {
-                        $plus = ' + ';
-                        $or = ' OR ';
-                    }
-                    
-                    // Give relevancy weighting
-                    // Title weight = 2
-                    // Description weight = 1
-                    $keyword_string = $keyword_string.$plus."(CASE WHEN incident_title LIKE '%$chunk%' THEN 2 ELSE 0 END) + (CASE WHEN incident_description LIKE '%$chunk%' THEN 1 ELSE 0 END)";
-                    $where_string = $where_string.$or."incident_title LIKE '%$chunk%' OR incident_description LIKE '%$chunk%'";
-                    $i++;
-                }
-            }
-            
-            if (!empty($keyword_string) && !empty($where_string))
-            {
-                // Limit the result set to only those reports that have been approved	
-                $where_string .= ' AND incident_active = 1';
-                $search_query = "SELECT *, (".$keyword_string.") AS relevance FROM ".$this->table_prefix."incident WHERE (".$where_string.") ORDER BY relevance DESC LIMIT ";
-            }
+            $match = "MATCH(incident_title,incident_description) AGAINST(\"*D+1:2,2:1 $keyword_raw\" IN BOOLEAN MODE)";
+            $keyword_string = $match;
+            $where_string = $match.' AND incident_active = 1';
+            $search_query = "SELECT *, (".$keyword_string.") AS relevance FROM ".$this->table_prefix."incident".
+                            " WHERE (".$where_string.") ORDER BY relevance DESC LIMIT ";
         }
         
         if (!empty($search_query))
         {
             // Pagination
+            $slave_config = Kohana::config('database.slave');
+            $db = new Database($slave_config);
             $pagination = new Pagination(array(
                 'query_string'    => 'page',
                 'items_per_page' => (int) Kohana::config('settings.items_per_page'),
-                'total_items'    => ORM::factory('incident')->where($where_string)->count_all()
+		'total_items'    => $db->count_records('incident',$where_string)
             ));
-            
-            $db = new Database();
             $query = $db->query($search_query . $pagination->sql_offset . ",". (int)Kohana::config('settings.items_per_page'));
-            
             // Results Bar
             if ($pagination->total_items != 0)
             {
