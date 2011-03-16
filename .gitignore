@@ -3,6 +3,7 @@
 *~
 application/logs/*
 application/cache/*
+media/uploads
 media/uploads/*
 #application/config/config.php
 #application/config/database.php
