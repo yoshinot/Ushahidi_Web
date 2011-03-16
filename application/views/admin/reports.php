@@ -65,8 +65,8 @@
 								<tr>
 									<th class="col-1"><?php echo Kohana::lang('ui_main.report_details');?></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
-									<th class="col-3"><input id="checkallincidents" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'incident_id[]' )" /></th>
-									<th class="col-4"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-3"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-4"><input id="checkallincidents" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'incident_id[]' )" /></th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -199,14 +199,14 @@
 											?>
 										</td>
 										<td class="col-2"><?php echo $incident_date; ?></td>
-										<td class="col-3"><input name="incident_id[]" id="incident" value="<?php echo $incident_id; ?>" type="checkbox" class="check-box"/></td>
-										<td class="col-4" style="white-space:nowrap;">
+										<td class="col-3" style="white-space:nowrap;">
 											<ul>
 												<li class="none-separator"><a href="#"<?php if ($incident_approved) echo " class=\"status_yes\"" ?> onclick="reportAction('a','APPROVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
 												<li><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
 												<li><a href="#" class="del" onclick="reportAction('d','DELETE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
 											</ul>
 										</td>
+										<td class="col-4"><input name="incident_id[]" id="incident" value="<?php echo $incident_id; ?>" type="checkbox" class="check-box"/></td>
 									</tr>
 									<?php
 								}

@@ -670,28 +670,30 @@ table td{
 	padding:0;
 	text-align:left;
 }
-.table th.col-4{ text-align:right;}
-.table .col-1{
-	border-left:2px solid #bbb;
+.table th.col-3{ text-align:right;}
+.table .col-4{
+	border-right:2px solid #bbb;
 	padding:12px 0 10px 10px;
 	width:25px;
 }
-.table .col-2{ width:539px;}
-.table .col-2_sub{
+.table .col-1{
+	border-left:2px solid #bbb;
+ 	width:539px;
+}
+.table .col-1_sub{
 	width:519px;
 	padding-left:20px;
 	background:url(../../img/admin/arrow.gif) no-repeat 3px 17px;
 }
-.table .col-3{
+.table .col-2{
 	width:103px;
 }
-.table td.col-3 {
+.table td.col-2 {
 	font-size:12px;
 	font-weight:bold;
 	color:#555;
 }
-.table .col-4{
-	border-right:2px solid #bbb;
+.table .col-3{
 	padding:12px 18px 10px 0;
 	width:200px;
 }
@@ -756,18 +758,18 @@ ul.links li a{
 ul.links li a:hover{
 	text-decoration:underline;
 }
-.table .col-4 ul{
+.table .col-3 ul{
 	float:right;
 	margin:0;
 	padding:0;
 }
-.table .col-4 ul li{
+.table .col-3 ul li{
 	padding:0 10px 0 12px;
 	background:url(../../img/admin/separator.gif) no-repeat 0 4px;
 	float:left;
 	list-style:none;
 }
-.table .col-4 ul li a.del{ color:#b75f5f;}
+.table .col-3 ul li a.del{ color:#b75f5f;}
 .table td .check-box { margin-top:2px !important;}
 
 /*-- tooltips --*/

@@ -77,8 +77,8 @@
 								<tr>
 									<th class="col-1"><?php echo Kohana::lang('ui_main.comment_details');?></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
-									<th class="col-3"><input id="checkallcomments" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'comment_id[]' )" /></th>
-									<th class="col-4"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-3"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-4"><input id="checkallcomments" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'comment_id[]' )" /></th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -134,8 +134,7 @@
 											</ul>
 										</td>
 										<td class="col-2"><?php echo $comment_date; ?></td>
-										<td class="col-3"><input name="comment_id[]" id="comment" value="<?php echo $comment_id; ?>" type="checkbox" class="check-box"/></td>
-										<td class="col-4" style="white-space:nowrap;">
+										<td class="col-3">
 											<ul>
 												<li class="none-separator"><?php
 												if ($comment_active)
@@ -160,6 +159,7 @@
 												<li><a href="#" class="del" onclick="commentAction('d','DELETE', '<?php echo $comment_id; ?>');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
 											</ul>
 										</td>
+										<td class="col-4"><input name="comment_id[]" id="comment" value="<?php echo $comment_id; ?>" type="checkbox" class="check-box"/></td>
 									</tr>
 									<?php
 								}
