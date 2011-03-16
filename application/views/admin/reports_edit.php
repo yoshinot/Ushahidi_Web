@@ -147,7 +147,7 @@
 									
 									print '<span class="sel-holder">' .
 									form::dropdown('incident_ampm', $ampm_array,
-									$form['incident_ampm']) . '</span>';
+									strtolower($form['incident_ampm'])) . '</span>';
 									?>
 								</div>
 							</div>
