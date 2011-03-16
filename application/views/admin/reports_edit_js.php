@@ -231,13 +231,6 @@
 				$("#latitude").attr("value", lonlat2.lat);
 				$("#longitude").attr("value", lonlat2.lon);
 			});
-			if ($("#latitude").val() == "") {
-				$("#latitude").attr("value", 0);
-			}
-			if ($("#longitude").val() == "") {
-				$("#longitude").attr("value", 0);
-			}
-			
 			
 			// GeoCode
 			$('.btn_find').live('click', function () {
