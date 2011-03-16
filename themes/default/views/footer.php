@@ -15,7 +15,7 @@
  
 			<!-- footer credits -->
 			<div class="footer-credits">
-				Powered by the &nbsp;<a href="http://www.ushahidi.com/"><img src="<?php echo url::base(); ?>/media/img/footer-logo.png" alt="Ushahidi" style="vertical-align:middle" /></a>&nbsp; Platform
+				<a href="http://aws.amazon.com/"><img src="<?php echo url::base(); ?>/media/img/Powered-by-Amazon-Web-Services.jpeg" alt="Ushahidi" style="vertical-align:middle" /></a> &nbsp; and &nbsp; the &nbsp; <a href="http://www.ushahidi.com/"><img src="<?php echo url::base(); ?>/media/img/footer-logo.png" alt="Ushahidi" style="vertical-align:middle" /></a>&nbsp; Platform
 			</div>
 			<!-- / footer credits -->
 		
