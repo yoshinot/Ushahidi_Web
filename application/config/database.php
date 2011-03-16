@@ -15,8 +15,8 @@
 
 $config['default'] = array
  (
-        'benchmark'     => TRUE,
-        'persistent'    => FALSE,
+        'benchmark'     => FALSE,
+        'persistent'    => TRUE,
         'connection'    => array
         (
                 'type'     => 'mysql',
@@ -30,7 +30,7 @@ $config['default'] = array
         'character_set' => 'utf8',
         'table_prefix'  => '',
         'object'        => TRUE,
-        'cache'         => FALSE,
+        'cache'         => TRUE,
         'escape'        => TRUE
  );
 

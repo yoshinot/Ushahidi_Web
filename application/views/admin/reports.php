@@ -216,3 +216,12 @@
 					</div>
 				<?php print form::close(); ?>
 			</div>
+      <!-- for LDRize -->
+      <style>
+      tr.selected td {
+        background-color:#D5E7FF;
+      }
+      </style>
+  		<?php
+	      echo html::script('media/js/ldrize', true);
+  		?>

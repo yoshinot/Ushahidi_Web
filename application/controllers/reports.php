@@ -329,7 +329,8 @@ class Reports_Controller extends Main_Controller {
 			// Validate for maximum and minimum latitude values
 			$post->add_rules('latitude', 'required', 'between[-90,90]');
 			$post->add_rules('longitude', 'required', 'between[-180,180]');
-			$post->add_rules('location_name', 'required', 'length[3,200]');
+			// location_name is not must be needed
+			// $post->add_rules('location_name', 'required', 'length[0,200]');
 
 			//XXX: Hack to validate for no checkboxes checked
 			if (!isset($_POST['incident_category'])) {
