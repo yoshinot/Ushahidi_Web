@@ -174,7 +174,6 @@ class Imap_Core {
 										'subject' => $subject,
 										'body' => $body,
 										'attachments' => $attachments));
-
 			// Mark Message As Read
 			imap_setflag_full($this->imap_stream, $msgno, "\\Seen");
 		}
