@@ -453,10 +453,9 @@ class Reports_Controller extends Admin_Controller
                 $incident_description = $message->message;
                 if ( ! empty($message->message_detail))
                 {
-                    //$form['incident_title'] = preg_replace(" ?(#[a-zA-Z0-9]+ ?)+$",$message->message_detail);
-                    $form['incident_title'] = $message->message_detail;
-                    $incident_description = "aaa";//$message->message_detail;
+                    $incident_description = $message->message_detail;
                 }
+                $form['incident_title'] = preg_replace(" ?(#[a-zA-Z0-9]+ ?)+$",$incident_description);
                 $form['incident_description'] = $incident_description;
                 $form['incident_date'] = date('m/d/Y', strtotime($message->message_date));
                 $form['incident_hour'] = date('h', strtotime($message->message_date));
