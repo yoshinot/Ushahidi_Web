@@ -29,6 +29,13 @@
 		<?php if ($current_page != 11) echo '&hellip;' ?>
 	<?php endif ?>
 
+	<?php if ($current_page == 1): ?>
+    <li><a href="#" style="cursor:not-allowed;">&lt;</a></li>
+	<?php else: ?>
+    <li><a href="<?php echo str_replace('{page}', $current_page - 1, $url) ?>">&lt;</a></li>
+	<?php endif ?>
+
+
 
 	<?php for ($i = $current_page - 9, $stop = $current_page + 10; $i < $stop; ++$i): ?>
 
@@ -42,6 +49,12 @@
 
 	<?php endfor ?>
 
+
+	<?php if ($current_page == $total_pages): ?>
+    <li><a href="#" style="cursor:not-allowed;">&gt;</a></li>
+  <?php else: ?>
+    <li><a href="<?php echo str_replace('{page}', $current_page + 1, $url) ?>">&gt;</a></li>
+	<?php endif ?>
 
 	<?php if ($current_page <= $total_pages - 10): ?>
 		<?php if ($current_page != $total_pages - 10) echo '&hellip;' ?>

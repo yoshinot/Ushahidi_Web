@@ -62,6 +62,11 @@
 					<div class="table-holder">
 						<table class="table">
 							<thead>
+								<tr class="foot">
+									<td colspan="4">
+										<?php echo $pagination; ?>
+									</td>
+								</tr>
 								<tr>
 									<th class="col-1"><input id="checkallincidents" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'incident_id[]' )" /></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.report_details');?></th>
@@ -214,6 +219,20 @@
 							</tbody>
 						</table>
 					</div>
+          <!-- Start Added by #111 -->
+          <!-- tabs -->
+          <div class="tabs">
+            <!-- tab -->
+            <div class="tab">
+              <ul>
+                <li><a href="#" onclick="reportAction('a','APPROVE', '');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
+                <li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
+                <li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
+                <li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- end Added by #111 -->
 				<?php print form::close(); ?>
 			</div>
       <!-- for LDRize -->
