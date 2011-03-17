@@ -32,9 +32,11 @@
 
 			<!-- logo -->
 			<div id="logo">
-				<!-- <h1><?php echo $site_name; ?></h1> -->
-				<!-- <span><?php echo $site_tagline; ?></span> -->
+				<a href="/">
+				<h1><?php echo $site_name; ?></h1>
+				<span style="display: none;"><?php echo $site_tagline; ?></span>
         <img src="<?php echo url::base(); ?>/media/img/logo.png" alt="<?php echo $site_name . ': ' . $site_tagline; ?>" />
+				</a>
 			</div>
 			<!-- / logo -->
 			
