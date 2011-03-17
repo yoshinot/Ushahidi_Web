@@ -34,6 +34,20 @@ end
 class Level < Sequel::Model(:level)
 end
 
+def expand_url(url)
+  uri = url.kind_of?(URI) ? url : URI.parse(url)
+  Net::HTTP.start(uri.host, uri.port) do |io|
+    r = io.head(uri.path)
+    r['Location'] || uri.to_s
+  end
+end
+
+def expand_url_string(text)
+  text.gsub(/https?(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)/) do |url|
+    expand_url(url)
+  end
+end
+
 def put_to_db(tweet)
   # reporterがすでにいるか？いなかったら生成
   reporter = Reporter.find_or_create(
@@ -51,6 +65,17 @@ def put_to_db(tweet)
   reporter.set(:level_id=>Level.find(:level_weight => 0).id).save_changes unless reporter.level_id
   tweet_date = Time.parse(tweet['created_at'])
   if reporter.level_id > 1
+    type = case tweet['text']+tweet['text_raw']
+           when /RT/, /via/, /QT/
+             1
+           when /live at/, /ustre\.?am/, /#nhk/, /nico\.ms/, /lv\d+/, /nicovideo/
+             2
+           when /GIZMODO/i, /GIGAZINE/i
+             3
+           when /拡散希望/, /コピペ/, /followme/
+             4
+           else; 0
+           end
     message = Message.insert(
                 :parent_id=>0,
                 :incident_id=>0,
@@ -62,6 +87,7 @@ def put_to_db(tweet)
                 :message_type=>1,
                 :message_date=>tweet_date, # DATETIME
                 :service_messageid=>tweet['id'],
+                :type => type
               )
   end
   if reporter.location && reporter.level.level_weight > 0
@@ -106,6 +132,8 @@ begin
         buf = []
         if j["text"] && j["user"] && j["user"]["screen_name"]
           next if j["retweeted_status"] #j["text"].match(/RT /) || j["text"].match(/QT /)
+          j["text_raw"] = j["text"].dup
+          j["text"] = expand_url_string(j["text"])
           puts "#{j["user"]["screen_name"]}: #{j["text"]}"
           put_to_db j
         end
