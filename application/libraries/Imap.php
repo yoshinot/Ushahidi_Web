@@ -164,8 +164,8 @@ class Imap_Core {
 			$attachments = $this->_extract_attachments($this->imap_stream, $msgno);
 
 			// Convert to valid UTF8
-			$body = htmlentities($body);
-			$subject = htmlentities(strip_tags($subject));
+			$body = htmlentities(mb_convert_encoding($body, "UTF-8", "ISO-2022-JP,SJIS,UTF-8,ASCII"), ENT_QUOTES, "UTF-8");
+			$subject = htmlentities(strip_tags(mb_convert_encoding($subject, "UTF-8", "ISO-2022-JP,SJIS,UTF-8,ASCII")), ENT_QUOTES, "UTF-8");
 
 			array_push($messages, array('message_id' => $message_id,
 										'date' => $date,
@@ -174,11 +174,9 @@ class Imap_Core {
 										'subject' => $subject,
 										'body' => $body,
 										'attachments' => $attachments));
-
 			// Mark Message As Read
 			imap_setflag_full($this->imap_stream, $msgno, "\\Seen");
 		}
-
 		return $messages;
 	}
 
