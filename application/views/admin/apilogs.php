@@ -105,7 +105,7 @@
             							    <input name="api_log_id[]" id="api_log" value="<?php echo $api_log_id; ?>" type="checkbox" class="check-box"/>
             							</td>
             							<td class="col-2">
-                            <?php echo(var_dump($api_parameters))
+                            <?php echo(var_export($api_parameters))
                                   // echo (is_array(unserialize($api_parameters)))
             							        //? implode(",",unserialize($api_parameters)) 
             							        //: unserialize($api_parameters); 
