@@ -82,6 +82,11 @@
 					<div class="table-holder">
 						<table class="table">
 							<thead>
+								<tr class="foot">
+									<td colspan="4">
+										<?php echo $pagination; ?>
+									</td>
+								</tr>
 								<tr>
 									<th class="col-1"><input id="checkall" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'message_id[]' )" /></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.message_details');?></th>
@@ -225,6 +230,17 @@
 							</tbody>
 						</table>
 					</div>
+          <!-- tabs -->
+          <div class="tabs">
+            <!-- tab -->
+            <div class="tab">
+              <ul>
+                <li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+                <li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
+                <li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+              </ul>
+            </div>
+          </div>
 				<?php print form::close(); ?>
 			</div>
 

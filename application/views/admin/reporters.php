@@ -144,6 +144,9 @@
 						<div class="table-holder">
 							<table class="table">
 								<thead>
+									<td colspan="4">
+										<?php echo $pagination; ?>
+									</td>
 									<tr>
 										<th class="col-1"><input id="checkall" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'reporter_id[]' )" /></th>
 										<th class="col-2"><?php echo Kohana::lang('ui_main.reporter');?></th>
@@ -242,6 +245,18 @@
 								</tbody>
 							</table>
 						</div>
+          <!-- tabs -->
+          <div class="tabs">
+            <!-- tab -->
+            <div class="tab">
+              <ul>
+                <li><a href="#" onClick="reportersAction('d', 'DELETE', '', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+                <?php foreach($levels as $level) { ?>
+                  <li><a href="#" onClick="reportersAction('l', 'Mark As <?php echo $level->level_title?>', '', <?php echo $level->id?>)" class="reporters_tab_<?php echo $level->id;?>"><?php echo $level->level_title?></a></li>
+                <?php } ?>
+              </ul>
+            </div>
+          </div>				
 					<?php print form::close(); ?>
 				</div>
 				
