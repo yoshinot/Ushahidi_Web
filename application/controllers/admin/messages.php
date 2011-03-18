@@ -90,9 +90,21 @@ class Messages_Controller extends Admin_Controller
             }
         }
 
+        // Junk type
+        $junk_type = '= 0';
+        if(!empty($_GET['junk'])) {
+          if($_GET['junk'] == "junk") {
+            $junk_type = '> 0';
+          }else{
+            $junk_type = '= '.intval($_GET['junk']);
+          }
+        }
+        $junk_filter = "message.type ".$junk_type;
+        $filter .= " AND ".$junk_filter;
+
         // filtering RT and QT
-        $rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
-        $filter .= " AND".$rt_filter;
+        //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
+        //$filter .= " AND".$rt_filter;
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -197,7 +209,7 @@ class Messages_Controller extends Admin_Controller
                                                         ->join('reporter','message.reporter_id','reporter.id')
                                                         ->where('service_id', $service_id)
                                                         ->where('message_type', 1)
-                                                        ->where($rt_filter)
+                                                        ->where($junk_filter)
                                                         ->count_all();
             
         // Trusted
