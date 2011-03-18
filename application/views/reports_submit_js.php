@@ -285,7 +285,7 @@
 
 			$("#latitude").attr("value", 35.689487);
 			$("#longitude").attr("value", 139.691706);
-			$("#location_name").attr("value", "東京都");
+			$("#location_name").attr("value", urlencode("東京都"));
 			
 			// Detect Dropdown Select
 			$("#select_city").change(function() {
