@@ -461,6 +461,7 @@ class Reports_Controller extends Admin_Controller
                 $form['incident_hour'] = date('h', strtotime($message->message_date));
                 $form['incident_minute'] = date('i', strtotime($message->message_date));
                 $form['incident_ampm'] = date('a', strtotime($message->message_date));
+                $form['incident_news'][0] = "http://twitter.com/".$message->reporter->reporter_first."/statuses/".$message->service_messageid;
                 $form['person_first'] = $message->reporter->reporter_first;
                 $form['person_last'] = $message->reporter->reporter_last;
 
