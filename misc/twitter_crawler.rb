@@ -70,8 +70,8 @@ def put_to_db(tweet)
              1
            when /live at/, /ustre\.?am/, /#nhk/, /nico\.ms/, /lv\d+/, /nicovideo/
              2
-           when /GIZMODO/i, /GIGAZINE/i
-             3
+           when /GIZMODO/i, /GIGAZINE/i, /NEWS4VIP/i, /APPBANK/i, /MAINICHI/i, /HEADLINES\.YAHOO/i
+            3
            when /拡散希望/, /コピペ/, /followme/
              4
            else; 0
