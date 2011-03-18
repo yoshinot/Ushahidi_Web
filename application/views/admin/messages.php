@@ -51,8 +51,8 @@
 							<li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
 							<li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
 							<li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
-              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?junk=junk&type=".$type."&level=".$level; ?>">Show Junks</a></li>
-              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?junk=0&type=".$type."&level=".$level; ?>">Show Not Junks</a></li>
+              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?filter=none&type=".$type."&level=".$level; ?>">Show Ignored Messages</a></li>
+              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?type=".$type."&level=".$level; ?>">Show Messages</a></li>
 						</ul>
 					</div>
 				</div>

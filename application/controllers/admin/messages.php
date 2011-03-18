@@ -90,17 +90,15 @@ class Messages_Controller extends Admin_Controller
             }
         }
 
-        // Junk type
-        $junk_type = '= 0';
-        if(!empty($_GET['junk'])) {
-          if($_GET['junk'] == "junk") {
-            $junk_type = '> 0';
-          }else{
-            $junk_type = '= '.intval($_GET['junk']);
+        // filter by type
+        $filter_type = '= 0';
+        if(!empty($_GET['filter'])) {
+          if($_GET['filter'] == 'none') {
+            $filter_type = '> 0';
           }
         }
-        $junk_filter = "message.type ".$junk_type;
-        $filter .= " AND ".$junk_filter;
+        $type_filter = "message.type ". $filter_type;
+        $filter .= " AND ". $type_filter;
 
         // filtering RT and QT
         //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
@@ -209,7 +207,7 @@ class Messages_Controller extends Admin_Controller
                                                         ->join('reporter','message.reporter_id','reporter.id')
                                                         ->where('service_id', $service_id)
                                                         ->where('message_type', 1)
-                                                        ->where($junk_filter)
+                                                        ->where($type_filter)
                                                         ->count_all();
             
         // Trusted
