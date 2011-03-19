@@ -7,5 +7,8 @@
 
 <body>
 <h1><?php echo $site_name; ?></h1>
+
 <a href="<?php echo url::site()."keitai"; ?>"> Home</a><?php echo $breadcrumbs; ?>
+<form method="get" id="search" action="/ushahidi/index.php/keitai/search/"><input type="hidden"  name="l" value="ja_JP" /><input type="text" name="k" value="" class="text" /><input type="submit" name="b" class="searchbtn" value="検索" /></form>
+<hr>
 
