@@ -17,7 +17,7 @@
 			foreach ($feeds as $feed)
 			{
 				$feed_date = date('M j Y', strtotime($feed->item_date));
-				echo "<li><strong><a href=\"".$feed->item_link."\">".$feed->item_title."</a></strong>";
+				echo "<li><strong><a href=\"http://www.google.co.jp/gwt/x?u=".urlencode ($feed->item_link)."\">".$feed->item_title."</a></strong>";
 				//echo "&nbsp;&nbsp;<i>$incident_date</i></li>";
 				echo "</li>";
 			}
