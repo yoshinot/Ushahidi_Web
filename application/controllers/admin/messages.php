@@ -69,15 +69,6 @@ class Messages_Controller extends Admin_Controller
             $filter = 'message_type = 1';
         }
         
-        // override $filter when auto_filter specified
-        if (!empty($_GET['auto_filter']))
-        {
-            elseif ($auto_filter=='5')
-            {
-                $filter = 'type = 5';
-            }
-        }
-
         // Do we have a reporter ID?
         if (isset($_GET['rid']) AND !empty($_GET['rid']))
         {
@@ -104,14 +95,20 @@ class Messages_Controller extends Admin_Controller
         if(!empty($_GET['filter'])) {
           if($_GET['filter'] == 'none') {
             $filter_type = '> 0';
+          }elseif($_GET['filter']=='1'))
+            $filter_type = '= 1';
+          }elseif($_GET['filter']=='2'))
+            $filter_type = '= 2';
+          }elseif($_GET['filter']=='3'))
+            $filter_type = '= 3';
+          }elseif($_GET['filter']=='4'))
+            $filter_type = '= 4';
+          }elseif($_GET['filter']=='5'))
+            $filter_type = '= 5';
           }
         }
         $type_filter = "message.type ". $filter_type;
         $filter .= " AND ". $type_filter;
-
-        // filtering RT and QT
-        //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
-        //$filter .= " AND".$rt_filter;
 
         // check, has the form been submitted?
         $form_error = FALSE;
