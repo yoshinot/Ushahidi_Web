@@ -91,13 +91,43 @@ class Messages_Controller extends Admin_Controller
         }
 
         // filter by type
-        $filter_type = '= 0';
+        $filter_type = array();
         if(!empty($_GET['filter'])) {
-          if($_GET['filter'] == 'none') {
-            $filter_type = '> 0';
+          $filter_form = preg_split('/, ?/', $_GET['filter']);
+          foreach($filter_form as $filter_str) {
+            $filter_sql = "message.type ";
+            switch($filter_str) {
+              case "junk":
+                $filter_sql .= '> 0';
+                break;
+              case "rt":
+                $filter_sql .= "= 1";
+                break;
+              case "live":
+                $filter_sql .= "= 2";
+                break;
+              case "news":
+                $filter_sql .= "= 3";
+                break;
+              case "junkstr":
+                $filter_sql .= "= 4";
+                break;
+              case "auto":
+                $filter_sql .= "= 5";
+                break;
+              case "none":
+              case "clear":
+              case "safe":
+                $filter_sql .= "= 0";
+                break;
+            }
+            if($filter_sql != "message.type ")
+              array_push($filter_type,$filter_sql);
           }
         }
-        $type_filter = "message.type ". $filter_type;
+        if(empty($filter_type)) $filter_type = array('message.type = 0');
+        //$type_filter = "message.type ". $filter_type;
+        $type_filter = "(".join(" OR ",$filter_type).")";
         $filter .= " AND ". $type_filter;
 
         // filtering RT and QT

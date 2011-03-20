@@ -51,8 +51,26 @@
 							<li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
 							<li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
 							<li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
-              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?filter=none&type=".$type."&level=".$level; ?>">Show Ignored Messages</a></li>
-              <li><a href="<?php echo url::site()."admin/messages/index/".$service_id."?type=".$type."&level=".$level; ?>">Show Messages</a></li>
+              <li>
+                <form action="<?php echo url::site()."admin/messages/index/".$service_id ?>" method="GET">
+                  <span style="padding-top: 0px; padding-bottom: 1px;" class="formspan">
+                    <input type="hidden" name="type" value="<?php echo $type ?>">
+                    <input type="hidden" name="level" value="<?php echo $level ?>">
+                    <input type="text" name="filter" id="filtertext" value="<?php echo $_GET["filter"] ?>">
+                  </span>
+                  <script type="text/javascript">
+                    $(document).ready(function(){
+                      var label = "Filter";
+                      if($("#filtertext").val() == "") {
+                        $("#filtertext").val(label).css('color', '#999') \
+                          .focus(function(){
+                            $(this).css('color', '#000').val("");
+                          });
+                      }
+                    });
+                  </script>
+                </form>
+              </li>
 						</ul>
 					</div>
 				</div>

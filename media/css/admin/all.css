@@ -553,7 +553,7 @@ ul.tabset li a:hover{
 	float:left;
 	list-style:none;
 }
-.tab ul li a{
+.tab ul li a,.tab ul li span.formspan {
 	padding:0 9px;
 	color:#5c5c5c;
 	background:#f2f7fa;
