@@ -532,7 +532,7 @@ class adminmap_helper_Core {
 			$approved_text, 
 			$where_text. " ". $extra_where_text, 
 			$logical_operator,
-			"incident.incident_date",
+			"incident.id",
 			"asc",
 			$joins,
 			$custom_category_to_table_mapping);
@@ -1148,7 +1148,7 @@ class adminmap_helper_Core {
 		$approved_text, 
 		$filter. " ". $extra_where_text, 
 		$logical_operator,
-		"incident.incident_date",
+		"incident.id",
 		"asc",
 		$joins,
 		$custom_category_to_table_mapping);        
@@ -1184,34 +1184,39 @@ class adminmap_helper_Core {
 		//Now we try and figure out which category this report was matched to
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		if(isset($incident_array["is_parent"]) && $incident_array["is_parent"] != 0) 
+		//if we're looking at all categories don't bother doing all this crazyness
+		if(!$is_all_categories)
 		{
-			//echo $incident->incident_title." parent matched\r\n";
-			$cat_names[$incident->parent_id] = $incident->parent_title;
-			$colors[$incident->parent_id] = $incident->parent_color;
-		}
-		elseif(isset($incident_array["is_child"]) && $incident_array["is_child"] != 0) 
-		{
-			//echo $incident->incident_title." kid matched\r\n";			
-			$cat_names[$incident->cat_id] = $incident->category_title;
-			$colors[$incident->cat_id] = $incident->color;
-		}
-		//now the fun part, loop through all the custom categories
-		foreach($custom_category_to_table_mapping as $name=>$custom_cat)
-		{
-			if(isset($incident_array["is_".$name."_parent"]) && $incident_array["is_".$name."_parent"] != 0) 
+		
+			if(isset($incident_array["is_parent"]) && $incident_array["is_parent"] != 0) 
 			{
-				//echo $incident->incident_title." $name parent matched\r\n";
-				$cat_names[$name."_".$incident_array[$name."_parent_cat_id"]] = $incident_array[$name."_parent_title"];
-				$colors[$name."_".$incident_array[$name."_parent_cat_id"]] = $incident_array[$name."_parent_color"];
+				//echo $incident->incident_title." parent matched\r\n";
+				$cat_names[$incident->parent_id] = $incident->parent_title;
+				$colors[$incident->parent_id] = $incident->parent_color;
 			}
-			elseif(isset($incident_array["is_".$name."_child"]) && $incident_array["is_".$name."_child"] != 0) 
+			elseif(isset($incident_array["is_child"]) && $incident_array["is_child"] != 0) 
 			{
-				//echo $incident->incident_title." $name kid matched. With color: ".$incident_array[$name."_color"]."\r\n";			
-				$cat_names[$name."_".$incident_array[$name."_cat_id"]] = $incident_array[$name."_title"];
-				$colors[$name."_".$incident_array[$name."_cat_id"]] = $incident_array[$name."_color"];
+				//echo $incident->incident_title." kid matched\r\n";			
+				$cat_names[$incident->cat_id] = $incident->category_title;
+				$colors[$incident->cat_id] = $incident->color;
 			}
-		}
+			//now the fun part, loop through all the custom categories
+			foreach($custom_category_to_table_mapping as $name=>$custom_cat)
+			{
+				if(isset($incident_array["is_".$name."_parent"]) && $incident_array["is_".$name."_parent"] != 0) 
+				{
+					//echo $incident->incident_title." $name parent matched\r\n";
+					$cat_names[$name."_".$incident_array[$name."_parent_cat_id"]] = $incident_array[$name."_parent_title"];
+					$colors[$name."_".$incident_array[$name."_parent_cat_id"]] = $incident_array[$name."_parent_color"];
+				}
+				elseif(isset($incident_array["is_".$name."_child"]) && $incident_array["is_".$name."_child"] != 0) 
+				{
+					//echo $incident->incident_title." $name kid matched. With color: ".$incident_array[$name."_color"]."\r\n";			
+					$cat_names[$name."_".$incident_array[$name."_cat_id"]] = $incident_array[$name."_title"];
+					$colors[$name."_".$incident_array[$name."_cat_id"]] = $incident_array[$name."_color"];
+				}
+			}
+		}//end if not is_all_categories
 		
 	}//end loop
 
@@ -1392,8 +1397,8 @@ class adminmap_helper_Core {
             $json_item .= "\"type\":\"Feature\",";
             $json_item .= "\"properties\": {";
 	    $categories_str = implode(",", $category_ids);
-            //$json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $list_reports_path."?c=".$categories_str."&sw=".$southwest."&ne=".$northeast."&lo=".$logical_operator."&u=".$show_unapproved.">" . $cluster_count . " Reports</a> ".$category_str)) . "\",";
-	    $json_item .= "\"link\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $list_reports_path."?c=".$categories_str."&sw=".$southwest."&ne=".$northeast."&lo=".$logical_operator."&u=".$show_unapproved.">" . $cluster_count . " Reports</a> ".$category_str)) . "\",";
+            $json_item .= "\"name\":\"" . str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $list_reports_path."?c=".$categories_str."&sw=".$southwest."&ne=".$northeast."&lo=".$logical_operator."&u=".$show_unapproved.">" . $cluster_count . " Reports</a> ".$category_str)) . "\",";
+	    $json_item .= "\"link\":\"" . url::base(). "$list_reports_path?c=".$categories_str."&sw=".$southwest."&ne=".$northeast."&lo=".$logical_operator."&u=".$show_unapproved."\",";
             $json_item .= "\"category\":[0], ";
 		if($contains_nonactive && $color_unapproved==2)
 		{
@@ -1461,8 +1466,8 @@ class adminmap_helper_Core {
             $json_item = "{";
             $json_item .= "\"type\":\"Feature\",";
             $json_item .= "\"properties\": {";
-            //$json_item .= "\"name\":\"" .date("n/j/Y", strtotime($single->incident_date)).":<br/>". str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $edit_report_path . $single->id . "/>".str_replace('"','\"',$single->incident_title)."</a>".$category_description)) . "\",";   
-	    $json_item .= "\"link\":\"" .date("n/j/Y", strtotime($single->incident_date)).":<br/>". str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $edit_report_path . $single->id . "/>".str_replace('"','\"',$single->incident_title)."</a>".$category_description)) . "\",";   
+            $json_item .= "\"name\":\"" .date("n/j/Y", strtotime($single->incident_date)).":<br/>". str_replace(chr(10), ' ', str_replace(chr(13), ' ', "<a href=" . url::base() . $edit_report_path . $single->id . "/>".str_replace('"','\"',$single->incident_title)."</a>".$category_description)) . "\",";   
+	    $json_item .= "\"link\":\"" .url::base(). "{$edit_report_path}{$single->id}\","; 
             $json_item .= "\"category\":[0], ";
 	    //check if it's a unapproved/unactive report
 		if($single->incident_active == 0 && $color_unapproved==2)
