@@ -282,8 +282,10 @@
 				$("#latitude").attr("value", lonlat2.lat);
 				$("#longitude").attr("value", lonlat2.lon);
 			});
-			$("#latitude").attr("value", 0.0);
-			$("#longitude").attr("value", 0.0);
+
+			// $("#latitude").attr("value", 35.689487);
+			// $("#longitude").attr("value", 139.691706);
+			// $("#location_name").attr("value", "東京都");
 			
 			// Detect Dropdown Select
 			$("#select_city").change(function() {
