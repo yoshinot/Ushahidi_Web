@@ -599,6 +599,15 @@
 			});
 		});
 		
+jQuery(document).ready(function(){
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(p){
+			var lonlat = new OpenLayers.LonLat(p.coords.longitude,p.coords.latitude).transform(proj_4326, map.getProjectionObject());
+			map.setCenter(lonlat, 10);
+			});
+	}
+});
+
 		/*		
 		d = $('#startDate > optgroup > option').map(function()
 		{
