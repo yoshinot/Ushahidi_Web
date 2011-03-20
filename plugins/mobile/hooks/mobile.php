@@ -41,9 +41,8 @@ class mobile {
 
 		if ( ! $session->get('full') )
 		{
-			//error_log($_GET['full']);
 			// If Mobile Configure Mobile Settings
-			if(isset($_SERVER['HTTP_USER_AGENT']) AND !$this->_is_keitai() AND $this->_is_mobile()
+			if(isset($_SERVER['HTTP_USER_AGENT']) AND $this->_is_mobile()
 				AND strrpos(url::current(), "mobile") === FALSE
 				AND Router::$controller != 'api') 
 			{
@@ -64,8 +63,7 @@ class mobile {
 			return false;
 		}
 		// check if the user agent gives away any tell tale signs it's a mobile browser
-#		if(preg_matcH('/up.browser|up.link|windows ce|iemobile|mini|iphone|ipod|android|danger|blackberry|mmp|symbian|midp|wap|phone|pocket|mobile|pda|psp/i',$_SERVER['HTTP_USER_AGENT']))
-               if(preg_matcH('/windows ce|iemobile|mini|iphone|ipod|android|danger|blackberry|mmp|symbian|midp|phone|pocket|mobile|pda|psp/i',$_SERVER['HTTP_USER_AGENT']))
+		if(preg_matcH('/up.browser|up.link|windows ce|iemobile|mini|iphone|ipod|android|danger|blackberry|mmp|symbian|midp|wap|phone|pocket|mobile|pda|psp/i',$_SERVER['HTTP_USER_AGENT']))
 		{
 			return true;
 		}
@@ -90,30 +88,6 @@ class mobile {
 			return true;
 		}
 	}
-
-	private function _is_keitai()
-	{
-        $agent = Net_UserAgent_Mobile::singleton(); 
-        switch( true )
-        {
-          case ($agent->isDoCoMo()):   // DoCoMoå墫å¦¡ë           return true;
-            if( $agent->isFOMA() )
-              return true;
-            break;
-          case ($agent->isVodafone()): // softbankå墫å¦¡ë           return true;
-            if( $agent->isType3GC() )
-              return true;
-            break;
-          case ($agent->isEZweb()):    // ezwebå墫å¦¡ë           return true;
-            if( $agent->isWIN() )
-              return true;
-            break;
-          default:
-            return false;
-            break;
-        }
-	}
-
 
 }
 
