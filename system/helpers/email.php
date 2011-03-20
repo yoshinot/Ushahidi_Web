@@ -168,11 +168,13 @@ class email_Core {
 		{
 			// From without a name
 			$from = new Swift_Address($from);
+			$message->setReplyTo($from);
 		}
 		elseif (is_array($from))
 		{
 			// From with a name
 			$from = new Swift_Address($from[0], $from[1]);
+			$message->setReplyTo($from);
 		}
 
 		return email::$mail->send($message, $recipients, $from);

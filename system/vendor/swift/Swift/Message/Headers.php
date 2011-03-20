@@ -411,11 +411,12 @@ class Swift_Message_Headers
       elseif ($this->encoding == "B") //Need to Base64 encode
       {
         //See the comments in the elseif() above since the logic is the same (refactor?)
-        $spec = "=?" . $this->getCharset() . "?B?";
-        $end = "?=";
-        $used_length = strlen($name) + 2 + strlen($spec) + 2;
-        $encoded_value[$key] = Swift_Message_Encoder::instance()->base64Encode(
-          $row, (75-(strlen($spec)+5)), ($key > 0 ? 0 : (76-($used_length+3))), true, $this->LE);
+#        $spec = "=?" . $this->getCharset() . "?B?";
+#        $end = "?=";
+#        $used_length = strlen($name) + 2 + strlen($spec) + 2;
+#        $encoded_value[$key] = Swift_Message_Encoder::instance()->base64Encode(
+#          $row, (75-(strlen($spec)+5)), ($key > 0 ? 0 : (76-($used_length+3))), true, $this->LE);
+        $encoded_value[$key] = mb_encode_mimeheader($row, $this->getCharset(), 'B', "\r\n");
       }
       
       if (false !== $p = strpos($encoded_value[$key], $this->LE))
