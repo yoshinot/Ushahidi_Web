@@ -69,6 +69,15 @@ class Messages_Controller extends Admin_Controller
             $filter = 'message_type = 1';
         }
         
+        // override $filter when auto_filter specified
+        if (!empty($_GET['auto_filter']))
+        {
+            elseif ($auto_filter=='5')
+            {
+                $filter = 'type = 5';
+            }
+        }
+
         // Do we have a reporter ID?
         if (isset($_GET['rid']) AND !empty($_GET['rid']))
         {
