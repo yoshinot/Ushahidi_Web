@@ -346,9 +346,9 @@ class Alerts_Controller extends Main_Controller {
 			: $settings['site_email'];
 		$from[] = $settings['site_name'];
         $subject = $settings['site_name']." ".Kohana::lang('alerts.verification_email_subject');
-        $message = Kohana::lang('alerts.confirm_request').url::site().'alerts/verify/?c='.$alert_code."&e=".$alert_email;
+        $message = Kohana::lang('alerts.confirm_request')."\n".url::site().'alerts/verify/?c='.$alert_code."&e=".$alert_email."\n\n".Kohana::lang('alerts.verification_request')."\n".$alert_code."\n\n".Kohana::lang('alerts.go_to_confirm_view')."\n".url::site().'alerts/confirm';
 
-        if (email::send($to, $from, $subject, $message, TRUE) == 1)
+        if (email::send($to, $from, $subject, $message, FALSE) == 1)
         {
             $alert = ORM::factory('alert');
             $alert->alert_type = self::EMAIL_ALERT;
