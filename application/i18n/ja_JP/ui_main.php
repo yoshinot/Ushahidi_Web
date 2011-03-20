@@ -137,7 +137,7 @@
 	'example_country' => 'Kenya',
 	'feed' => 'フィード',
 	'feedback' => 'フィードバックを提供',
-	'feedback_reports' => '下部のボタンをクリックしてあなたの感じたことをフィードバックしてください。',
+	'feedback_reports' => '下部のリンクをクリックしてあなたの感じたことをフィードバックしてください。',
 	'feeds' => 'フィード',
 	'feed_has_been' => 'The feed has been',
 	'feed_items' => 'フィードアイテム',

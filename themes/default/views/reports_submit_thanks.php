@@ -9,6 +9,7 @@
 
 				<div class="thanks_msg"><a href="<?php echo
 					url::site().'reports' ?>"><?php echo Kohana::lang('ui_main.reports_return');?></a><br /><br /><br />
+					<?php echo Kohana::lang('ui_main.feedback_reports');?><br /><br />
 					<a href="https://spreadsheets.google.com/viewform?formkey=dGlnajlENUtFOFZnWlN2XzlqbklickE6MQ" class="btn_gray" target="_blank"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
 				</div>
 			</div>
