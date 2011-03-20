@@ -1,14 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title><?php echo $site_name; ?></title>
-</head>
-
-<body>
-<h1><?php echo $site_name; ?></h1>
-
-<a href="<?php echo url::site()."keitai"; ?>"> Home</a><?php echo $breadcrumbs; ?>
+<html> 
+<head> 
+<title><?php echo $site_name; ?></title> 
+<style type="text/css"> 
+<![CDATA[
+  a:link{color:#808080;}
+  a:focus{color:#a0a0a0;}
+  a:visited{color:#808080;}
+]]>
+</style> 
+</head> 
+<body bgcolor="#ffffff" text="#000000">
+<?php echo $site_name; ?><br>
+<hr size="1" noshade>
+<a href="<?php echo url::site()."keitai"; ?>" accesskey="0">[0]TOP</a><?php echo $breadcrumbs; ?><br>
 <form method="get" id="search" action="/ushahidi/index.php/keitai/search/"><input type="hidden"  name="l" value="ja_JP" /><input type="text" name="k" value="" class="text" /><input type="submit" name="b" class="searchbtn" value="検索" /></form>
-<hr>
+
 
