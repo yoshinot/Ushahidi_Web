@@ -56,7 +56,7 @@
                   <span style="padding-top: 0px; padding-bottom: 1px;" class="formspan">
                     <input type="hidden" name="type" value="<?php echo $type ?>">
                     <input type="hidden" name="level" value="<?php echo $level ?>">
-                    <input type="text" name="filter" id="filtertext" value="<?php echo $_GET["filter"] ?>">
+                    <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
                   </span>
                   <script type="text/javascript">
                     $(document).ready(function(){
