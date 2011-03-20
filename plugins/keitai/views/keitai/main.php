@@ -5,7 +5,7 @@
 			foreach ($incidents as $incident)
 			{
 				$incident_date = $incident->incident_date;
-				$incident_date = date('M j Y', strtotime($incident->incident_date));
+				$incident_date = date('Y/m/d', strtotime($incident->incident_date));
 				echo "<li><strong><a href=\"".url::site()."keitai/reports/view/".$incident->id."\">".$incident->incident_title."</a></strong>";
 				echo "&nbsp;&nbsp;<i>$incident_date</i></li>";
 			}
@@ -16,7 +16,7 @@
 			<?php
 			foreach ($feeds as $feed)
 			{
-				$feed_date = date('M j Y', strtotime($feed->item_date));
+				$feed_date = date('Y/m/d', strtotime($feed->item_date));
 				echo "<li><strong><a href=\"http://www.google.co.jp/gwt/x?u=".urlencode ($feed->item_link)."\">".$feed->item_title."</a></strong>";
 				//echo "&nbsp;&nbsp;<i>$incident_date</i></li>";
 				echo "</li>";
@@ -34,7 +34,7 @@
 		$color_css = 'class="swatch" style="background-color:#'.$category_color.'"';
 		if (count($category_info[4]) == 0)
 		{
-			echo '<h2 ><a href="'.url::site().'keitai/reports/index/'.$category.'">'.$category_image.$category_title.'</a>'.$category_count.'</h2>';
+			echo '<h2 ><a href="'.url::site().'keitai/reports/index/'.$category.'">'.$category_image.$category_title.'</a>('.$category_count.')</h2>';
 		}
 		else
 		{
@@ -49,7 +49,7 @@
 			$child_image = '';
 			$child_count = $child_info[3];
 			$color_css = 'class="swatch" style="background-color:#'.$child_color.'"';
-			echo '<h2><a href="'.url::site().'keitai/reports/index/'.$child.'">'.$child_image.$child_title.'</a>'.$child_count.'</h2>';
+			echo '<h2><a href="'.url::site().'keitai/reports/index/'.$child.'">'.$child_image.$child_title.'</a>('.$child_count.')</h2>';
 		}
 		echo '</div>';
 	}

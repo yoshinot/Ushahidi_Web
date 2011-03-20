@@ -24,7 +24,7 @@
 		</li>
 		<li>
 			<small>日時</small>: 
-			<?php echo date('Y/M/j', strtotime($incident->incident_date)); ?>
+			<?php echo date('Y/m/d', strtotime($incident->incident_date)); ?>
 		</li>
 		<li>
 			<small>時間</small>: 
