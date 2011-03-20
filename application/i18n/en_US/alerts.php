@@ -29,6 +29,8 @@
 	'code_not_found' => 'This verification code was not found! Please confirm that you have the correct URL.',
 	'code_verified' => ' Your code was verified correctly. You will now receive alerts about incidents as they happen.',
 	'confirm_request' => 'To confirm your alert request, please go to ',
+	'verification_request' => 'Or input this Verification Code on confirm View: ',
+	'confirm_view' => 'Confirm view:',
 	'create_more_alerts' => 'Return to the Alerts page to create more alerts',
 	'email_alert_request_created' => 'Your Email Alert request has been created and verification message has been sent to ',
 	'email_code' => 'Please enter the Email confirmation code you received below: ',
