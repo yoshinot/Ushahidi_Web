@@ -11,8 +11,8 @@
 					url::site().'reports' ?>"><?php echo Kohana::lang('ui_main.reports_return');?></a><br /><br /><br />
 					<?php echo Kohana::lang('ui_main.feedback_reports');?><br /><br />
 					<?php 
-					print form::open('https://spreadsheets.google.com/viewform?formkey=dGlnajlENUtFOFZnWlN2XzlqbklickE6MQ', array('target'=>'_blank'));
-					print form::hidden('alert_code', $_SERVER['SERVER_NAME']);
+					print form::open('https://spreadsheets.google.com/viewform?formkey=dGlnajlENUtFOFZnWlN2XzlqbklickE6MQ', array('target'=>'_blank', 'method'=>'get'));
+// print form::hidden('alert_code', $_SERVER['SERVER_NAME']);
 					print "&nbsp;&nbsp;";
 					print form::submit('button', Kohana::lang('ui_main.feedback'), ' class=btn_gray ');
 					print form::close();
