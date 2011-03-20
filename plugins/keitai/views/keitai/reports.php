@@ -1,40 +1,32 @@
-<div class="report_list">
-	<div class="block">
-		<?php
-		if ($category AND $category->loaded)
-		{
-			$category_id = $category->id;
-			$color_css = 'class="swatch" style="background-color:#'.$category->category_color.'"';
-			echo '<h2 ><a href="#">'.$category->category_title.'</a></h2>';
-		}
-		else
-		{
-			$category_id = "";
-		}
-		?>
-		<div class="list">
-			<ul>
-				<?php
-				if ($incidents->count())
-				{
-					$page_no = (isset($_GET['page'])) ? $_GET['page'] : "";
-					foreach ($incidents as $incident)
-					{
-						$incident_date = $incident->incident_date;
-						$incident_date = date('M j Y', strtotime($incident->incident_date));
-						$location_name = $incident->location_name;
-						echo "<li><strong><a href=\"".url::site()."keitai/reports/view/".$incident->id."?c=".$category_id."&p=".$page_no."\">".$incident->incident_title."</a></strong>";
-						echo "&nbsp;&nbsp;<i>$incident_date</i>";
-						echo "<BR /><span class=\"location_name\">".$location_name."</span></li>";
-					}
-				}
-				else
-				{
-					echo "<li>No Reports Found</li>";
-				}
-				?>
-			</ul>
-		</div>
-		<?php echo $pagination; ?>
-	</div>
-</div>
+<?php
+if ($category AND $category->loaded)
+{
+	$category_id = $category->id;
+	$color_css = 'class="swatch" style="background-color:#'.$category->category_color.'"';
+	echo '<a href="#" accesskey="1">[1]'.$category->category_title.'</a><br>';
+}
+else
+{
+	$category_id = "";
+}
+if ($incidents->count())
+{
+	$page_no = (isset($_GET['page'])) ? $_GET['page'] : "";
+	foreach ($incidents as $incident)
+	{
+		$incident_date = $incident->incident_date;
+		$incident_date = date('Y/m/d', strtotime($incident->incident_date));
+		$location_name = $incident->location_name;
+		echo $incident->incident_title;
+		echo "&nbsp;";
+		echo "(<span class=\"location_name\">".$location_name."</span>) <br> $incident_date ";
+        echo "<a href=\"".url::site()."keitai/reports/view/".$incident->id."?c=".$category_id."&p=".$page_no."\">[詳細]</a>";
+		echo "<hr size='1' noshade>";
+	}
+}
+else
+{
+	echo "ﾚﾎﾟｰﾄはありません";
+}
+?>
+<?php echo $pagination; ?>

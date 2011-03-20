@@ -1,40 +1,19 @@
-
-     <?php
-	if ($incident->incident_verified == 1)
-	{
-
-	}
-	?>
-	<br>
 	<?php
 	if ($incident->incident_verified == 1)
 	{
-		echo "[確認済み情報]";
+		echo "[確認済み情報]<br>";
 	}
 	else
 	{
-		echo "[未確認情報]";
+		echo "[未確認情報]<br>";
 	}
 	?>
-	<h2><?php echo $incident->incident_title; ?></h2>
-	<ul >
-		<li>
-			<small>場所</small>: 
-			<?php echo $incident->location->location_name; ?>
-		</li>
-		<li>
-			<small>日時</small>: 
-			<?php echo date('Y/m/d', strtotime($incident->incident_date)); ?>
-		</li>
-		<li>
-			<small>時間</small>: 
-			<?php echo date('H:i', strtotime($incident->incident_date)); ?>
-		</li>		
-		<li>
-			<small>詳細</small>: <br />
-			<?php echo $incident->incident_description; ?>
-		</li>
-	</ul>
-
+	<?php echo $incident->incident_title; ?><br>
+   場所 : <?php echo $incident->location->location_name; ?> <br>
+   日時 : <?php echo date('Y/m/d', strtotime($incident->incident_date)); ?> <br>
+   時間 : <?php echo date('H:i', strtotime($incident->incident_date)); ?> <br>
+   詳細 : <?php echo $incident->incident_description; ?><br>
+   
+   <div style="clear:both;text-align:center;"><a href="http://www.google.co.jp/m/local?q=<?php echo $incident->location->latitude.",".$incident->location-> longitude;?>&z=14"><img src="http://maps.google.com/maps/api/staticmap?center=<?php echo $incident->location->latitude.",".$incident->location-> longitude;?>&zoom=14&size=230x100&format=gif&maptype=roadmap&sensor=false&markers=<?php echo $incident->location->latitude.",".$incident->location-> longitude;?>" border="0"></a></div> 
 
 
