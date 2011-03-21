@@ -130,6 +130,15 @@ class Messages_Controller extends Admin_Controller
         $type_filter = "(".join(" OR ",$filter_type).")";
         $filter .= " AND ". $type_filter;
 
+<<<<<<< HEAD
+=======
+        // filtering RT and QT
+        //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
+        //$filter .= " AND".$rt_filter;
+        // filtering reported message
+        $filter .= "AND NOT message.incident_id = 0"
+
+>>>>>>> yuiseki_issue76
         // check, has the form been submitted?
         $form_error = FALSE;
         $form_saved = FALSE;
