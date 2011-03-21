@@ -228,7 +228,7 @@ class Messages_Controller extends Admin_Controller
                                 ->join('reporter','message.reporter_id','reporter.id')
                                 ->where('service_id', $service_id)
                                 ->where($filter)
-                                ->orderby('message_date','desc')
+                                ->orderby('message_date','asc')
                                 ->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
             
         // Get Message Count
