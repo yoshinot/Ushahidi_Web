@@ -134,7 +134,7 @@ class Messages_Controller extends Admin_Controller
         //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
         //$filter .= " AND".$rt_filter;
         // filtering reported message
-        $filter .= "AND NOT message.incident_id = 0"
+        $filter .= "AND message.incident_id = 0";
 
         // check, has the form been submitted?
         $form_error = FALSE;
