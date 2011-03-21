@@ -65,7 +65,7 @@ class Keitai_Controller extends Template_Controller {
 		// Get 10 Most Recent Reports
 		$this->template->content->incidents = ORM::factory('incident')
             ->where('incident_active', '1')
-			->limit('10')
+			->limit('3')
             ->orderby('incident_date', 'desc')
 			->with('location')
             ->find_all();
@@ -114,7 +114,7 @@ class Keitai_Controller extends Template_Controller {
 
 		// Get RSS News Feeds
 		$this->template->content->feeds = ORM::factory('feed_item')
-			->limit('10')
+			->limit('3')
             ->orderby('item_date', 'desc')
             ->find_all();
 	}

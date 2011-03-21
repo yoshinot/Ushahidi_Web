@@ -44,7 +44,7 @@ class Search_Controller extends Keitai_Controller  {
             'on', 'you', 'this', 'for', 'but', 'with', 'are', 'have', 'be', 
             'at', 'or', 'as', 'was', 'so', 'if', 'out', 'not'
         );
-        
+       error_log("raw_data ".$_GET['k']); 
         if ($_GET)
         {
             /**
@@ -61,24 +61,29 @@ class Search_Controller extends Keitai_Controller  {
               
             // Phase 1 - Fetch the search string and perform initial sanitization
             $keyword_raw = (isset($_GET['k']))? mysql_real_escape_string($_GET['k']) : "";
-            
+error_log("Phase 1 ".mb_detect_encoding($keyword_raw)." ".$keyword_raw);     
+          
             // Phase 2 - Strip the search string of any HTML and PHP tags that may be present for additional safety              
             $keyword_raw = strip_tags($keyword_raw);
-            
+error_log("Phase 2 ".mb_detect_encoding($keyword_raw)." ".$keyword_raw);               
             // Phase 3 - Apply Kohana's XSS cleaning mechanism
             $keyword_raw = $this->input->xss_clean($keyword_raw);
-                        
-            
+error_log("Phase 3 ".mb_detect_encoding($keyword_raw)." ".$keyword_raw);   
+#            $keyword_raw = mb_convert_encoding($keyword_raw,'UTF-8','EUC-JP,SJIS,ASCII,JIS');
+#error_log("Phase 4 ".mb_detect_encoding($keyword_raw)." ".$keyword_raw);   
         }
         else
         {
             $keyword_raw = "";
         }
-                
+
+        error_log("Phase 4 ".$keyword_raw);
         $keywords = explode(' ', $keyword_raw);
+
         if (is_array($keywords) && !empty($keywords)) 
         {
             $match = "MATCH(incident_title,incident_description) AGAINST(\"*D+1:2,2:1 $keyword_raw\" IN BOOLEAN MODE)";
+            error_log("Match ".$match);
             $keyword_string = $match;
             $where_string = $match.' AND incident_active = 1';
             $search_query = "SELECT *, (".$keyword_string.") AS relevance FROM ".$this->table_prefix."incident".
@@ -91,6 +96,7 @@ class Search_Controller extends Keitai_Controller  {
             $slave_config = Kohana::config('database.slave');
             $db = new Database($slave_config);
             $pagination = new Pagination(array(
+                'style' => 'keitai',
                 'query_string'    => 'page',
                 'items_per_page' => (int) Kohana::config('settings.items_per_page'),
 		'total_items'    => $db->count_records('incident',$where_string)
@@ -99,16 +105,14 @@ class Search_Controller extends Keitai_Controller  {
             // Results Bar
             if ($pagination->total_items != 0)
             {
-                $search_info .= "<div class=\"search_info\">";
-                $search_info .= Kohana::lang('ui_admin.showing_results').' '. ( $pagination->sql_offset + 1 ).' '.Kohana::lang('ui_admin.to').' '. ( (int) Kohana::config('settings.items_per_page') + $pagination->sql_offset ) .' '.Kohana::lang('ui_admin.of').' '. $pagination->total_items .' '.Kohana::lang('ui_admin.searching_for').'<strong>'. $keyword_raw . "</strong>";
-                $search_info .= "</div>";
+               # $search_info .= . ( $pagination->sql_offset + 1 ). ( (int) Kohana::config('settings.items_per_page') + $pagination->sql_offset ) .' '.Kohana::lang('ui_admin.of').' '. $pagination->total_items .' '.Kohana::lang('ui_admin.searching_for').'<strong>'. $keyword_raw . "</strong>";
+                $search_info .= "$keyword_raw ".$pagination->total_items."件";
+                $search_info .= "<br>";
+                  
             } else { 
-                $search_info .= "<div class=\"search_info\">0 ".Kohana::lang('ui_admin.results')."</div>";
+                $search_info .= "0 ".Kohana::lang('ui_admin.results')."";
                 
-                $html .= "<div class=\"search_result\">";
-                $html .= "<h3>".Kohana::lang('ui_admin.your_search_for')."<strong> ".$keyword_raw."</strong> ".Kohana::lang('ui_admin.match_no_documents')."</h3>";
-                $html .= "</div>";
-                
+                $html .= Kohana::lang('ui_admin.your_search_for')." ".$keyword_raw." ".Kohana::lang('ui_admin.match_no_documents');
                 $pagination = "";
             }
             
@@ -123,7 +127,7 @@ class Search_Controller extends Keitai_Controller  {
                 {
                     if (in_array(strtolower($value),$keywords) && !in_array(strtolower($value),$stop_words))
                     {
-                        $highlight_title .= "<span class=\"search_highlight\">" . $value . "</span> ";
+                        $highlight_title .= "" . $value . " ";
                     }
                     else
                     {
@@ -150,7 +154,7 @@ class Search_Controller extends Keitai_Controller  {
                 {
                     if (in_array(strtolower($value),$keywords) && !in_array(strtolower($value),$stop_words))
                     {
-                        $highlight_description .= "<span class=\"search_highlight\">" . $value . "</span> ";
+                        $highlight_description .= "" . $value . "";
                     }
                     else
                     {
@@ -158,23 +162,19 @@ class Search_Controller extends Keitai_Controller  {
                     }
                 }
                 
-                $incident_date = date('D M j Y g:i:s a', strtotime($search->incident_date));
-                
-                $html .= "<div class=\"search_result\">";
-                $html .= "<h3><a href=\"" . url::base() . "reports/view/" . $incident_id . "\">" . $highlight_title . "</a></h3>";
-                $html .= $highlight_description . " ...";
-                $html .= "<div class=\"search_date\">" . $incident_date . " | ".Kohana::lang('ui_admin.relevance').": <strong>+" . $search->relevance . "</strong></div>";
-                $html .= "</div>";
+                $incident_date = date('Y/m/d', strtotime($search->incident_date));
+		$html .= $highlight_title."<br>";
+                $html .= $incident_date." "; 
+                $html .= "<a href=\"" . url::base() . "/keitai/reports/view/" . $incident_id . "\">[詳細]</a><br>";
+                $html .= "<hr size='1' noshade>";
             }
         }
         else
         {
             // Results Bar
-            $search_info .= "<div class=\"search_info\">0 ".Kohana::lang('ui_admin.results')."</div>";
+            $search_info .= Kohana::lang('ui_admin.results');
             
-            $html .= "<div class=\"search_result\">";
-            $html .= "<h3>".Kohana::lang('ui_admin.your_search_for')."<strong>".$keyword_raw."</strong> ".Kohana::lang('ui_admin.match_no_documents')."</h3>";
-            $html .= "</div>";
+            $html .= Kohana::lang('ui_admin.your_search_for')."<strong>".$keyword_raw."</strong> ".Kohana::lang('ui_admin.match_no_documents');
         }
         
         $html .= $pagination;

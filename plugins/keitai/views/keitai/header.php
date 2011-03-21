@@ -10,7 +10,7 @@
 </style> 
 </head> 
 <body bgcolor="#ffffff" text="#000000">
-<?php echo $site_name; ?><br>
+<img src="<?php echo url::base(); ?>/media/img/logo_m.png" alt="<?php echo $site_name . ': ' . $site_tagline; ?>" />
 <hr size="1" noshade>
 <a href="<?php echo url::site()."keitai"; ?>" accesskey="0">[0]TOP</a><?php echo $breadcrumbs; ?><br>
 <form method="get" id="search" action="/ushahidi/index.php/keitai/search/"><input type="hidden"  name="l" value="ja_JP" /><input type="text" name="k" value="" class="text" /><input type="submit" name="b" class="searchbtn" value="検索" /></form>
