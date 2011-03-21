@@ -19,6 +19,9 @@ div#middle .layoutleft{
 #graph{
   display: none !important;
 }
+div.slider-holder{
+  display: none !important;
+}
 
 #category_block{
   overflow: auto;

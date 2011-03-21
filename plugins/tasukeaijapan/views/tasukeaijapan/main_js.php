@@ -225,7 +225,7 @@
 			{
 				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat+"?i=hour", function(data) {
 					graphData = data[0];
-
+/*
 					gTimeline = $.timeline({categoryId: currentCat,
 						startTime: new Date(startDate * 1000),
 					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
@@ -233,6 +233,7 @@
 						graphData: graphData
 					});
 					gTimeline.plot();
+*/
 				});
 			} 
 			else if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 124)
@@ -240,7 +241,7 @@
 			    // weekly if period > 2 months
 				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat+"?i=day", function(data) {
 					graphData = data[0];
-
+/*
 					gTimeline = $.timeline({categoryId: currentCat,
 						startTime: new Date(startDate * 1000),
 					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
@@ -248,6 +249,7 @@
 						graphData: graphData
 					});
 					gTimeline.plot();
+*/
 				});
 			} 
 			else if ((endTime - startTime) / (1000 * 60 * 60 * 24) > 124)
@@ -255,7 +257,7 @@
 				// monthly if period > 4 months
 				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat, function(data) {
 					graphData = data[0];
-
+/*
 					gTimeline = $.timeline({categoryId: currentCat,
 						startTime: new Date(startDate * 1000),
 					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
@@ -263,6 +265,7 @@
 						graphData: graphData
 					});
 					gTimeline.plot();
+*/
 				});
 			}
 
@@ -427,12 +430,13 @@
 				graphData = "";
 				$.getJSON("<?php echo url::site()."json/timeline/"?>"+catID, function(data) {
 					graphData = data[0];
-
+/*
 					gTimeline = $.timeline({categoryId: catID, startTime: startTime, endTime: endTime,
 						graphData: graphData,
 						mediaType: gMediaType
 					});
 					gTimeline.plot();
+*/
 				});
 				
 				dailyGraphData = "";
@@ -610,3 +614,11 @@
 			return n > '1183240800';
 		})[0];
 */
+
+// link in new window
+$('#map_OpenLayers_ViewPort a').live('mouseover', function(){
+  var link = $(this);
+  if(link.attr('href').indexOf('http') === 0){
+    link.attr('target', '_blank');
+  }
+});

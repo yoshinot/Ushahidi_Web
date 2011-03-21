@@ -64,10 +64,6 @@ class TasukeaijapanThemes {
 	private function _header_css()
 	{
 		$core_css = "";
-		foreach (Kohana::config("settings.site_style_css") as $theme_css)
-		{
-			$core_css .= html::stylesheet($theme_css,"",true);
-		}
 		$core_css .= html::stylesheet($this->css_url."media/css/jquery-ui-themeroller", "", true);
 		$core_css .= "<!--[if lte IE 7]>".html::stylesheet($this->css_url."media/css/iehacks","",true)."<![endif]-->";
 		$core_css .= "<!--[if IE 7]>".html::stylesheet($this->css_url."media/css/ie7hacks","",true)."<![endif]-->";
