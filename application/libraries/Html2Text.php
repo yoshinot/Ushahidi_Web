@@ -421,7 +421,7 @@ class Html2Text
         $text = trim(stripslashes($this->html));
 
         // Run our defined search-and-replace
-        $text = mb_convert_encoding(preg_replace($this->search, $this->replace, $text), "utf-8", "JIS");
+        $text = mb_convert_encoding(preg_replace($this->search, $this->replace, $text), "utf-8", "auto");
 
         // Strip any other HTML tags
         $text = strip_tags($text, $this->allowed_tags);

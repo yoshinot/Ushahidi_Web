@@ -58,7 +58,7 @@ class S_Alerts_Controller extends Controller {
 		$site_name = $settings['site_name'];
 		$alerts_email = ($settings['alerts_email']) ? $settings['alerts_email']
 			: $settings['site_email'];
-		$unsubscribe_message = Kohana::lang('alerts.unsubscribe')
+		$unsubscribe_message = Kohana::lang('alerts.unsubscribe')."\n"
 								.url::site().'alerts/unsubscribe/';
 
 				$database_settings = kohana::config('database'); //around line 33
@@ -92,6 +92,7 @@ class S_Alerts_Controller extends Controller {
 			$incident_description = $incident->incident_description;
 			$html2text = new Html2Text($incident_description);
 			$incident_description = $html2text->get_text();
+                        $incident_description = mb_convert_encoding($incident_description, "UTF-8", "auto");
 
 			// EMAIL MESSAGE
 			$email_message = $incident_description;

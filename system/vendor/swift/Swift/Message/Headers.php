@@ -416,7 +416,26 @@ class Swift_Message_Headers
 #        $used_length = strlen($name) + 2 + strlen($spec) + 2;
 #        $encoded_value[$key] = Swift_Message_Encoder::instance()->base64Encode(
 #          $row, (75-(strlen($spec)+5)), ($key > 0 ? 0 : (76-($used_length+3))), true, $this->LE);
-        $encoded_value[$key] = mb_encode_mimeheader($row, $this->getCharset(), 'B', "\r\n");
+        if ($is_email)
+        {
+          $s = mb_strpos($row, " <");
+          $e = mb_strpos($row, ">");
+          if ($s < $e)
+          {
+            $line_length = mb_strlen($row);
+            $to_encode = mb_substr($row, 0, $s);
+            $not_encode = mb_substr($row, $s, $line_length);
+            $encoded_value[$key] = mb_encode_mimeheader($to_encode, $this->getCharset(), 'B', "\r\n"). "\r\n" . $not_encode;
+          }
+          else
+          {
+            $encoded_value[$key] = mb_encode_mimeheader($row, $this->getCharset(), 'B', "\r\n");
+          }
+        }
+        else
+        {
+          $encoded_value[$key] = mb_encode_mimeheader($row, $this->getCharset(), 'B', "\r\n");
+        }
       }
       
       if (false !== $p = strpos($encoded_value[$key], $this->LE))
