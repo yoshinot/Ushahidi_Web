@@ -6,6 +6,8 @@
 	# Installation directory
 	RewriteBase /ushahidi
 
+        RewriteRule ^.*/media/(.*) media/$1 [L,R]
+
 	# Protect application and system files from being viewed
 	RewriteRule ^(application|modules|system) - [F,L]
 
