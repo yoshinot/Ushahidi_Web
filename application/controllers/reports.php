@@ -135,7 +135,8 @@ class Reports_Controller extends Main_Controller {
 
 
 
-                $query = 'SELECT id,category_title,category_color FROM category WHERE category_visible = 1 AND category_trusted = 0';
+                // $query = 'SELECT id,category_title,category_color FROM category WHERE category_visible = 1 AND category_trusted = 0';
+                $query = 'SELECT id,category_title,category_color FROM category';
 
                 $query = $db->query($query);
 		$category_master = array();
