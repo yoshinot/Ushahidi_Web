@@ -1,0 +1,35 @@
+
+div.rapidxwpr{
+  width: 910px;
+}
+
+#main{
+  padding: 15px 15px 0 !important;
+}
+
+#content{
+  margin-right: 300px !important;
+}
+
+div#middle .layoutleft{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#graph{
+  display: none !important;
+}
+
+#category_block{
+  overflow: auto;
+  height: 440px;
+}
+
+#category_switch{
+  padding: 5px;
+}
+
+#footer_link{
+  text-align: right;
+  margin: 0pt 20px;
+}
