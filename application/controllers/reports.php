@@ -134,6 +134,26 @@ class Reports_Controller extends Main_Controller {
 
 		// Swap out category titles with their proper localizations using an array (cleaner way to do this?)
 
+
+
+                $query = 'SELECT id,category_title,category_color FROM category WHERE category_visible = 1 AND category_trusted = 0';
+
+                $query = $db->query($query);
+
+		$category_master = array();
+		foreach($query as $row){
+			$category_master[$row->id]['title'] = $row->category_title; 
+			$category_master[$row->id]['color'] = $row->category_color; 
+		}	
+		$this->template->content->category_master = $category_master;
+
+
+
+
+
+
+
+
 		$localized_categories = array();
 		foreach ($incidents as $incident)
 		{
@@ -144,13 +164,15 @@ class Reports_Controller extends Main_Controller {
 				{
 					$translated_title = Category_Lang_Model::category_title($category->id,$l);
 					$localized_categories[$ct] = $category->category_title;
+					$localized_categories[$ct]['color'] = $category->category_color;
 					if($translated_title)
 					{
-						$localized_categories[$ct] = $translated_title;
+						$localized_categories[$ct]['title'] = $translated_title;
 					}
 				}
 			}
 		}
+
 
 		$this->template->content->localized_categories = $localized_categories;
 
@@ -1318,3 +1340,4 @@ class Reports_Controller extends Main_Controller {
 	}*/
 
 } // End Reports
+
