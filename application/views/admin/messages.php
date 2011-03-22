@@ -52,11 +52,13 @@
 							<li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
 							<li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
               <li>
-                <form action="<?php echo url::site()."admin/messages/index/".$service_id ?>" method="GET">
+                <form action="<?php echo url::site()."admin/messages/index/".$service_id ?>" method="GET"> 
                   <span style="padding-top: 0px; padding-bottom: 1px;" class="formspan">
                     <input type="hidden" name="type" value="<?php echo $type ?>">
                     <input type="hidden" name="level" value="<?php echo $level ?>">
-                    <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
+                    ページ番号<input type="text" name="page" value="" size="3">
+                   フィルタ条件： <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
+                    <input type="submit" />
                   </span>
                   <script type="text/javascript">
                     $(document).ready(function(){
@@ -233,11 +235,11 @@
 											<ul>
 												<?php
 												if ($incident_id != 0 && $message_type != 2) {
-													echo "<li class=\"none-separator\"><a href=\"". url::base() . 'admin/reports/edit/' . $incident_id ."\" class=\"status_yes\"><strong>View Report</strong></a></li>";
+													echo "<li class=\"none-separator\"><a target=\"edit\" href=\"". url::base() . 'admin/reports/edit/' . $incident_id ."\" class=\"status_yes\"><strong>View Report</strong></a></li>";
 												}
 												elseif ($message_type != 2)
 												{
-													echo "<li class=\"none-separator\"><a href=\"". url::base() . 'admin/reports/edit?mid=' . $message_id ."\">Create Report?</a></li>";
+													echo "<li class=\"none-separator\"><a target=\"edit\"   href=\"". url::base() . 'admin/reports/edit?mid=' . $message_id ."\">Create Report?</a></li>";
 												}
 												?>
 												<li><a href="javascript:messagesAction('d','DELETE','<?php echo(rawurlencode($message_id)); ?>')" class="del"><?php echo Kohana::lang('ui_main.delete');?></a></li>
