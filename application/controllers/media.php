@@ -83,7 +83,13 @@ class Media_Controller extends Controller {
 
         // HTTP Headers
         $expiry_time = 613200;  // 1 Week
-        $mime = ($ext == 'css') ? 'text/css' : 'application/javascript';
+        if ($ext == 'css') {
+            $mime = 'text/css';
+        } else if ($ext == 'js') {
+            $mime = 'application/javascript';
+        } else {
+            $mime = 'text/html';
+        }
         header('Content-type: '.$mime);
         header('Cache-Control: must-revalidate');
         header('Expires: '.gmdate("D, d M Y H:i:s", time() + $expiry_time).' GMT');
