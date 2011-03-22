@@ -1,4 +1,3 @@
-	<!--TODO nati: add google analitcs for mobile-->
 <br>
 <div style="text-align:right;" align="right"><right>[<a href="#top">↑</a>]</right></div>
 <br>
@@ -6,5 +5,8 @@
 <hr size="1" noshade>
 <div style="font-size:xx-small;text-align:center" align="center"><center>Copyright(R) sinsai.info</center></div>
 <br>
+<?php
+  $googleAnalyticsImageUrl = googleAnalyticsGetImageUrl();
+  echo '<img src="' . $googleAnalyticsImageUrl . '" />';?>
 </body>
 </html>
