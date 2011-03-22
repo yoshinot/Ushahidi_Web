@@ -195,20 +195,10 @@
 	'upgrade_ushahidi' => 'Ushahidiをアップグレード',
 	'upgrade_ushahidi_status' => 'Ushahidiのステイタスをアップグレード',
 	'upload_reports' => 'レポートをアップロード',
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b25ac4820edb91abfcbc8809845b2b7c2408c058
-	'users' => 'ユーザ',
+	'users' => 'ユーザー',
 	'user_create' => 'Ushahidi:ユーザ登録',
 	'user_create_message_line_1' => 'ユーザを作成しました:',
 	'user_create_message_line_4' => 'ログイン画面からログインしてください。',
-<<<<<<< HEAD
-=======
-=======
-	'users' => 'ユーザー',
->>>>>>> smellman_issue213
->>>>>>> b25ac4820edb91abfcbc8809845b2b7c2408c058
 	'ushahidi' => 'Ushahidi',
 	'version' => 'バージョン',
 	'version_available' => 'アップグレード可能です。',
