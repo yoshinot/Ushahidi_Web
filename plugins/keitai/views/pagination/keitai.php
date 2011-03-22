@@ -7,6 +7,6 @@
 ?>
 
 	<?php if ($next_page): ?>
-		<a href="<?php echo str_replace('{page}', $next_page, $url) ?>" accesskey="#">[#]次へ</a>
+		[#]<a href="<?php echo str_replace('{page}', $next_page, $url) ?>" accesskey="#">次へ</a>
 	<?php else: ?>
 	<?php endif ?>

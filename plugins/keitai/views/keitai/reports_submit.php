@@ -1,5 +1,16 @@
 
 	<h2 >レポートの投稿</h2>
+
+<?php if ($form['latitude'] && $form['longitude']) { ?>
+▼現在地のﾚﾎﾟｰﾄ投稿<br>
+<div style="clear:both;text-align:center;" align="center"><center><a href="http://www.google.co.jp/m/local?q=<?php echo $form['latitude'].",".$form['longitude'];?>&z=14"><img src="http://maps.google.com/maps/api/staticmap?center=<?php echo $form['latitude'].",".$form['longitude'];?>&zoom=14&size=230x100&format=gif&maptype=roadmap&sensor=false&markers=<?php echo $form['latitude'].",".$form['longitude'];?>" border="0"></a></center></div>
+<hr size="1" noshade>
+<?php } else { ?>
+<?php if ($device == 'd') { ?>現在地のレポート投稿(<a href="http://w1m.docomo.ne.jp/cp/iarea?ecode=OPENAREACODE&msn=OPENAREAKEY&nl=<?php echo url::site()."keitai/checkin/reports" ?>&posinfo=2">簡易</a>/<a href="<?php echo url::site()."keitai/checkin/reports" ?>?guid=ON" lcs>GPS</a>)<br><?php } ?>
+<?php if ($device == 'a') { ?><a href="device:gpsone?url=<?php echo url::site()."keitai/checkin/reports" ?>&amp;ver=1&amp;datum=0&amp;unit=0">現在地のレポート投稿</a><br><?php } ?>
+<?php if ($device == 's') { ?><a href="location:auto?url=<?php echo url::site()."keitai/checkin/reports" ?>">現在地のレポート投稿</a><br><?php } ?>
+<br>
+<?php } ?>
 	<?php print form::open(NULL, array('enctype' => 'multipart/form-data', 'id' => 'reportForm', 'name' => 'reportForm')); ?>
 	<input type="hidden" name="latitude" id="latitude" value="<?php echo $form['latitude']; ?>">
 	<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
@@ -92,8 +103,6 @@
 				echo category::tree($categories, $selected_categories, 'incident_category', $columns);
 				?>
 			
-		
-		
 		
 			<h4>場所</h4>
 			地名を選択してください<br>

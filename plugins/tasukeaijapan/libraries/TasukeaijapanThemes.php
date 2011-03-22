@@ -64,37 +64,37 @@ class TasukeaijapanThemes {
 	private function _header_css()
 	{
 		$core_css = "";
-		$core_css .= html::stylesheet($this->css_url."media/css/jquery-ui-themeroller", "", true);
-		$core_css .= "<!--[if lte IE 7]>".html::stylesheet($this->css_url."media/css/iehacks","",true)."<![endif]-->";
-		$core_css .= "<!--[if IE 7]>".html::stylesheet($this->css_url."media/css/ie7hacks","",true)."<![endif]-->";
-		$core_css .= "<!--[if IE 6]>".html::stylesheet($this->css_url."media/css/ie6hacks","",true)."<![endif]-->";
+		$core_css .= html::stylesheet($this->css_url."views/css/jquery-ui-themeroller", "", true);
+		$core_css .= "<!--[if lte IE 7]>".html::stylesheet($this->css_url."views/css/iehacks","",true)."<![endif]-->";
+		$core_css .= "<!--[if IE 7]>".html::stylesheet($this->css_url."views/css/ie7hacks","",true)."<![endif]-->";
+		$core_css .= "<!--[if IE 6]>".html::stylesheet($this->css_url."views/css/ie6hacks","",true)."<![endif]-->";
 			
 		if ($this->map_enabled)
 		{
-			$core_css .= html::stylesheet($this->css_url."media/css/openlayers","",true);
+			$core_css .= html::stylesheet($this->css_url."views/css/openlayers","",true);
 		}
 		
 		if ($this->treeview_enabled)
 		{
-			$core_css .= html::stylesheet($this->css_url."media/css/jquery.treeview","",true);
+			$core_css .= html::stylesheet($this->css_url."views/css/jquery.treeview","",true);
 		}
 		
 		if ($this->photoslider_enabled)
 		{
-			$core_css .= html::stylesheet($this->css_url."media/css/picbox/picbox","",true);
+			$core_css .= html::stylesheet($this->css_url."views/css/picbox/picbox","",true);
 		}
 		
 		if ($this->videoslider_enabled)
 		{
-			$core_css .= html::stylesheet($this->css_url."media/css/videoslider","",true);
+			$core_css .= html::stylesheet($this->css_url."views/css/videoslider","",true);
 		}
 		
-		$core_css .= html::stylesheet($this->css_url."media/css/style.css");
+		$core_css .= html::stylesheet($this->css_url."views/css/style.css");
 		
 		// Render CSS
 		$plugin_css = plugin::render('stylesheet');
 		
-		$iframe_css = html::stylesheet($this->css_url."media/css/iframe","",true);
+		$iframe_css = html::stylesheet($this->css_url."views/css/iframe","",true);
 		
 		return $core_css.$plugin_css.$iframe_css;
 	}
@@ -107,13 +107,13 @@ class TasukeaijapanThemes {
 		$core_js = "";
 		if ($this->map_enabled)
 		{
-			$core_js .= html::script($this->js_url."media/js/OpenLayers", true);
-			$core_js .= "<script type=\"text/javascript\">OpenLayers.ImgPath = '".$this->js_url."media/img/openlayers/"."';</script>";
+			$core_js .= html::script($this->js_url."views/js/OpenLayers", true);
+			$core_js .= "<script type=\"text/javascript\">OpenLayers.ImgPath = '".$this->js_url."views/img/openlayers/"."';</script>";
 		}
 		
-		$core_js .= html::script($this->js_url."media/js/jquery", true);
-		$core_js .= html::script($this->js_url."media/js/jquery.ui.min", true);
-		$core_js .= html::script($this->js_url."media/js/jquery.pngFix.pack", true);
+		$core_js .= html::script($this->js_url."views/js/jquery", true);
+		$core_js .= html::script($this->js_url."views/js/jquery.ui.min", true);
+		$core_js .= html::script($this->js_url."views/js/jquery.pngFix.pack", true);
 		
 		if ($this->map_enabled)
 		{
@@ -121,37 +121,17 @@ class TasukeaijapanThemes {
 
 			if ($this->main_page || $this->this_page == "alerts")
 			{
-				$core_js .= html::script($this->js_url."media/js/selectToUISlider.jQuery", true);
+				$core_js .= html::script($this->js_url."views/js/selectToUISlider.jQuery", true);
 			}
 
 			if ($this->main_page)
 			{
-				$core_js .= html::script($this->js_url."media/js/jquery.flot", true);
-				$core_js .= html::script($this->js_url."media/js/timeline", true);
-				$core_js .= "<!--[if IE]>".html::script($this->js_url."media/js/excanvas.min", true)."<![endif]-->";
+				$core_js .= html::script($this->js_url."views/js/jquery.flot", true);
+				$core_js .= html::script($this->js_url."views/js/timeline", true);
+				$core_js .= "<!--[if IE]>".html::script($this->js_url."views/js/excanvas.min", true)."<![endif]-->";
 			}
 		}
 
-		if ($this->treeview_enabled)
-		{
-			$core_js .= html::script($this->js_url."media/js/jquery.treeview");
-		}
-
-		if ($this->validator_enabled)
-		{
-			$core_js .= html::script($this->js_url."media/js/jquery.validate.min");
-		}
-
-		if ($this->photoslider_enabled)
-		{
-			$core_js .= html::script($this->js_url."media/js/picbox", true);
-		}
-
-		if($this->videoslider_enabled )
-		{
-			$core_js .= html::script($this->js_url."media/js/coda-slider.pack");
-		}
-		
 		// Javascript files from plugins
 		$plugin_js = plugin::render('javascript');
 		
