@@ -133,6 +133,8 @@ class Messages_Controller extends Admin_Controller
         // filtering RT and QT
         //$rt_filter = " message.message NOT LIKE '%RT%' AND message.message NOT LIKE '%QT%' AND message.message NOT LIKE '%ＲＴ%'";
         //$filter .= " AND".$rt_filter;
+        // filtering reported message
+        $filter .= "AND message.incident_id = 0";
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -228,7 +230,7 @@ class Messages_Controller extends Admin_Controller
                                 ->join('reporter','message.reporter_id','reporter.id')
                                 ->where('service_id', $service_id)
                                 ->where($filter)
-                                ->orderby('message_date','desc')
+                                ->orderby('message_date','asc')
                                 ->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
             
         // Get Message Count
