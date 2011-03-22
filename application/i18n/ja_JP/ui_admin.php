@@ -195,14 +195,10 @@
 	'upgrade_ushahidi' => 'Ushahidiをアップグレード',
 	'upgrade_ushahidi_status' => 'Ushahidiのステイタスをアップグレード',
 	'upload_reports' => 'レポートをアップロード',
-<<<<<<< HEAD
-	'users' => 'ユーザ',
+	'users' => 'ユーザー',
 	'user_create' => 'Ushahidi:ユーザ登録',
 	'user_create_message_line_1' => 'ユーザを作成しました:',
 	'user_create_message_line_4' => 'ログイン画面からログインしてください。',
-=======
-	'users' => 'ユーザー',
->>>>>>> smellman_issue213
 	'ushahidi' => 'Ushahidi',
 	'version' => 'バージョン',
 	'version_available' => 'アップグレード可能です。',
