@@ -131,7 +131,6 @@ class Reports_Controller extends Main_Controller {
 			->where($incident_id_in)
 			->orderby("incident_date", "desc")
 			->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
-
 		// Swap out category titles with their proper localizations using an array (cleaner way to do this?)
 
 
@@ -139,40 +138,16 @@ class Reports_Controller extends Main_Controller {
                 $query = 'SELECT id,category_title,category_color FROM category WHERE category_visible = 1 AND category_trusted = 0';
 
                 $query = $db->query($query);
-
 		$category_master = array();
+		$localized_categories = array();
 		foreach($query as $row){
 			$category_master[$row->id]['title'] = $row->category_title; 
 			$category_master[$row->id]['color'] = $row->category_color; 
+			$localized_categories[(string)$row->category_title] = $row->category_title;
+			$localized_categories[(string)$row->category_title]['title'] = $row->category_title;
+			$localized_categories[(string)$row->category_title]['color'] = $row->category_title;
 		}	
 		$this->template->content->category_master = $category_master;
-
-
-
-
-
-
-
-
-		$localized_categories = array();
-		foreach ($incidents as $incident)
-		{
-			foreach ($incident->category AS $category)
-			{
-				$ct = (string)$category->category_title;
-				if( ! isset($localized_categories[$ct]))
-				{
-					$translated_title = Category_Lang_Model::category_title($category->id,$l);
-					$localized_categories[$ct] = $category->category_title;
-					$localized_categories[$ct]['color'] = $category->category_color;
-					if($translated_title)
-					{
-						$localized_categories[$ct]['title'] = $translated_title;
-					}
-				}
-			}
-		}
-
 
 		$this->template->content->localized_categories = $localized_categories;
 
