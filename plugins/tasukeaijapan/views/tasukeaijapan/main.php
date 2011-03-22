@@ -5,9 +5,11 @@
 		<div id="right" class="clearingfix">
 	
 			<!-- category filters -->
+			<!--
 			<div class="cat-filters clearingfix">
 				<strong><?php echo Kohana::lang('ui_main.category_filter');?></strong>
 			</div>
+			-->
 		    <div id="category_block">
 			<ul id="category_switch" class="category-filters">
 				<li><a class="active" id="cat_0" href="#"><span class="swatch" style="background-color:<?php echo "#".$default_map_all;?>"></span><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
@@ -68,6 +70,7 @@
 			<div class="floatbox">
 			
 				<!-- filters -->
+				<!--
 				<div class="filters clearingfix">
 					<div style="float:left; width: 100%">
 						<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
@@ -80,6 +83,7 @@
 						</ul>
 					</div>
 				</div>
+				-->
 				<!-- / filters -->
 				
 				<?php								
