@@ -57,6 +57,9 @@
             <tr>
             <td><a href="<?php echo url::site()?>login/resetpassword"> <?php echo Kohana::lang('ui_main.forgot_password');?></a></td>
             </tr>
+            <tr>
+            <td><a href="<?php echo url::site()?>login/newuser"> <?php echo Kohana::lang('ui_main.user_add');?></a></td>
+            </tr>
         </form>
       </table>
   </div>
