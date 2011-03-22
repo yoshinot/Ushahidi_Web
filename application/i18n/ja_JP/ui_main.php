@@ -72,9 +72,16 @@
 	'comments' => 'コメント',
 	'comment_details' => 'コメント詳細',
 	'comment_rating' => 'コメント評価',
+<<<<<<< HEAD
+	'configuration_saved' => 'あなたの設定は保存されました!',
+	'configure' => '構成',
+	'confirm_password' => 'メールアドレスに送信されたパスワードを確認して,ログインしてください。',
+	'contact' => 'お問い合わせ',
+=======
 	'configuration_saved' => '設定が保存されました！',
 	'configure' => '設定',
 	'contact' => 'コンタクト',
+>>>>>>> smellman_issue213
 	'contact_code' => 'セキュリティコード',
 	'contact_email' => 'あなたのメールアドレス',
 	'contact_message' => 'メッセージ',
@@ -85,10 +92,18 @@
 	'contact_subject' => 'メッセージタイトル',
 	'copyright' => 'Copyright ©',
 	'create' => '作成',
+<<<<<<< HEAD
+	'create_edit' => '作成/編集',
+	'create_new' => '新規作成',
+	'create_report' => 'レポートを作成',
+	'create_user' => 'ユーザを追加しました!',
+	'credibility' => '信頼性',
+=======
 	'create_edit' => '追加/編集',
 	'create_new' => '新規追加',
 	'create_report' => 'レポートを追加',
 	'credibility' => '信頼',
+>>>>>>> smellman_issue213
 	'data' => '情報',
 	'date' => '日付',
 	'date_format' => '(yyyy/mm/dd)',
@@ -477,6 +492,23 @@
 	'update_feeds' => 'フィードのアップデート',
 	'upload' => 'アップロード',
 	'upload_file' => 'アップロードするファイル',
+<<<<<<< HEAD
+	'upload_reports' => 'レポートをアップロード',
+	'upload_reports_detail_1' => '下記フォームで、インシデントをUshahidiエンジンにインポートできます',
+	'upload_reports_detail_2' => 'レポートはCSV形式でアップロードしてください',
+	'upload_reports_detail_3' => 'インシデントIDが既にデータベースに存在する場合、CSVファイル内のエントリは無視されます',
+	'upload_reports_detail_4' => '少なくともインシデントのタイトルと日付は必要です',
+	'upload_reports_detail_5' => 'サンプルCSVレポート',
+	'upload_reports_detail_6' => '#,INCIDENT TITLE,INCIDENT DATE,LOCATION,DESCRIPTION,CATEGORY,APPROVED,VERIFIED<br />"1","Suspected death in Nairobi","2009-05-15 01:06:00","Nairobi","Three cases have been confirmed in C. del Uruguay","DEATHS, CIVILIANS, ",YES,YES',
+	'upload_reports_detail_7' => '"2","Looting","2009-03-18 10:10:00","Accra","Looting happening everywhere","RIOTS, DEATHS, PROPERTY LOSS, ",YES,NO',
+	'upload_successful' => 'アップロード成功',
+	'user' => 'ユーザ',
+	'user_add' => '新規ユーザ',
+	'username' => 'ユーザ名',
+	'ushahidi_admin' => 'Ushahidi 管理者',
+	'verified' => '検証済',
+	'verified_reports' => '検証済レポート',
+=======
 	'upload_reports' => 'アップロードされたレポート',
 	'upload_reports_detail_1' => '以下のフォーム内で、Ushahidiエンジンにインシデントを取り込む事が出来ます。',
 	'upload_reports_detail_2' => 'レポートはCSV フォーマットでアップロードされる必要があります。',
@@ -491,6 +523,7 @@
 	'ushahidi_admin' => 'Ushahidi管理',
 	'verified' => '確認済み',
 	'verified_reports' => 'レポートを検証する',
+>>>>>>> smellman_issue213
 	'verify' => '検証',
 	'verify_this_report' => 'このレポートを検証する',
 	'version' => 'バージョン',
