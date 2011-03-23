@@ -6,6 +6,8 @@
 	# Installation directory
 	RewriteBase /ushahidi
 
+        RewriteRule ^(index\.php)?/media/(.*) media/$2 [L,R]
+
 	# Protect application and system files from being viewed
 	RewriteRule ^(application|modules|system) - [F,L]
 

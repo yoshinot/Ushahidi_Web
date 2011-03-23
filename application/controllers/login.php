@@ -196,6 +196,78 @@ class Login_Controller extends Template_Controller {
 		$this->template->js = new View('admin/reset_password_js');
 	}
 
+    public function newuser($user_id = false)
+    {
+	$form = array
+	(
+	  'name' 	=> '',
+	  'email'	=> '',
+	  'username'    => '',
+	  'notify'      => '',
+	);
+	$errors = $form;
+	$form_error = FALSE;
+	$form_action = "";
+	
+	if($_POST)
+	{
+            $post = Validation::factory($_POST);
+
+            //  Add some filters
+            $post->pre_filter('trim', TRUE);
+    
+            $post->add_rules('username','required','length[3,16]', 'alpha');
+            
+	    //only validate password as required when user_id has value.
+            $post->add_rules('name','required','length[3,100]');
+            $post->add_rules('email','required','email','length[4,64]');
+            $user_id == '' ? $post->add_callbacks('username',
+                array($this,'username_exists_chk')) : '';
+            $user_id == '' ? $post->add_callbacks('email',
+                array($this,'email_exists_chk')) : '';
+            $post->add_rules('notify','between[0,1]');
+            
+            if ($post->validate())
+	    { // Email New Password
+                $user = ORM::factory('user',$user_id);
+                $user->name = $post->name;
+		$user->username = $post->username;
+                $user->email = $post->email;
+                $user->notify = $post->notify;
+                   
+                // Add New Roles
+                $user->add(ORM::factory('role', 'login'));
+                $user->add(ORM::factory('role', 'reporter'));
+		   
+		$new_password = $this->_generate_password();
+		$user->password = $new_password;
+		$user->save();
+		
+		$this->_email_newuser( $user->email, $user->name, $user->username, $new_password);
+		//url::redirect(url::site().'login/created_user');
+
+		$this->template = new View('admin/created_user');
+		return;
+	    }
+            else 
+            {
+                // repopulate the form fields
+                $form = arr::overwrite($form, $post->as_array());
+
+                // populate the error fields, if any
+                $errors = arr::overwrite($errors, $post->errors('auth'));
+                $form_error = TRUE;
+            }
+        }
+
+	$this->template = new View('admin/new_user');
+	$this->template->form = $form;
+	$this->template->errors = $errors;
+	$this->template->form_error = $form_error;
+	$this->template->form_action = $form_action;
+	$this->template->user =  "";// user model's user
+	$this->template->yesno_array = array('1'=>strtoupper(Kohana::lang('ui_main.yes')),'0'=>strtoupper(Kohana::lang('ui_main.no')));        
+    }
     /**
      * Create New password upon user request.
      */
@@ -235,6 +307,21 @@ class Login_Controller extends Template_Controller {
 	}
 
 	/**
+	 * Checks if username already exists.
+	 * @param Validation $post $_POST variable with validation rules 
+	 */
+	public function username_exists_chk(Validation $post)
+	{
+	    $users = ORM::factory('user');
+	    // If add->rules validation found any errors, get me out of here!
+	    if (array_key_exists('username', $post->errors()))
+	        return;
+			
+	    if ($users->username_exists($post->username))
+	        $post->add_error( 'username', 'exists');
+	}
+
+	/**
 	 * Checks if email address is associated with an account.
 	 * @param Validation $post $_POST variable with validation rules
 	 */
@@ -244,7 +331,7 @@ class Login_Controller extends Template_Controller {
 		if( array_key_exists('resetemail',$post->errors()))
 			return;
 
-		if( !$users->email_exists( $post->resetemail ) )
+		if( !$users->email_exists( $post->email ) )
 			$post->add_error('resetemail','invalid');
 	}
 	
@@ -284,6 +371,29 @@ class Login_Controller extends Template_Controller {
 		$message .= Kohana::lang('ui_admin.password_reset_message_line_2').' '.$name.". ";
 		$message .= Kohana::lang('ui_admin.password_reset_message_line_3')."\n\n";
 		$message .= $secret_url."\n\n";
+		
+		//email details
+		if( email::send( $to, $from, $subject, $message, FALSE ) == 1 )
+		{
+			return TRUE;
+		}
+		else 
+		{
+			return FALSE;
+		}
+	
+	}
+	
+	public function _email_newuser( $email, $name, $username, $password )
+	{
+		$to = $email;
+		$from = Kohana::lang('ui_admin.password_reset_from');
+		$subject = Kohana::lang('ui_admin.user_create');
+		
+		$message = Kohana::lang('ui_admin.user_create_message_line_1').' '.$name.",\n";
+		$message .= Kohana::lang('ui_admin.user_create_message_line_4').":\n\n";
+		$message .= Kohana::lang('ui_admin.label_username').": ".$username."\n";
+		$message .= Kohana::lang('ui_admin.password').": ".$password;
 		
 		//email details
 		if( email::send( $to, $from, $subject, $message, FALSE ) == 1 )

@@ -1,9 +1,22 @@
 <?php
+$latlong_params = "";
+if ($latlong) {
+  $latlong_params = "&latlong=".$latlong;
+?>
+▼現在地<br>
+<div style="clear:both;text-align:center;" align="center"><center><a href="http://www.google.co.jp/m/local?q=<?php echo $latlong;?>&z=14"><img src="http://maps.google.com/maps/api/staticmap?center=<?php echo $latlong;?>&zoom=14&size=230x100&format=gif&maptype=roadmap&sensor=false&markers=<?php echo $latlong;?>" border="0"></a></center></div>
+<hr size="1" noshade>
+<?php
+}
 if ($category AND $category->loaded)
 {
 	$category_id = $category->id;
 	$color_css = 'class="swatch" style="background-color:#'.$category->category_color.'"';
-	echo '<a href="#" accesskey="1">[1]'.$category->category_title.'</a><br>';
+	$category_title = $category->category_title;
+	if (preg_match("/^([^\/]+)\/([^\/]+)$/",$category_title,$matches)) {
+		$category_title = $matches[1];
+	}
+	//echo '[1]<a href="#" accesskey="1">'.$category_title.'</a><br>';
 }
 else
 {
@@ -19,9 +32,9 @@ if ($incidents->count())
 		$location_name = $incident->location_name;
 		echo $incident->incident_title;
 		echo "&nbsp;";
-		echo "(<span class=\"location_name\">".$location_name."</span>) <br> $incident_date ";
-        echo "<a href=\"".url::site()."keitai/reports/view/".$incident->id."?c=".$category_id."&p=".$page_no."\">[詳細]</a>";
-		echo "<hr size='1' noshade>";
+		echo "(<span class=\"location_name\">".$location_name."</span>) <br>";
+		echo "<div style=\"color:#808080;\">$incident_date [<a href=\"".url::site()."keitai/reports/view/".$incident->id."?c=".$category_id."&p=".$page_no.''.$latlong_params."\">詳細</a>]</div>";
+		echo "<hr size=\"1\" noshade>";
 	}
 }
 else

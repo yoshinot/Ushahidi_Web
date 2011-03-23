@@ -17,8 +17,8 @@
 
 class Reports_Controller extends Keitai_Controller {
 
-    public function __construct()
-    {
+	public function __construct()
+	{
 		parent::__construct();
 	}
 	
@@ -27,8 +27,9 @@ class Reports_Controller extends Keitai_Controller {
 	 * @param boolean $category_id If category_id is supplied filter by
 	 * that category
 	 */
-	public function index($category_id = false)
+        public function index($category_id = false)
 	{
+
 		$this->template->content = new View('keitai/reports');
 		
 		$db = new Database;
@@ -37,22 +38,41 @@ class Reports_Controller extends Keitai_Controller {
 			? " AND ( c.id='".$category_id."' OR 
 				c.parent_id='".$category_id."' )  "
 			: " AND 1 = 1";
-			
+
+		$latlong = (isset($_GET['latlong'])) ? $_GET['latlong'] : "";
+		$latlong_filter = "";
+		if ($latlong) {
+		    if (preg_match("/^([0-9\.]+),([0-9\.]+)/", $latlong, $matches)) {
+		        $lat = $matches[1];
+			$lon = $matches[2];
+			$latmin = $lat - 0.0277778;
+			$latmax = $lat + 0.0277778;
+			$lonmin = $lon - 0.0277778;
+			$lonmax = $lon + 0.0277778;
+			$latlong_filter = "AND l.latitude >= $latmin AND l.latitude <= $latmax AND l.longitude >= $lonmin AND l.longitude <= $lonmax";
+		    }
+		}
+
 		// Pagination
 		$pagination = new Pagination(array(
 				'style' => 'keitai',
 				'query_string' => 'page',
 				'items_per_page' => (int) Kohana::config('keitai.items_per_page'),
-				'total_items' => $db->query("SELECT DISTINCT i.* FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) WHERE `incident_active` = '1' $filter")->count()
+				'total_items' => $db->query("SELECT DISTINCT i.* FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter $latlong_filter")->count()
 				));
 		$this->template->content->pagination = $pagination;
 
-		$incidents = $db->query("SELECT DISTINCT i.*, l.location_name FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter ORDER BY incident_date DESC LIMIT ". (int) Kohana::config('keitai.items_per_page') . " OFFSET ".$pagination->sql_offset);
+		$incidents = $db->query("SELECT DISTINCT i.*, l.location_name FROM `".$this->table_prefix."incident` AS i JOIN `".$this->table_prefix."incident_category` AS ic ON (i.`id` = ic.`incident_id`) JOIN `".$this->table_prefix."category` AS c ON (c.`id` = ic.`category_id`) JOIN `".$this->table_prefix."location` AS l ON (i.`location_id` = l.`id`) WHERE `incident_active` = '1' $filter $latlong_filter ORDER BY incident_date DESC LIMIT ". (int) Kohana::config('keitai.items_per_page') . " OFFSET ".$pagination->sql_offset);
 		
 		// If Category Exists
 		if ($category_id)
 		{
 			$category = ORM::factory("category", $category_id);
+			$category_title = $category->category_title;
+			if (preg_match("/^([^\/]+)\/([^\/]+)$/",$category_title,$matches)) {
+				$category_title = $matches[1];
+			}
+			$this->template->header->breadcrumbs = "&nbsp;&raquo;&nbsp;".$category_title;
 		}
 		else
 		{
@@ -61,6 +81,7 @@ class Reports_Controller extends Keitai_Controller {
 			
 		$this->template->content->incidents = $incidents;
 		$this->template->content->category = $category;
+		$this->template->content->latlong = $latlong;
 	}
 	
 	/**
@@ -70,6 +91,12 @@ class Reports_Controller extends Keitai_Controller {
 	 */
 	public function view($id = false)
 	{	
+		$latlong = (isset($_GET['latlong'])) ? $_GET['latlong'] : "";
+		$latlong_params = "";
+		if ($latlong) {
+		  $latlong_params = "&latlong=".$latlong;
+		}
+
 		$this->template->header->show_map = TRUE;
 		$this->template->header->js = new View('keitai/reports_view_js');
 		$this->template->content = new View('keitai/reports_view');
@@ -99,7 +126,11 @@ class Reports_Controller extends Keitai_Controller {
 					->find($category_id);
 				if ($category->loaded)
 				{
-					$this->template->header->breadcrumbs = "&nbsp;&raquo;&nbsp;<a href=\"".url::site()."keitai/reports/index/".$category_id."?page=".$page_no."\">".$category->category_title."</a>";
+					$category_title = $category->category_title;
+					if (preg_match("/^([^\/]+)\/([^\/]+)$/",$category_title,$matches)) {
+						$category_title = $matches[1];
+					}
+					$this->template->header->breadcrumbs = "&nbsp;&raquo;&nbsp;<a href=\"".url::site()."keitai/reports/index/".$category_id."?page=".$page_no.''.$latlong_params."\">".$category_title."</a>";
 				}
 			}
 		}
@@ -300,10 +331,10 @@ class Reports_Controller extends Keitai_Controller {
 				$form_error = TRUE;
 			}
 			
+		} else {
+			$form['latitude'] = (isset($_GET['latitude'])) ? $_GET['latitude'] : "";
+			$form['longitude'] = (isset($_GET['longitude'])) ? $_GET['longitude'] : "";
 		}
-		
-		
-		
 		
 		$this->template->content->form = $form;
 		$this->template->content->errors = $errors;
@@ -321,6 +352,8 @@ class Reports_Controller extends Keitai_Controller {
 			$this->template->header->js->latitude = $form['latitude'];
 			$this->template->header->js->longitude = $form['longitude'];
 		}
+		$this->template->content->device = $this->checkdevice($_SERVER['HTTP_USER_AGENT']);
+
 	}
 	
 	/*
