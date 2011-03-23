@@ -89,7 +89,7 @@ class locale_Core
 			"is" => "Íslenska",
 			"it" => "Italiano",
 			"iu" => "ᐃᓄᒃᑎᑐᑦ",
-			"ja" => "日本語 (にほんご／にっぽんご)",
+			"ja" => "日本語",
 			"jv" => "basa Jawa",
 			"ka" => "ქართული",
 			"kg" => "KiKongo",
