@@ -1,4 +1,4 @@
-<div class="slider-holder">
+<div class="slider-holder dnone">
 	<form action="">
 		<input type="hidden" value="0" name="currentCat" id="currentCat"/>
 		<fieldset>
@@ -10,4 +10,4 @@
 		</fieldset>
 	</form>
 </div>
-<div id="graph" class="graph-holder"></div>
+<div id="graph" class="graph-holder dnone"></div>
