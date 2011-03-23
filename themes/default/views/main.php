@@ -12,11 +12,10 @@
 		<div id="right" class="clearingfix">
 	
 			<!-- category filters -->
-			<div class="cat-filters clearingfix">
-				<strong><?php echo Kohana::lang('ui_main.category_filter');?> <span>[<a href="javascript:toggleLayer('category_switch_link', 'category_switch')" id="category_switch_link"><?php echo Kohana::lang('ui_main.hide'); ?></a>]</span></strong>
-			</div>
+			
 		
 			<ul id="category_switch" class="category-filters">
+            <!--<li>カテゴリーを選択してください</li>-->
 				<li><a class="active" id="cat_0" href="#"><span class="swatch" style="background-color:<?php echo "#".$default_map_all;?>"></span><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
 				<?php
 					foreach ($categories as $category => $category_info)
@@ -163,16 +162,10 @@
 			<div class="floatbox">
 			
 				<!-- filters -->
-				<div class="filters clearingfix">
-					<div style="float:left; width: 100%">
-						<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
-						<ul>
-							<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
-							<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
-							<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
-							<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
-							<li><a id="media_3" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
-						</ul>
+				<div class="filters clearingfix map_above">
+					<div class="map_description">
+						<h3>レポートを地図から探す</h3>
+                        <p>◎をクリックすると、そのエリアで投稿されたレポートがご覧になれます。</p>
 					</div>
 					<?php
 					// Action::main_filters - Add items to the main_filters
