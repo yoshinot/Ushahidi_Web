@@ -26,7 +26,7 @@ class keitai {
 		Event::add('system.pre_controller', array($this, 'add'));
 		Event::add('system.display', array($this, 'display'));
 
-		header('Content-Type: text/html; charset=Shift_JIS');
+#		header('Content-Type: text/html; charset=Shift_JIS');
 	}
 	
 	/**
@@ -86,7 +86,7 @@ class keitai {
 
 	public function display()
 	{
-	    Event::$data = mb_convert_encoding(Event::$data, 'SJIS', 'UTF-8');
+//	    Event::$data = mb_convert_encoding(Event::$data, 'SJIS', 'UTF-8');
 	}
 }
 
