@@ -1,20 +1,20 @@
 
-	<h2 >レポートの投稿</h2>
+	<h2 >ﾚﾎﾟｰﾄの投稿</h2>
 
 <?php if ($form['latitude'] && $form['longitude']) { ?>
 ▼現在地のﾚﾎﾟｰﾄ投稿<br>
 <div style="clear:both;text-align:center;" align="center"><center><a href="http://www.google.co.jp/m/local?q=<?php echo $form['latitude'].",".$form['longitude'];?>&z=14"><img src="http://maps.google.com/maps/api/staticmap?center=<?php echo $form['latitude'].",".$form['longitude'];?>&zoom=14&size=230x100&format=gif&maptype=roadmap&sensor=false&markers=<?php echo $form['latitude'].",".$form['longitude'];?>" border="0"></a></center></div>
 <hr size="1" noshade>
 <?php } else { ?>
-<?php if ($device == 'd') { ?>現在地のレポート投稿(<a href="http://w1m.docomo.ne.jp/cp/iarea?ecode=OPENAREACODE&msn=OPENAREAKEY&nl=<?php echo url::site()."keitai/checkin/reports" ?>&posinfo=2">簡易</a>/<a href="<?php echo url::site()."keitai/checkin/reports" ?>?guid=ON" lcs>GPS</a>)<br><?php } ?>
-<?php if ($device == 'a') { ?><a href="device:gpsone?url=<?php echo url::site()."keitai/checkin/reports" ?>&amp;ver=1&amp;datum=0&amp;unit=0">現在地のレポート投稿</a><br><?php } ?>
-<?php if ($device == 's') { ?><a href="location:auto?url=<?php echo url::site()."keitai/checkin/reports" ?>">現在地のレポート投稿</a><br><?php } ?>
+<?php if ($device == 'd') { ?>現在地のﾚﾎﾟｰﾄ投稿(<a href="http://w1m.docomo.ne.jp/cp/iarea?ecode=OPENAREACODE&msn=OPENAREAKEY&nl=<?php echo url::site()."keitai/checkin/reports" ?>&posinfo=2">簡易</a>/<a href="<?php echo url::site()."keitai/checkin/reports" ?>?guid=ON" lcs>GPS</a>)<br><?php } ?>
+<?php if ($device == 'a') { ?><a href="device:gpsone?url=<?php echo url::site()."keitai/checkin/reports" ?>&amp;ver=1&amp;datum=0&amp;unit=0">現在地のﾚﾎﾟｰﾄ投稿</a><br><?php } ?>
+<?php if ($device == 's') { ?><a href="location:auto?url=<?php echo url::site()."keitai/checkin/reports" ?>">現在地のﾚﾎﾟｰﾄ投稿</a><br><?php } ?>
 <br>
 <?php } ?>
-	<?php print form::open(NULL, array('enctype' => 'multipart/form-data', 'id' => 'reportForm', 'name' => 'reportForm')); ?>
-	<input type="hidden" name="latitude" id="latitude" value="<?php echo $form['latitude']; ?>">
-	<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
-	
+
+<form action="<?php echo url::site(); ?>keitai/reports/submit" method="post">
+<input type="hidden" name="latitude" id="latitude" value="<?php echo $form['latitude']; ?>">
+<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
 		
 		<?php
 			if ($form_error) {
@@ -92,17 +92,27 @@
 		
 		
 		
-			<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?> (Select All That Apply)</h4>
-			
-				<?php
-				$selected_categories = array();
-     if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
-					$selected_categories = $form['incident_category'];
-				}
-				$columns = 1;
-				echo category::tree($categories, $selected_categories, 'incident_category', $columns);
-				?>
-			
+			<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?><!-- (Select All That Apply)--></h4>
+
+<?php
+$selected_categories = array();
+if (!empty($form['incident_category']) && is_array($form['incident_category'])) {
+  $selected_categories = $form['incident_category'];
+}
+foreach ($categories as $category) {
+  $category_title = $category->category_title;
+  if (preg_match("/^([^\/]+)\/([^\/]+)$/",$category_title,$matches)) {
+    $category_title = $matches[1];
+  }
+  $checked = "";
+  foreach ($selected_categories as $s) {
+    if ($s == $category->id) {
+      $checked = " checked";
+    }
+  }
+  echo "<input type=\"checkbox\" name=\"incident_category[]\" value=\"$category->id\"$checked>$category_title<br>";
+}
+?>
 		
 			<h4>場所</h4>
 			地名を選択してください<br>
@@ -117,4 +127,3 @@
 		
 	
 	</form>
-
