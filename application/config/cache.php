@@ -23,12 +23,12 @@ if (@!is_writable(APPPATH.'cache'))
  *  -> Eaccelerator
  *  -> Xcache
  */
-#$config['default'] = array(
-#	'driver' => 'apc',
-#	'params' => APPPATH.'cache',
-#	'lifetime' => 1800,
-#	'requests' => -1
-#);
+$config['default'] = array(
+	'driver' => 'apc',
+        'params' => APPPATH.'cache',
+	'lifetime' => 1800,
+	'requests' => -1
+);
 
 
 /**
