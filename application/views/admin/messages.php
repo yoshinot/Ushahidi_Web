@@ -13,6 +13,28 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
 ?>
+<script type="text/javascript" src="http://plugins.jquery.com/files/jquery.query-2.1.7.js.txt"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1");
+  var spreadsheet = 'https://spreadsheets0.google.com/ccc?hl=ja&key=tvnTR-r956hUAPvyvfMP9eA&hl=ja#gid=0';
+  $(document).ready(function(){
+    var getuser = function(){
+        var query = new google.visualization.Query(spreadsheet);
+        var page = $.query.get('page') ? $.query.get('page') : 1;
+        query.setQuery("select * where A = " + page);
+        query.send(function(response){
+             var data = response.getDataTable();
+             var user = data.getFormattedValue(0, 1) ? data.getFormattedValue(0, 1) : "担当不在";
+             $("#user").html("<a href='"+ spreadsheet  +"' title='担当を変更する'>"+ user + "</a>");
+        });
+    }
+    getuser();
+    setInterval(getuser,10000);  
+
+});
+
+</script>
 			<div class="bg">
 				<h2>
 					<?php admin::messages_subtabs($service_id); ?>
@@ -59,6 +81,7 @@
                     ページ番号<input type="text" name="page" value="" size="3">
                    フィルタ条件： <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
                     <input type="submit" />
+                    現在担当のユーザ:<div id="user" style='float:right;'></div>
                   </span>
                   <script type="text/javascript">
                     $(document).ready(function(){
