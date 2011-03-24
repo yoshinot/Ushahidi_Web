@@ -467,13 +467,21 @@ div.map {
 	border-right: solid 1px #999;
 	border-bottom: solid 1px #999;*/
 	font-size: 10px;
-	width: 660px;
+	width: 625px;
+}
+#mapScale
+{
+        min-width: 90px;
 }
 #mapStatus div
 {
 	float: left;
 	display: inline-block;
 	padding: 4px 6px 4px 6px;
+}
+#mapProjection
+{
+        min-width: 80px;
 }
 #mapOutput sup
 {
