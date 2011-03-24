@@ -24,6 +24,10 @@ class keitai {
 	{
 		// Hook into routing
 		Event::add('system.pre_controller', array($this, 'add'));
+		if (isset($_SERVER['HTTP_USER_AGENT']) AND $this->_is_keitai()) {
+			Event::add('system.display', array($this, 'display'));
+			header('Content-Type: text/html; charset=Shift_JIS');
+		}
 	}
 	
 	/**
@@ -81,6 +85,10 @@ class keitai {
         }
 	}
 
+	public function display()
+	{
+	    Event::$data = mb_convert_encoding(Event::$data, 'sjis-win', 'utf8');
+	}
 }
 
 new keitai;
