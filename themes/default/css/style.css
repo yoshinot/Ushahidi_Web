@@ -350,49 +350,48 @@ div.submit-incident a:hover{
 ------------------------------------------------------------*/
 /* mainmenu */
 div#mainmenu{
-    background: #b0cda1;
+   background: #b0cda1;
+   width:960px;
+   overflow:hidden;
 }
 
 div#mainmenu ul{
     padding: 0px;
     margin: 0px;
     list-style: none;
+	background-color: #b0cda1;
+	overflow:hidden;
+	width:960px;
 }
 
 div#mainmenu li{
     float: left;
-    display: block;
+	margin:0;padding:0;
+	text-transform: uppercase;
+    font-weight: bold;
+    font-size: 120%;
 }
 
 div#mainmenu a{
     display: block;
-    position: relative;
-    padding: 10px 20px;
+    padding: 10px 15px;
+	margin:0;
     color: #fff;
     overflow: hidden;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 120%;
 	text-decoration:none;
+	background-color: #b0cda1;
 }
 
 div#mainmenu a:hover{
     text-decoration: none;
     color: #fff;
     background: #128a2b;
-	text-decoration:none;
 }
 
 div#mainmenu a.active{
-    display: block;
-    position: relative;
-    overflow: hidden;
-    text-transform: uppercase;
-    font-weight: bold;
     text-decoration: none;
     color: #fff;
     background: #128a2b;
-	text-decoration:none;
 }
 
 /* -----------------------------------------------------------
@@ -468,21 +467,13 @@ div.map {
 	border-right: solid 1px #999;
 	border-bottom: solid 1px #999;*/
 	font-size: 10px;
-	width: 625px;
-}
-#mapScale
-{
-        min-width: 90px;
+	width: 660px;
 }
 #mapStatus div
 {
 	float: left;
 	display: inline-block;
 	padding: 4px 6px 4px 6px;
-}
-#mapProjection
-{
-        min-width: 80px;
 }
 #mapOutput sup
 {

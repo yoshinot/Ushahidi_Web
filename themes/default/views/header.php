@@ -8,6 +8,7 @@
 // Action::header_scripts - Additional Inline Scripts from Plugins
 Event::run('ushahidi_action.header_scripts');
 ?>
+<link rel="shortcut icon" href="/ushahidi/media/img/favicon.ico" type="image/x-icon" />
 </head>
 
 <body id="page">
@@ -51,7 +52,7 @@ Event::run('ushahidi_action.header_scripts');
 <div class="background layoutleft">
 
 <!-- mainmenu -->
-<div id="mainmenu" class="clearingfix">
+<div id="mainmenu">
 <ul>
 <!-- <?php nav::main_tabs($this_page); ?> -->
 <?php
@@ -68,12 +69,12 @@ $menu .= ($this_page == 'reports') ? " class=\"active\"" : "";
 $menu .= ">".Kohana::lang('ui_main.reports')."</a></li>";
 
 // Reports Submit
-if (Kohana::config('settings.allow_reports'))
-{
-$menu .= "<li><a href=\"".url::site()."reports/submit\" ";
-$menu .= ($this_page == 'reports_submit') ? " class=\"active\"":"";
-$menu .= ">".Kohana::lang('ui_main.submit')."</a></li>";
-}
+//if (Kohana::config('settings.allow_reports'))
+//{
+//$menu .= "<li><a href=\"".url::site()."reports/submit\" ";
+//$menu .= ($this_page == 'reports_submit') ? " class=\"active\"":"";
+//$menu .= ">".Kohana::lang('ui_main.submit')."</a></li>";
+//}
 
 // Alerts
 $menu .= "<li><a href=\"".url::site()."alerts\" ";
