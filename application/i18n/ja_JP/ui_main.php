@@ -439,7 +439,7 @@
 	'ssl_support' => 'SSLサポート？',
 	'start_point' => 'から',
 	'step' => 'ステップ',
-	'submit' => 'レポートを送信する',
+	'submit' => 'レポート送信',
 	'submitted_by' => '送信者',
 	'submit_sms' => 'SMS経由で送信する',
 	'submit_sms1' => 'SMSを送る',
