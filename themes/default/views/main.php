@@ -167,11 +167,17 @@
 						<h3>レポートを地図から探す</h3>
                         <p>◎をクリックすると、そのエリアで投稿されたレポートがご覧になれます。</p>
 					</div>
+                                        <div style="float:right;width:100px;">
 					<?php
 					// Action::main_filters - Add items to the main_filters
-					Event::run('ushahidi_action.map_main_filters');
-					?>
-				</div>
+					//Event::run('ushahidi_action.map_main_filters');
+					$menu = "";
+                                        $menu .= "<h1><a target=\"bigmap\" href=\"".url::site()."bigmap\" ";
+                                        $menu .= ">全画面表示</a></h1>";
+                                        echo $menu;
+                                        ?>
+                                        </div>
+                                </div>
 				<!-- / filters -->
 				
 				<?php								
