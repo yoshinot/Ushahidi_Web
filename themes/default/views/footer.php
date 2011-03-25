@@ -25,7 +25,7 @@
 					<li><a class="item1" href="<?php echo url::site(); ?>"><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 					<li><a href="<?php echo url::site()."reports/submit"; ?>">レポートを投稿</a></li>
 					<li><a href="<?php echo url::site()."alerts"; ?>"><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
-					<li><a href="<?php echo url::site()."help"; ?>">運営団体<!--<?php echo Kohana::lang('ui_main.help'); ?>--></a></li>
+					<li><a href="<?php echo url::site()."ushahidi/page/index/9"; ?>">サイト運営団体について<!--<?php echo Kohana::lang('ui_main.help'); ?>--></a></li>
 					<li><a href="<?php echo url::site()."contact"; ?>"><?php echo Kohana::lang('ui_main.contact'); ?></a></li>
 					<?php
 					// Action::nav_main_bottom - Add items to the bottom links
