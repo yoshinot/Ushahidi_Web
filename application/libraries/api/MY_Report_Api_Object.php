@@ -224,8 +224,8 @@ class Report_Api_Object extends Api_Object_Core {
                         $new_filename = $incident->id . "_" . $i . "_" . time();
 
                         // Resize original file... make sure its max 408px wide
-                        Image::factory($filename)->resize(408,248,
-                                Image::AUTO)->save(
+                        Image::factory($filename)->
+                                save(
                                     Kohana::config('upload.directory',
                                         TRUE) . $new_filename . ".jpg");
 
