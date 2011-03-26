@@ -113,8 +113,8 @@ class Reports_Controller extends Keitai_Controller {
 				url::redirect('keitai');
 			}
 			
+			$incident->incident_description = preg_replace('/((https?|http)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$)/', '<a href="$1">$1</a>', $incident->incident_description);
 			$this->template->content->incident = $incident;
-			
 			$this->template->header->js->latitude = $incident->location->latitude;
 			$this->template->header->js->longitude = $incident->location->longitude;
 			
