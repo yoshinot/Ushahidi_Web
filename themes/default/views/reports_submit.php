@@ -184,6 +184,8 @@
 						<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>
 						<div id="find_loading" class="report-find-loading"></div>
 						<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
+						<div id="find_this_location"><input type="button" name="find_this_location_button" id="find_this_location_button" value="<?php echo Kohana::lang('ui_main.find_this_location'); ?>" class="btn_find" /></div>
+						<div id="find_this_locaiton_text"><?php echo Kohana::lang('ui_main.pinpoint_location_by_browser'); ?></div>
 					</div>
 				</div>
 				
