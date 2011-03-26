@@ -185,7 +185,7 @@
 
 				<?php								
 				// Map and Timeline Blocks
-				echo '<div id="timeline_holder">
+				echo '<div id="timeline_holder" style="display:none;">
 				<div id="timeline_drag" onmousedown="mD(this,event)"> 
 				<strong style="margin-left:10px">TIME LINE</strong> 
 				<a id="toggletimeline" onclick="togglelayer(\'timeline_colapse\', \'toggletimeline\'); return false;" style="border: solid 1px black; marging: 1px; padding: 0px 10px; position:relative; left:525px;" href="#" > <strong>-</strong> </a>

@@ -95,7 +95,7 @@ function init() {
 	ob = document.getElementById("timeline_holder");
 	ob.style.left="1px";
 	ob.style.top= myHeight - (230 + 1) + "px";
-	ob.style.display="block";
+	//ob.style.display="block";
 	ob.ondrag=function(){return false;};
 	ob.onselectstart=function(){return false;};
 }
@@ -392,6 +392,10 @@ function mU() {
 		*/
 		function refreshGraph(startDate, endDate)
 		{
+      // #257 //////////////////
+      return;
+      //////////////////////////
+
 			var currentCat = gCategoryId;
 			// Get Current Status
 			var currStatus = $("#currentStatus").val();
