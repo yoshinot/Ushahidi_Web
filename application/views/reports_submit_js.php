@@ -151,7 +151,7 @@
 					"incident_news[]": {
 						url: "Please enter a valid News link"
 					},
-					"incident_news[]": {
+					"incident_video[]": {
 						url: "Please enter a valid Video link"
 					}	
 				},
