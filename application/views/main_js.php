@@ -601,10 +601,15 @@
 		
 jQuery(document).ready(function(){
 	if(navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(function(p){
-			var lonlat = new OpenLayers.LonLat(p.coords.longitude,p.coords.latitude).transform(proj_4326, map.getProjectionObject());
-			map.setCenter(lonlat, 10);
-			});
+		$('#view_this_location').click(function() {
+			navigator.geolocation.getCurrentPosition(function(p){
+				var lonlat = new OpenLayers.LonLat(p.coords.longitude,p.coords.latitude).transform(proj_4326, map.getProjectionObject());
+				map.setCenter(lonlat, 10);
+				});
+		});
+	}
+	else {
+		$('#view_this_location').hide();
 	}
 });
 

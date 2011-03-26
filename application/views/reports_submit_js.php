@@ -309,7 +309,9 @@
 			
 			// GeoCode
 			$('.btn_find').live('click', function () {
-				geoCode();
+				if($(this).attr("id") != "find_this_location_button") {
+					geoCode();
+				}
 			});
 			$('#location_find').bind('keypress', function(e) {
 				var code = (e.keyCode ? e.keyCode : e.which);
@@ -335,5 +337,22 @@
 	        collapsed: true,
 	        unique: false
 	      });
+			
+			if(navigator.geolocation){
+                		$('#find_this_location_button').click(function() {
+					navigator.geolocation.getCurrentPosition(function(p){
+						//var lonlat = new OpenLayers.LonLat(p.coords.longitude,p.coords.latitude).transform(proj_4326, map.getProjectionObject());
+						//map.setCenter(lonlat, 10);
+						//$("#location_find").val(p.coords.longitude + "," + p.coords.latitude);
+						$("#location_find").val(p.coords.latitude + "," + p.coords.longitude);
+						//$("#location_find").val(lonlat.lon + "," + lonlat.lat);
+						geoCode();
+					});
+				});
+			}
+			else {
+				$('#find_this_location').hide();
+				$('#find_this_locaiton_text').hide();
+			}
 	
 		});

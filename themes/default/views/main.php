@@ -175,12 +175,15 @@
 				echo $div_map;
 				echo $div_timeline;
 				?>
-                                <div style="float:right;width:100px;">
+                                <div style="float:right;">
                                         <?php
                                         // Action::main_filters - Add items to the main_filters
                                         //Event::run('ushahidi_action.map_main_filters');
                                         $menu = "";
-                                        $menu .= "<h2><a target=\"bigmap\" href=\"".url::site()."bigmap\" ";
+                                        $menu .= "<h2>";
+					$menu .= "<a href=\"#\" id=\"view_this_location\">現在地を表示</a>";
+					$menu .= "&nbsp;&nbsp;";
+					$menu .= "<a target=\"bigmap\" href=\"".url::site()."bigmap\" ";
                                         $menu .= ">全画面表示</a></h2>";
                                         echo $menu;
                                         ?>
