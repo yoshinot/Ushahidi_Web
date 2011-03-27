@@ -10,14 +10,20 @@
 
 			<h1><?php echo Kohana::lang('ui_main.reports').": ";?> <?php echo ($category_title) ? " in $category_title" : ""?> <?php echo $pagination_stats; ?></h1>
 <?php
-                        foreach($category_master as $key => $category){
-                                echo '<a class="r_category" href="'.url::site().'reports/?c='.$key;
+			echo '<a class="r_category" href="'.url::site().'reports/';
+			if(isset($_GET['sw']))echo '?sw='.$_GET['sw'];
+			if(isset($_GET['ne']))echo '&ne='.$_GET['ne'];
+			echo '">';
+			echo '<span class="r_cat-box" style="background-color:#cc0000"></span>';
+			echo '<span class="r_cat-desc">全カテゴリ</span></a>';
+			foreach($category_master as $key => $category){
+				echo '<a class="r_category" href="'.url::site().'reports/?c='.$key;
 				if(isset($_GET['sw']))echo '&sw='.$_GET['sw'];
 				if(isset($_GET['ne']))echo '&ne='.$_GET['ne'];
 				echo '">';
-                                echo '<span class="r_cat-box" style="background-color:#'.$category['color'].'"></span>';
+				echo '<span class="r_cat-box" style="background-color:#'.$category['color'].'"></span>';
 				echo '<span class="r_cat-desc">'.$category['title'].'</span></a>';
-                        }
+			}
 ?>
 
 
