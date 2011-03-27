@@ -60,6 +60,13 @@
 			<?php echo $incident_description; 
                               Event::run('ushahidi_action.report_extra', $incident_id);
                         ?>
+			<?php if ( count($incident_news) > 0 ) {?>
+            <br /><br /><h5><?php echo Kohana::lang('ui_main.reports_news');?></h5>
+            <?php   foreach ($incident_news as $news)
+                    {
+                        echo '<a href="'.$news.'">'.$news.'</a> ';
+                    } ?>
+			<?php } ?>
                         
 			<div class="credibility">
 				<table class="rating-table" cellspacing="0" cellpadding="0" border="0">

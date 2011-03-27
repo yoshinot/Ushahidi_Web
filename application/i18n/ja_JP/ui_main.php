@@ -350,7 +350,7 @@
 	'reports_first' => '名前',
 	'reports_last' => '名字',
 	'reports_location_name' => 'ロケーションの名前を明確にする',
-	'reports_news' => '新しい情報源のリンク',
+	'reports_news' => '情報源のリンク',
 	'reports_optional' => '参考情報',
 	'reports_photos' => '写真をアップロード',
 	'reports_return' => 'レポーターのページへ戻る',

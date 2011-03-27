@@ -854,21 +854,20 @@ class Reports_Controller extends Main_Controller {
 		$this->template->content->incident_neighbors = $this->_get_neighbors($incident->location->latitude,
 																									 $incident->location->longitude);
 
-		// Video links
+        // News link
+		$this->template->content->incident_news = $incident_news;
 
+		// Video links
 		$this->template->content->incident_videos = $incident_video;
 
 		// Images
-
 		$this->template->content->incident_photos = $incident_photo;
 
 		// Create object of the video embed class
-
 		$video_embed = new VideoEmbed();
 		$this->template->content->videos_embed = $video_embed;
 
 		// Javascript Header
-
 		$this->themes->map_enabled = TRUE;
 		$this->themes->photoslider_enabled = TRUE;
 		$this->themes->videoslider_enabled = TRUE;
