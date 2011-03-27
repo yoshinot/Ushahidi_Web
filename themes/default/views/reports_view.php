@@ -57,7 +57,10 @@
 		
 		<div class="report-description-text">
 			<h5><?php echo Kohana::lang('ui_main.reports_description');?></h5>
-			<?php echo $incident_description; ?>
+			<?php echo $incident_description; 
+                              Event::run('ushahidi_action.report_extra', $incident_id);
+                        ?>
+                        
 			<div class="credibility">
 				<table class="rating-table" cellspacing="0" cellpadding="0" border="0">
           <tr>
