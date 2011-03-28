@@ -2156,3 +2156,27 @@ div.green-box ul, div.red-box ul{
 .right-cap	{ -webkit-border-top-right-radius: 0px; -webkit-border-bottom-right-radius: 0px; -moz-border-radius-topright: 0px; -moz-border-radius-bottomright: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; }
 .bottom-cap	{ -webkit-border-top-left-radius: 0px; -webkit-border-top-right-radius: 0px; -moz-border-radius-topright: 0px; -moz-border-radius-topleft: 0px; border-top-right-radius: 0px; border-top-left-radius: 0px; }
 .left-cap		{ -webkit-border-top-left-radius: 0px; -webkit-border-bottom-left-radius: 0px; -moz-border-radius-topleft: 0px; -moz-border-radius-bottomleft: 0px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; }
+p.copyright{
+	color:#FFFFFF;
+}
+p.copyright a{
+	color:#FFFFFF;
+}
+p.copyright a:link{
+        color:#FFFFFF;
+}
+p.copyright a:visited{
+        color:#FFFFFF;
+}
+p.copyright a:hover{
+        color:#FFFFFF;
+}
+p.copyright a:active{
+        color:#FFFFFF;
+}
+input.text_contact_subject{
+	width:59em;
+	border: 1px solid #CCCCCC;
+	padding: 3px 7px;
+}
+
