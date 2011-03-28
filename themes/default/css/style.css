@@ -2175,4 +2175,9 @@ p.copyright a:active{
         color:#FFFFFF;
 }
 
+input.text_contact_subject{
+	width:59em;
+	border: 1px solid #CCCCCC;
+	padding: 3px 7px;
+}
 
