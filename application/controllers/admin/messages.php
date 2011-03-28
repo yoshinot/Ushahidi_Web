@@ -235,6 +235,21 @@ class Messages_Controller extends Admin_Controller
             
         // Get Message Count
         // ALL
+	$reporter_ids = array();
+	foreach($messages as $message){
+		$reporter_ids[] = $message->reporter_id;
+	}
+
+        $reporters = array();
+	if(count($reporter_ids)){
+	        $temp_reporters = ORM::factory('reporter')
+					->in('id',implode(',',$reporter_ids))
+	                                ->find_all();
+		foreach($temp_reporters as $reporter){
+			$reporters[$reporter->id] = $reporter->service_account;
+	        }
+	}
+
         $this->template->content->count_all = ORM::factory('message')
                                                         ->join('reporter','message.reporter_id','reporter.id')
                                                         ->where('service_id', $service_id)
@@ -258,7 +273,9 @@ class Messages_Controller extends Admin_Controller
                                                         ->where("message.message_level = '99'")
                                                         ->count_all();
 
+
         $this->template->content->messages = $messages;
+        $this->template->content->reporters = $reporters;
         $this->template->content->service_id = $service_id;
         $this->template->content->services = ORM::factory('service')->find_all();
         $this->template->content->pagination = $pagination;
