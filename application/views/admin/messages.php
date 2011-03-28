@@ -161,10 +161,10 @@
 								foreach ($messages as $message)
 								{
 									$message_id = $message->id;
-									$message_from = $reporters[$message->reporter_id];
-									//$message_from = $message->reporter->service_account;
 									//$message_from = $reporters[$message->reporter_id];
 									//$message_from = $message->reporter->service_account;
+									//$message_from = $reporters[$message->reporter_id];
+									$message_from = $message->reporter->service_account;
 									$message_to = $message->message_to;
 									$incident_id = $message->incident_id;
 									$message_description = text::auto_link($message->message);
