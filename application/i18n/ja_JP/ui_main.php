@@ -139,7 +139,7 @@
 	'example' => '例',
 	'example_country' => 'ケニヤ',
 	'feed' => 'フィード',
-	'feedback' => 'サイトの問題点や機能改善についてのお問い合わせ',
+	'feedback' => 'サイトの問題点や機能改善などの報告',
 	'feedback_reports' => '以下のボタンをクリックしてフィードバックをしてください。',
 	'feeds' => 'フィード',
 	'feed_has_been' => 'フィードは',
@@ -163,8 +163,7 @@
 	'form_title' => 'フォームタイトル',
 	'from' => 'から',
 	'full_name' => '氏名',
-	'geolocation_available' => '可能なジオロケーション
-',
+	'geolocation_available' => '可能なジオロケーション',
 	'geometry_color' => '色',
 	'geometry_comments' => 'コメント',
 	'geometry_label' => 'ラベル',
