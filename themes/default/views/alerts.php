@@ -2,7 +2,7 @@
 	<div class="content-bg">
 		<!-- start block -->
 		<div class="big-block">
-			<h1><?php echo Kohana::lang('ui_main.alerts_get'); ?></h1>
+			<h2><?php echo Kohana::lang('ui_main.alerts_get'); ?></h2>
 			<?php
 			if ($form_error) {
 			?>

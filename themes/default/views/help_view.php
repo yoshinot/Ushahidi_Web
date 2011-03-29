@@ -3,7 +3,7 @@
 		<div class="big-block">
 			<?php print form::open(NULL, array('id' => 'sendMessage', 'name' => 'sendMessage')); ?>
 			<div class="incident-name">
-				<h1><?php echo $organization_name; ?></h1>
+				<h2><?php echo $organization_name; ?></h2>
 				<?php
 					if ($form_error) {
 				?>

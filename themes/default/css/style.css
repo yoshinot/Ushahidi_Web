@@ -1539,7 +1539,7 @@ a.show-more {
 }
 
 /*page title*/
-.big-block h1 {
+.big-block h1,h2 {
 	margin-bottom:40px;
 	font-size:22px;
 	color:#128a2b;
