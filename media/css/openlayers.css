@@ -68,7 +68,7 @@ div.olLayerDiv {
 .infowindow .infowindow_list{
 	padding:10px 0 10px 0;
 	border:1px solid #ccc;
-	border-width:1px 0 1px 0;
+	border-width:0px 0 0px 0;
 	float:left;
 }
 
