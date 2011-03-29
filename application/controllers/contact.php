@@ -94,7 +94,8 @@ class Contact_Controller extends Main_Controller
         $this->template->content->form_sent = $form_sent;
         $this->template->content->captcha = $captcha;
 		
+        $this->template->header->action_name = Kohana::lang('ui_main.contact_title_index');
         // Rebuild Header Block
         $this->template->header->header_block = $this->themes->header_block();		
-    }	
+    }
 }

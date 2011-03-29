@@ -233,6 +233,8 @@ class Reports_Controller extends Main_Controller {
 		$this->template->content->report_stats->avg_reports_per_day = $avg_reports_per_day;
 		$this->template->content->report_stats->percent_verified = $percent_verified;
 
+		$this->template->header->action_name = Kohana::lang('ui_main.reports_title_index');
+
 		$this->template->header->header_block = $this->themes->header_block();
 	}
 
@@ -587,6 +589,7 @@ class Reports_Controller extends Main_Controller {
 			$this->themes->js->longitude = $form['longitude'];
 		}
 
+		$this->template->header->action_name = Kohana::lang('ui_main.reports_title_submit');
 		// Rebuild Header Block
 		$this->template->header->header_block = $this->themes->header_block();
 	}
@@ -903,6 +906,7 @@ class Reports_Controller extends Main_Controller {
 		// If the Admin is Logged in - Allow for an edit link
 		$this->template->content->logged_in = $this->logged_in;
 
+		$this->template->header->action_name = Kohana::lang('ui_main.reports_title_view').$incident_title.' ('. date('y/m/d', strtotime($incident->incident_date)).') ';
 		// Rebuild Header Block
 		$this->template->header->header_block = $this->themes->header_block();
 	}
@@ -915,6 +919,7 @@ class Reports_Controller extends Main_Controller {
 		$this->template->header->this_page = 'reports_submit';
 		$this->template->content = new View('reports_submit_thanks');
 
+		$this->template->header->action_name = Kohana::lang('ui_main.reports_title_thanks');
 		// Rebuild Header Block
 		$this->template->header->header_block = $this->themes->header_block();
 	}
