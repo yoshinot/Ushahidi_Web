@@ -3,7 +3,7 @@
 		
 		<!-- start block -->
 		<div class="big-block">
-			<h1>Get Alerts</h1>
+			<h2>Get Alerts</h2>
 			
 			<?php if($show_mobile == TRUE) { ?>
 			<!-- Mobile Alert -->

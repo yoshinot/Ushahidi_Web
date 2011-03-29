@@ -2,7 +2,7 @@
 	<div class="content-bg">
 		<!-- start contacts block -->
 		<div class="big-block">
-			<h1><?php echo Kohana::lang('ui_main.contact'); ?></h1>
+			<h2><?php echo Kohana::lang('ui_main.contact'); ?></h2>
 			<div id="contact_us" class="contact">
 				<?php
 				if ($form_error)

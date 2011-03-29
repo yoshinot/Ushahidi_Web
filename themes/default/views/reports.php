@@ -8,7 +8,7 @@
 			echo $report_stats;
 			?>
 
-			<h1><?php echo Kohana::lang('ui_main.reports').": ";?> <?php echo ($category_title) ? " in $category_title" : ""?> <?php echo $pagination_stats; ?></h1>
+			<h2><?php echo Kohana::lang('ui_main.reports').": ";?> <?php echo ($category_title) ? " in $category_title" : ""?> <?php echo $pagination_stats; ?></h2>
 <?php
 			echo '<a class="r_category" href="'.url::site().'reports/';
 			if(isset($_GET['sw']))echo '?sw='.$_GET['sw'];
