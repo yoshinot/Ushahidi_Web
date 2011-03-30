@@ -743,6 +743,7 @@ div.report-description-text {
 	/* border-bottom:1px dotted #C0C2B8; */
 	padding:10px 0;
 	margin-bottom:18px;
+	word-wrap : break-word;
 }
 
 div.report-description-text h5 {
@@ -760,6 +761,10 @@ div.credibility {
 
 div.report-title {
 	padding-bottom:0px;
+}
+
+h1.report-title {
+	word-wrap : break-word;
 }
 
 div.report-comments {
