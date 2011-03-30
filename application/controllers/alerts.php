@@ -126,6 +126,7 @@ class Alerts_Controller extends Main_Controller {
         $this->themes->js->latitude = $form['alert_lat'];
         $this->themes->js->longitude = $form['alert_lon'];
         
+        $this->template->header->action_name = Kohana::lang('ui_main.alerts_title_index');
         // Rebuild Header Block
         $this->template->header->header_block = $this->themes->header_block();
     }
@@ -156,6 +157,7 @@ class Alerts_Controller extends Main_Controller {
 			$this->template->content->show_mobile = FALSE;
         }
 
+        $this->template->header->action_name = Kohana::lang('ui_main.alerts_title_confirm');
         // Rebuild Header Block
         $this->template->header->header_block = $this->themes->header_block();
     }
@@ -239,6 +241,7 @@ class Alerts_Controller extends Main_Controller {
             $this->template->content->errno = ER_CODE_NOT_FOUND;
         }
         
+        $this->template->header->action_name = Kohana::lang('ui_main.alerts_title_verify');
         // Rebuild Header Block
         $this->template->header->header_block = $this->themes->header_block();
     } // END function verify
@@ -265,6 +268,7 @@ class Alerts_Controller extends Main_Controller {
             $this->template->content->unsubscribed = TRUE;
         }
         
+        $this->template->header->action_name = Kohana::lang('ui_main.alerts_title_unsubscribe');
         // Rebuild Header Block
         $this->template->header->header_block = $this->themes->header_block();
     }
