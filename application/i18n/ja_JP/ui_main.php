@@ -342,7 +342,7 @@
 	'reports' => 'レポート一覧',
 	'reports_title_index' => 'レポート一覧',
 	'reports_title_submit' => 'レポートを投稿',
-	'reports_title_view' => 'レポート ≫ ',
+	'reports_title_view' => 'レポート > ',
 	'reports_title_thanks' => 'レポート',
 	'reports_btn_browse' => '表示する',
 	'reports_btn_submit' => '送信',
