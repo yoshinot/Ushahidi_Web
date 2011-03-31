@@ -3,7 +3,7 @@
 <br>
 [0]<a href="<?php echo url::site(); ?>keitai<?php if ($latlong) { echo "?latlong=".$latlong; } ?>" accesskey="0">TOP</a><br>
 <hr size="1" noshade>
-<div style="font-size:xx-small;text-align:center" align="center"><center>Copyright(R) sinsai.info</center></div>
+<div style="font-size:xx-small;text-align:center" align="center"><center>powered by Ushahidi</center></div>
 <br>
 <?php
   $googleAnalyticsImageUrl = googleAnalyticsGetImageUrl();

@@ -34,7 +34,7 @@
   }
 ?>
 <a name="top" id="top"></a>
-<div><img src="<?php echo url::base(); ?>/media/img/logo_m.gif" alt="<?php echo $site_name . ': ' . $site_tagline; ?>" /></div>
+<div><img src="<?php echo url::base(); ?>plugins/keitai/views/img/logo.gif" alt="<?php echo $site_name . ': ' . $site_tagline; ?>" /></div>
 <div style="clear:both;text-align:right;" align="right"><right><form method="get" id="search" action="/ushahidi/index.php/keitai/search/"><input type="hidden"  name="l" value="ja_JP" /><input type="text" name="k" value="" class="text" size="14" /><input type="submit" name="b" class="searchbtn" value="検索" /></form></right></div>
 [0]<a href="<?php echo url::site(); ?>keitai<?php if ($latlong) { echo "?latlong=".$latlong; } ?>" accesskey="0">TOP</a><?php echo $breadcrumbs; ?><br>
 <hr size="1" noshade>
