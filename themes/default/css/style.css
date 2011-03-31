@@ -2116,7 +2116,7 @@ div.green-box {
 
 
 div.news-box{
-    font-size:14px;line-height:1.2;
+    font-size:12px;line-height:1.2;
 }
 
 div.help-box {
@@ -2153,7 +2153,7 @@ div.mobile-box {
 }
 
 div.mobile-box h3{
-    font-size:14px;
+    font-size:12px;
     line-height:1.3;
     margin-bottom:0px;
 }
@@ -2166,7 +2166,7 @@ div.mobile-box-qr{
 div.mobile-box-description  {
     padding:10px;
     width:150px ;
-    font-size:12px;
+    font-size:10px;
     float:left;
 }
 
@@ -2199,13 +2199,13 @@ div.news-box h3,div.green-box ul, div.red-box ul{
 }
 
 div.map_description h3{
-    font-size:14px;
+    font-size:12px;
     float:left;
 }
 
 div.map_description div{
-    font-size:14px;
-    float:right;
+    font-size:12px;
+    float:left;
 }
 
 
