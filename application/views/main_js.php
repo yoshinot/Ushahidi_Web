@@ -377,7 +377,7 @@
 			
 			// Add Controls
 			map.addControl(new OpenLayers.Control.Navigation());
-			map.addControl(new OpenLayers.Control.Attribution());
+			//map.addControl(new OpenLayers.Control.Attribution());
 			map.addControl(new OpenLayers.Control.PanZoomBar());
 			map.addControl(new OpenLayers.Control.MousePosition(
 				{
