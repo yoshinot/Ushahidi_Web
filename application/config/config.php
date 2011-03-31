@@ -54,8 +54,6 @@ $config['global_xss_filtering'] = TRUE;
  */
 $config['enable_hooks'] = TRUE;
 
-$config['allow_stat_sharing'] = 0;
-
 /**
  * Log thresholds:
  *  0 - Disable logging
