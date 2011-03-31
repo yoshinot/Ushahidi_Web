@@ -32,8 +32,8 @@ if ($show_map === TRUE) {
 ?>>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $site_name; ?></h1>
-			<span><?php echo $site_tagline; ?></span>
+			<h1><img src="<?php echo url::site(); ?>plugins/mobile/views/images/logo.gif" alt="<?php echo $site_name.' - '.$site_tagline; ?>" /></h1>
+			<span class="dnone"><?php echo $site_tagline; ?></span>
 		</div>
 		<div id="navigation">
 			&raquo;&nbsp;<a href="<?php echo url::site()."mobile"; ?>">Home</a><?php echo $breadcrumbs; ?>
