@@ -3,9 +3,27 @@
 	<div id="mainmiddle" class="floatbox withright">
 
 	<?php if($site_message != '') { ?>
-		<div class="green-box">
-			<h3><?php echo $site_message; ?></h3>
+		<div class="news-box">
+			<?php echo $site_message; ?>
 		</div>
+		<div class="help-box">
+		<p>このサイトは震災情報をみんなで集め公開しているサイトです。<br>
+		被災地復興を願うボランティアスタッフが運用しています。<a href="http://wiki.openstreetmap.org/wiki/JA:Sinsai_info_user_help">ご利用方法はこちら</a></p>
+		</div>
+		<div class="mobile-box">
+		    <div class="mobile-box-qr">
+		    <img src="http://chart.apis.google.com/chart?chs=100x100&cht=qr&chl=http://www.sinsai.info/"/>
+		    </div>
+		    <div class="mobile-box-description">
+			<h3>モバイルサイト＆アプリ</h3>
+            モバイル端末からQRコードを読み取るか
+			sinsai.infoにアクセスしてください。<br>
+			アプリのダウンロードは<br>
+			<a href="https://market.android.com/details?id=sinsai.info.android.app&feature=search_result">こちらから</a>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		
 	<?php } ?>
 
 		<!-- right column -->
@@ -165,9 +183,10 @@
 				<div class="filters clearingfix map_above">
 					<div class="map_description">
 						<h3>レポートを地図から探す</h3>
-                        <p>◎をクリックすると、そのエリアで投稿されたレポートがご覧になれます。</p>
+                        <div>◎をクリックすると、そのエリアで投稿されたレポートがご覧になれます。</div>
 					</div>
                                 </div>
+                <div style="clear:both;"></div>
 				<!-- / filters -->
 				
 				<?php								
