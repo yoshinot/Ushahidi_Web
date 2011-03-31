@@ -51,7 +51,6 @@
 	</div>
 	<!-- / footer -->
  
-	<?php echo $ushahidi_stats; ?>
 	<?php echo $google_analytics; ?>
 	
 	<!-- Task Scheduler -->
