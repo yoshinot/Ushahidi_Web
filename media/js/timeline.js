@@ -440,51 +440,35 @@
 					},
 					fontsize: function(feature)
 					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!=="")
+						feature_count = feature.attributes.count;
+						if (feature_count > 1000)
 						{
-							return "9px";
+							return "20px";
+						}
+						else if (feature_count > 500)
+						{
+							return "18px";
+						}
+						else if (feature_count > 100)
+						{
+							return "14px";
+						}
+						else if (feature_count > 10)
+						{
+							return "12px";
+						}
+						else if (feature_count >= 2)
+						{
+							return "10px";
 						}
 						else
 						{
-							feature_count = feature.attributes.count;
-							if (feature_count > 1000)
-							{
-								return "20px";
-							}
-							else if (feature_count > 500)
-							{
-								return "18px";
-							}
-							else if (feature_count > 100)
-							{
-								return "14px";
-							}
-							else if (feature_count > 10)
-							{
-								return "12px";
-							}
-							else if (feature_count >= 2)
-							{
-								return "10px";
-							}
-							else
-							{
-								return "";
-							}
+							return "";
 						}
 					},
 					fontweight: function(feature)
 					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!=="")
-						{
-							return "normal";
-						}
-						else
-						{
 							return "bold";
-						}
 					},
 					radius: function(feature)
 					{
@@ -560,15 +544,7 @@
 					},
 					icon: function(feature)
 					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!=="")
-						{
-							return baseUrl + feature_icon;
-						} 
-						else
-						{
-							return "";
-						}
+						return "";
 					},
 					clusterCount: function(feature)
 					{
@@ -578,16 +554,7 @@
 							{ // IE6 Bug with Labels
 								return "";
 							}
-							
-							feature_icon = feature.attributes.icon;
-							if (feature_icon!=="")
-							{
-								return "> " + feature.attributes.count;
-							} 
-							else
-							{
-								return feature.attributes.count;
-							}
+							return feature.attributes.count;
 						}
 						else
 						{
@@ -596,27 +563,11 @@
 					},
 					opacity: function(feature)
 					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!=="")
-						{
-							return "1";
-						}
-						else
-						{
-							return markerOpacity;
-						}
+						return markerOpacity;
 					},
 					labelalign: function(feature)
 					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!=="")
-						{
 							return "c";
-						}
-						else
-						{
-							return "c";
-						}
 					}
 				}
 			});

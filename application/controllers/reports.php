@@ -136,7 +136,7 @@ class Reports_Controller extends Main_Controller {
 
 
                 // $query = 'SELECT id,category_title,category_color FROM category WHERE category_visible = 1 AND category_trusted = 0';
-                $query = 'SELECT id,category_title,category_color FROM category';
+                $query = 'SELECT id,category_title,category_color,category_image_thumb FROM category';
 
                 $query = $db->query($query);
 		$category_master = array();
@@ -144,6 +144,7 @@ class Reports_Controller extends Main_Controller {
 		foreach($query as $row){
 			$category_master[$row->id]['title'] = $row->category_title; 
 			$category_master[$row->id]['color'] = $row->category_color; 
+			$category_master[$row->id]['category_image_thumb'] = $row->category_image_thumb; 
 			$localized_categories[(string)$row->category_title] = $row->category_title;
 			$localized_categories[(string)$row->category_title]['title'] = $row->category_title;
 			$localized_categories[(string)$row->category_title]['color'] = $row->category_title;

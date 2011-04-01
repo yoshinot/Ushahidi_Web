@@ -2270,3 +2270,10 @@ input.text_contact_subject{
 	padding: 3px 7px;
 }
 
+a.category_menu{
+    margin:5px;
+    text-decoration:none;
+    font-size:16px;
+}
+
+
