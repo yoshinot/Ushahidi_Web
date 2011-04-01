@@ -33,7 +33,7 @@
 		
 			<ul id="category_switch" class="category-filters">
             <!--<li>カテゴリーを選択してください</li>-->
-				<li><a class="active" id="cat_0" href="#"><img style='float:left;' src="<?php echo url::base() ?>/media/img/all.png" /><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
+				<li><a class="active" id="cat_0" href="#"><img style='float:left;' src="<?php echo url::base() ?>/media/img/all.png" width='16' height='16'/><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
 				<?php
 					foreach ($categories as $category => $category_info)
 					{
@@ -44,7 +44,9 @@
 						if($category_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$category_info[2])) {
 							$category_image = html::image(array(
 								'src'=>Kohana::config('upload.relative_directory').'/'.$category_info[2],
-								'style'=>'float:left;padding-right:5px;'
+								'style'=>'float:left;padding-right:5px;',
+								'width' => '16',
+                                'height' => '16',
 								));
 							$color_css = '';
 						}
@@ -63,7 +65,7 @@
                                                             if($child_info[2] != NULL && file_exists(Kohana::config('upload.relative_directory').'/'.$child_info[2])) {
                                                                     $child_image = html::image(array(
                                                                             'src'=>Kohana::config('upload.relative_directory').'/'.$child_info[2],
-                                                                            'style'=>'float:left;padding-right:5px;'
+                                                                            'style'=>'float:left;padding-right:5px;width:16px;height:16px;',
                                                                             ));
                                                                     $color_css = '';
                                                             }
