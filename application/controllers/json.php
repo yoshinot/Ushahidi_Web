@@ -305,15 +305,18 @@ class Json_Controller extends Template_Controller
         $markers = array();
         foreach ($incidents as $id => $incident)
         {
-            if (isset($allowed_ids[$id]))
-            {
-                $markers[] = array(
-                    'id' => $id,
-                    'incident_title' => $incident['title'],
-                    'latitude' => $locations[$incident['location_id']]['lat'],
-                    'longitude' => $locations[$incident['location_id']]['lon']
-                    );
-            }
+			if ((isset($incident['location_id']))
+					&& (isset( $locations[$incident['location_id']]['lat']))
+					&& (isset( $locations[$incident['location_id']]['lon']))
+						&& (isset($allowed_ids[$id])))
+			{
+				$markers[] = array(
+					'id' => $id,
+					'incident_title' => $incident['title'],
+					'latitude' => $locations[$incident['location_id']]['lat'],
+					'longitude' => $locations[$incident['location_id']]['lon']
+					);
+			}
         }
 
         $clusters = array();    // Clustered
