@@ -40,31 +40,42 @@ class Reports_Controller extends Admin_Controller
         $this->template->content->title = Kohana::lang('ui_admin.reports');
 
 
+		$filter = '';
+
+		$status = "0";
+		$filter_status = '';
         if (!empty($_GET['status']))
         {
-            $status = $_GET['status'];
+			$status = strtolower($_GET['status']);
+            if ($status == 'a')
+            {
+                $filter_status = 'incident_active = 0';
+            }
+            elseif ($status == 'v')
+            {
+                $filter_status = 'incident_verified = 0';
+            }
+			else
+			{
+				$status = "0";
+				$filter_status = '';
+			}
+        }
 
-            if (strtolower($status) == 'a')
-            {
-                $filter = 'incident_active = 0';
-            }
-            elseif (strtolower($status) == 'v')
-            {
-                $filter = 'incident_verified = 0';
-            }
-            else
-            {
-                $status = "0";
-                $filter = '1=1';
-            }
-        }
-        else
-        {
-            $status = "0";
-            $filter = "1=1";
-        }
+		$filter_via = '';
+		$via = "";
+		if(!empty($_GET['via']))
+		{
+			$tmp_via = intval($this->input->xss_clean($_GET['via']));
+			if ($tmp_via != 0)
+			{
+				$filter_via = 'incident_mode = '.$tmp_via;
+			}
+			$via = $tmp_via;
+		}
 
         // Get Search Keywords (If Any)
+		$filter_kw = '';
         if (isset($_GET['k']))
         {
             //  Brute force input sanitization
@@ -78,13 +89,18 @@ class Reports_Controller extends Admin_Controller
             // Phase 3 - Invoke Kohana's XSS cleaning mechanism just incase an outlier wasn't caught
             // in the first 2 steps
             $keyword_raw = $this->input->xss_clean($keyword_raw);
-            
-            $filter .= " AND (".$this->_get_searchstring($keyword_raw).")";
+
+			$filter_kw = "(".$this->_get_searchstring($keyword_raw).")";
         }
-        else
-        {
-            $keyword_raw = "";
-        }
+
+		// filter string build.
+        $filter = $filter_status;
+        $filter .= ((!empty($filter))? ((!empty($filter_via))? (" AND ".$filter_via):""):$filter_via);
+        $filter .= ((!empty($filter))? ((!empty($filter_kw))? (" AND ".$filter_kw):""):$filter_kw);
+		if (empty($filter))
+		{
+			$filter = "1=1";
+		}
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -261,11 +277,11 @@ class Reports_Controller extends Admin_Controller
 				->count_all()
             ));
 
-        $incidents = ORM::factory('incident')
-			->join('location', 'incident.location_id', 'location.id','INNER')
-			->where($filter)
-			->orderby('incident_dateadd', 'desc')
-			->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
+		$incidents = ORM::factory('incident')
+				->join('location', 'incident.location_id', 'location.id','INNER')
+				->where($filter)
+				->orderby('incident_dateadd', 'desc')
+				->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
 
         $location_ids = array();
         foreach ($incidents as $incident)
@@ -303,6 +319,7 @@ class Reports_Controller extends Admin_Controller
             $countries[$country->id] = $this_country;
         }
 
+		$this->template->content->filter = $filter;
         $this->template->content->countries = $countries;
         $this->template->content->incidents = $incidents;
         $this->template->content->pagination = $pagination;
@@ -312,6 +329,9 @@ class Reports_Controller extends Admin_Controller
 
         // Total Reports
         $this->template->content->total_items = $pagination->total_items;
+
+		// via
+		$this->template->content->via = $via;
 
         // Status Tab
         $this->template->content->status = $status;

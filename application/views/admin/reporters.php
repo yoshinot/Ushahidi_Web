@@ -144,9 +144,11 @@
 						<div class="table-holder">
 							<table class="table">
 								<thead>
-									<td colspan="4">
-										<?php echo $pagination; ?>
-									</td>
+									<tr>
+										<td colspan="4">
+											<?php echo $pagination; ?>
+										</td>
+									</tr>
 									<tr>
 										<th class="col-1"><input id="checkall" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'reporter_id[]' )" /></th>
 										<th class="col-2"><?php echo Kohana::lang('ui_main.reporter');?></th>

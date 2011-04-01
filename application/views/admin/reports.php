@@ -25,13 +25,14 @@
 						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_approval');?></a></li>
 						<li><a href="?status=v" <?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
 					</ul>
-					<!-- tab -->
-					<div class="tab">
+					<!-- filter -->
+					<div class="filter">
 						<ul>
-							<li><a href="#" onclick="reportAction('a','APPROVE', '');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
-							<li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
-							<li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
-							<li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+							<li><a <?php if($via == 0 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>">All</a></li>
+							<li><a <?php if($via == 1 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&via=1">Web</a></li>
+<!--							<li><a <?php if($via == 2 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&via=2">sms</a></li> -->
+							<li><a <?php if($via == 3 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&via=3">Email</a></li>
+							<li><a <?php if($via == 4 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&via=4">Twitter</a></li>
 						</ul>
 					</div>
 				</div>
@@ -67,6 +68,19 @@
 										<?php echo $pagination; ?>
 									</td>
 								</tr>
+					<!-- tab -->
+					<tr class="tab">
+						<td colspan="4">
+							<div class="tab">
+								<ul>
+									<li><a href="#" onclick="reportAction('a','APPROVE', '');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
+									<li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
+									<li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
+									<li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
 								<tr>
 									<th class="col-1"><?php echo Kohana::lang('ui_main.report_details');?></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
@@ -75,6 +89,18 @@
 								</tr>
 							</thead>
 							<tfoot>
+					<tr class="tab">
+						<td colspan="4">
+							<div class="tab">
+								<ul>
+									<li><a href="#" onclick="reportAction('a','APPROVE', '');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
+									<li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
+									<li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
+									<li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
+								</ul>
+							</div>
+						</td>
+					</tr>
 								<tr class="foot">
 									<td colspan="4">
 										<?php echo $pagination; ?>
@@ -99,7 +125,7 @@
 									$incident_title = $incident->incident_title;
 									$incident_description = text::limit_chars($incident->incident_description, 150, "...", true);
 									$incident_date = $incident->incident_date;
-									$incident_date = date('Y-m-d', strtotime($incident->incident_date));
+									$incident_date = date('Y/m/d', strtotime($incident->incident_date));
 									$incident_mode = $incident->incident_mode;	// Mode of submission... WEB/SMS/EMAIL?
 
 									//XXX incident_Mode will be discontinued in favour of $service_id
@@ -204,7 +230,7 @@
 											?>
 										</td>
 										<td class="col-2"><?php echo $incident_date; ?></td>
-										<td class="col-3" style="white-space:nowrap;">
+										<td class="col-3">
 											<ul>
 												<li class="none-separator"><a href="#"<?php if ($incident_approved) echo " class=\"status_yes\"" ?> onclick="reportAction('a','APPROVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
 												<li><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
@@ -219,20 +245,6 @@
 							</tbody>
 						</table>
 					</div>
-          <!-- Start Added by #111 -->
-          <!-- tabs -->
-          <div class="tabs">
-            <!-- tab -->
-            <div class="tab">
-              <ul>
-                <li><a href="#" onclick="reportAction('a','APPROVE', '');"><?php echo Kohana::lang('ui_main.approve');?></a></li>
-                <li><a href="#" onclick="reportAction('u','UNAPPROVE', '');"><?php echo Kohana::lang('ui_main.disapprove');?></a></li>
-                <li><a href="#" onclick="reportAction('v','VERIFY', '');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
-                <li><a href="#" onclick="reportAction('d','DELETE', '');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- end Added by #111 -->
 				<?php print form::close(); ?>
 			</div>
       <!-- for LDRize -->

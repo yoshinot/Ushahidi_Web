@@ -74,6 +74,32 @@
 					<div class="table-holder">
 						<table class="table">
 							<thead>
+								<tr class="foot">
+									<td colspan="4">
+										<?php echo $pagination; ?>
+									</td>
+								</tr>
+					<tr class="tab">
+						<td colspan="4">
+							<div class="tab">
+						<ul>
+							<li><a href="#" onclick="commentAction('a','APPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.approve'));?></a></li>
+							<li><a href="#" onclick="commentAction('u','UNAPPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.disapprove'));?></a></li>
+							<li><a href="#" onclick="commentAction('s','MARK AS SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
+							<li><a href="#" onclick="commentAction('n','MARK AS NOT SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+							<li><a href="#" onclick="commentAction('d','DELETE', '');"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+							<?php 
+							if ($status == 's')
+							{
+								?>
+								<li><a href="#" onclick="commentAction('x','DELETE ALL SPAM', '000');"><?php echo strtoupper(Kohana::lang('ui_main.delete_spam'));?></a></li>
+								<?php
+							}
+							?>
+						</ul>
+							</div>
+						</td>
+					</tr>
 								<tr>
 									<th class="col-1"><?php echo Kohana::lang('ui_main.comment_details');?></th>
 									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
@@ -82,6 +108,27 @@
 								</tr>
 							</thead>
 							<tfoot>
+					<tr class="tab">
+						<td colspan="4">
+							<div class="tab">
+						<ul>
+							<li><a href="#" onclick="commentAction('a','APPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.approve'));?></a></li>
+							<li><a href="#" onclick="commentAction('u','UNAPPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.disapprove'));?></a></li>
+							<li><a href="#" onclick="commentAction('s','MARK AS SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
+							<li><a href="#" onclick="commentAction('n','MARK AS NOT SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+							<li><a href="#" onclick="commentAction('d','DELETE', '');"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+							<?php 
+							if ($status == 's')
+							{
+								?>
+								<li><a href="#" onclick="commentAction('x','DELETE ALL SPAM', '000');"><?php echo strtoupper(Kohana::lang('ui_main.delete_spam'));?></a></li>
+								<?php
+							}
+							?>
+						</ul>
+							</div>
+						</td>
+					</tr>
 								<tr class="foot">
 									<td colspan="4">
 										<?php echo $pagination; ?>

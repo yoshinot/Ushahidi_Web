@@ -41,7 +41,7 @@
 	'confirm_msg' => 'このユーザーは',
 	'country_not_found' => '国が見つかりません',
 	'created_edited' => '追加済/編集済',
-	'create_report' => 'レポートを作成する',
+	'create_report' => 'レポート作成',
 	'critical_upgrade' => '緊急アップグレード',
 	'daily' => '毎日',
 	'dashboard' => 'ダッシュボード',
@@ -207,5 +207,11 @@
 	'wiki' => 'ウィキ',
 	'yes' => 'はい',
 	'your_search_for' => '検索結果',
+	'sort_asc' => '昇順',
+	'sort_desc' => '降順',
+	'unapproved_view' => '未承認のみ表示',
+	'approved_view' => '承認済のみ表示',
+	'unverified_view' => '未認証のみ表示',
+	'verified_view' => '認証済のみ表示',
 	);
 ?>
