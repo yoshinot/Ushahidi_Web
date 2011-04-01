@@ -16,10 +16,9 @@
 		    </div>
 		    <div class="mobile-box-description">
 			<h3>モバイルサイト＆アプリ</h3>
-            モバイル端末からQRコードを読み取るか
-			sinsai.infoにアクセスしてください。<br>
-			アプリのダウンロードは<br>
-			<a href="https://market.android.com/details?id=sinsai.info.android.app&feature=search_result">こちらから</a>
+			モバイル端末からQRコードを読み取るか
+			sinsai.infoにアクセスしてください。
+			<a href="https://market.android.com/details?id=sinsai.info.android.app&feature=search_result">Androidアプリ</a>でもご利用できます。
 			</div>
 		</div>
 		<div style="clear:both;"></div>

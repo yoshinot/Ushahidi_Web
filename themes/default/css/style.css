@@ -457,7 +457,7 @@ div.map {
     height: 617px;
 	/*height: 366px;*/
 	position:relative;
-	padding:10px;
+	padding:0px 10px;
 	background-color:#ebebeb;
 }
 #mapStatus
@@ -2134,9 +2134,16 @@ div.help-box {
 }
 
 div.help-box p{
-        position: relative;
-        top:50%;
-        margin-top: -1em;
+        /* position: relative; */
+        /* top:50%; */
+        /* margin-top: -1em; */
+
+	/* http://u2k772.blog95.fc2.com/blog-entry-75.html */
+	position:absolute;
+	top:50%;
+	/* left:50%; */
+	/* margin-left:-2.5em; */
+	margin-top:-1em;
 }
 
 div.mobile-box {
