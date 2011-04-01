@@ -12,7 +12,7 @@
 			echo '<a class="category_menu" href="'.url::site().'reports/';
 			if(isset($_GET['sw']))echo '?sw='.$_GET['sw'];
 			if(isset($_GET['ne']))echo '&ne='.$_GET['ne'];
-			echo '">';
+			echo '"><img src="'.url::base().'/media/img/all.png" width="16" height="16"/>';
 			echo '<span>全カテゴリ</span></a>';
 			foreach($category_master as $key => $category){
 				echo '<a class="category_menu" href="'.url::site().'reports/?c='.$key;
