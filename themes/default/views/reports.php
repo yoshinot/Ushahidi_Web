@@ -18,10 +18,13 @@
 				echo '<a class="category_menu" href="'.url::site().'reports/?c='.$key;
 				if(isset($_GET['sw']))echo '&sw='.$_GET['sw'];
 				if(isset($_GET['ne']))echo '&ne='.$_GET['ne'];
+				echo '" >';
 				if(isset($category['category_image_thumb'])){
-				    echo '"><img src="/ushahidi/media/uploads/'.$category['category_image_thumb'].'"/>';
+				    echo '<img src="/ushahidi/media/uploads/'.$category['category_image_thumb'].'"/>';
+				}else{
+				    echo '<span style="width:16px;height:16px;background-color:#'.$category['color'].'"> &nbsp;</span>';
 				}
-				echo '<span>'.$category['title'].'</span></a>';
+				echo '<span style="float:;">'.$category['title'].'</span></a>';
 			}
 ?>
 
