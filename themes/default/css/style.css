@@ -2143,7 +2143,7 @@ div.help-box p{
 	top:50%;
 	/* left:50%; */
 	/* margin-left:-2.5em; */
-	margin-top:-2em;
+	margin-top:-1.5em;
 }
 
 div.mobile-box {
@@ -2208,11 +2208,13 @@ div.news-box h3,div.green-box ul, div.red-box ul{
 div.map_description h3{
     font-size:12px;
     float:left;
+    margin-bottom:0px;
 }
 
 div.map_description div{
     font-size:12px;
     float:left;
+    margin-bottom:0px;
 }
 
 
