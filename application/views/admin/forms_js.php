@@ -27,10 +27,10 @@ function fillFields(id, form_title, form_description,
  form_visible )
 {
 	show_addedit();
-	$("#form_id").attr("value", unescape(id));
-	$("#form_title").attr("value", unescape(form_title));
-	$("#form_description").attr("value", unescape(form_description));
-	$("#form_active").attr("value", unescape(form_active));
+	$("#form_id").attr("value", decodeURIComponent(id));
+	$("#form_title").attr("value", decodeURIComponent(form_title));
+	$("#form_description").attr("value", decodeURIComponent(form_description));
+	$("#form_active").attr("value", decodeURIComponent(form_active));
 	
 }
 
@@ -116,7 +116,7 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 				function(data){
 					if (data.status == 'success'){
 						$('#form_fields_current_' + form_id).html('');
-						$('#form_fields_current_' + form_id).html(unescape(data.response));
+						$('#form_fields_current_' + form_id).html(decodeURIComponent(data.response));
 						//$('#form_fields_current_' + form_id).effect("highlight", {}, 2000);
 						$('#form_fields_current_' + form_id).css({
 						"background-image" : "none"
@@ -130,7 +130,7 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 			function(data){
 				if (data.status == 'success'){
 					$('#form_fields_current_' + form_id).html('');
-					$('#form_fields_current_' + form_id).html(unescape(data.response));
+					$('#form_fields_current_' + form_id).html(decodeURIComponent(data.response));
 					//$('#form_fields_current_' + form_id).effect("highlight", {}, 2000);
 					$('#form_fields_current_' + form_id).css({
 					"background-image" : "none"
@@ -143,7 +143,7 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 			function(data){
 				if (data.status == 'success'){
 					$('#form_fields_current_' + form_id).html('');
-					$('#form_fields_current_' + form_id).html(unescape(data.response));
+					$('#form_fields_current_' + form_id).html(decodeURIComponent(data.response));
 					//$('#form_fields_current_' + form_id).effect("highlight", {}, 2000);
 					$('#form_fields_current_' + form_id).css({
 					"background-image" : "none"
