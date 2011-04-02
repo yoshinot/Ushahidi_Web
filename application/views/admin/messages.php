@@ -68,15 +68,61 @@
 						<li><a href="<?php echo url::site()."admin/messages/reporters/index/".$service_id; ?>">Reporters</a></li>
 					</ul>
 					<!-- tab -->
-					<div class="tab">
+<script type="text/javascript"> 
+$(function() {
+	$('#down_range').click(function() {
+		$('#form_range').submit();
+	});
+});
+$(function() {
+	var dates = $( "#from, #to" ).datepicker({
+		defaultDate: "-3d",
+		dateFormat: 'yy/mm/dd',
+		changeMonth: true,
+		numberOfMonths: 2,
+		gotoCurrent: true,
+		monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+		onSelect: function( selectedDate ) {
+			var option = this.id == "from" ? "minDate" : "maxDate",
+				instance = $( this ).data( "datepicker" ),
+				date = $.datepicker.parseDate(
+					instance.settings.dateFormat ||
+					$.datepicker._defaults.dateFormat,
+					selectedDate, instance.settings );
+			dates.not( this ).datepicker( "option", option, date );
+		}
+	});
+});
+</script>
+					<div class="filter">
 						<ul>
+					<fieldset>
+						<legend> Date. </legend>
+<div id="date_range">
+<form id="form_range" method="GET">
+<input type="hidden" name="filter" value="<?php echo $filter ?>">
+<label for="from">From</label>
+<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
+<label for="to">to</label>
+<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
+<a href="#" id="down_range">絞込み</a>
+</form>
+</div>
+					</fieldset>
+						</ul>
+						<ul>
+					<fieldset>
+						<legend> Keyword. </legend>
               <li>
                 <form action="<?php echo url::site()."admin/messages/index/".$service_id ?>" method="GET"> 
                   <span style="padding-top: 0px; padding-bottom: 1px;" class="formspan">
+                    <input type="hidden" name="from" value="<?php echo $from ?>">
+                    <input type="hidden" name="to" value="<?php echo $to ?>">
                     <input type="hidden" name="type" value="<?php echo $type ?>">
                     <input type="hidden" name="level" value="<?php echo $level ?>">
                     ページ番号<input type="text" name="page" value="" size="3">
-                   フィルタ条件： <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
+                   フィルタ条件： <input size="15" type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
                     <input type="submit" />
                     現在担当のユーザ:<div id="user" style='float:right;'></div>
                   </span>
@@ -93,6 +139,7 @@
                   </script>
                 </form>
               </li>
+					</fieldset>
 						</ul>
 					</div>
 				</div>

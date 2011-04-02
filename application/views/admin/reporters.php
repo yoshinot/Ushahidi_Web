@@ -25,8 +25,6 @@
 						</ul>
 					</div>
 				</div>				
-				
-				
 				<!-- tabs -->
 				<div class="tabs">
 					<!-- tab -->

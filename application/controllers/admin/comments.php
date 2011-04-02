@@ -38,36 +38,68 @@ class Comments_Controller extends Admin_Controller
     {
         $this->template->content = new View('admin/comments');
         $this->template->content->title = Kohana::lang('ui_admin.comments');
+
+		$filter = '';
         
-        
+		$r_from = "";
+		if( isset($_GET['from']) )
+		{
+			$r_from = $this->input->xss_clean($_GET['from']);
+		}
+		$r_to = "";
+		if( isset($_GET['to']) )
+		{
+			$r_to = $this->input->xss_clean($_GET['to']);
+		}
+
+		$filter_range = "";
+		if( isset($r_from) && empty($r_to) )
+		{
+			$filter_range = "comment_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d")." 23:59:00\"";
+		} elseif( isset($r_from) && isset($r_to) )
+		{
+			$filter_range = "comment_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		} elseif( empty($r_from) && isset($r_to) )
+		{
+			$filter_range = "comment_date between \"".date("Y-m-d",1)." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		}
+
+		$filter_status = "";
         if (!empty($_GET['status']))
         {
             $status = $_GET['status'];
             
             if (strtolower($status) == 'a')
             {
-                $filter = 'comment_active = 1 AND comment_spam = 0';
+                $filter_status = 'comment_active = 1 AND comment_spam = 0';
             }
             elseif (strtolower($status) == 'p')
             {
-                $filter = 'comment_active = 0 AND comment_spam = 0';
+                $filter_status = 'comment_active = 0 AND comment_spam = 0';
             }
             elseif (strtolower($status) == 's')
             {
-                $filter = 'comment_spam = 1';
+                $filter_status = 'comment_spam = 1';
             }
             else
             {
                 $status = "0";
-                $filter = 'comment_spam = 0';
+                $filter_status = 'comment_spam = 0';
             }
         }
         else
         {
             $status = "0";
-            $filter = 'comment_spam = 0';
+            $filter_status = 'comment_spam = 0';
         }
-        
+
+		// filter string build.
+        $filter = $filter_status;
+        $filter .= ((!empty($filter))? ((!empty($filter_range))? (" AND ".$filter_range):""):$filter_range);
+		if (empty($filter))
+		{
+            $filter = 'comment_spam = 0';
+		}
         
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -163,6 +195,21 @@ class Comments_Controller extends Admin_Controller
             
         }
         
+		$order = 0;
+		$order_string = "desc";
+		if( isset($_GET['order']) )
+		{
+			$order = intval($_GET['order']);
+			if ( $order == 0 )
+			{
+				$order_string = "desc";
+			} elseif ( $order == 1 ) {
+				$order_string = "asc";
+			} else {
+				$order = 0;
+				$order_string = "desc";
+			}
+		}
         
         // Pagination
         $pagination = new Pagination(array(
@@ -171,8 +218,11 @@ class Comments_Controller extends Admin_Controller
             'total_items'    => ORM::factory('comment')->where($filter)->count_all()
         ));
 
-        $comments = ORM::factory('comment')->where($filter)->orderby('comment_date', 'desc')->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
+        $comments = ORM::factory('comment')->where($filter)->orderby('comment_date', $order_string)->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
         
+		$this->template->content->from = $r_from;
+		$this->template->content->to = $r_to;
+        $this->template->content->order = $order;
         $this->template->content->comments = $comments;
         $this->template->content->pagination = $pagination;
         $this->template->content->form_error = $form_error;

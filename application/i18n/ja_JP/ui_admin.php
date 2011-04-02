@@ -209,9 +209,6 @@
 	'your_search_for' => '検索結果',
 	'sort_asc' => '昇順',
 	'sort_desc' => '降順',
-	'unapproved_view' => '未承認のみ表示',
-	'approved_view' => '承認済のみ表示',
-	'unverified_view' => '未認証のみ表示',
-	'verified_view' => '認証済のみ表示',
+	'down_range' => '絞込み',
 	);
 ?>

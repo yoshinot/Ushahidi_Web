@@ -44,7 +44,7 @@ h2 a.active{
 	font-weight: bold;
 	padding-right:5px;
 }
-h2 span a, h2 span a:visited{
+h2 span a, h2 span a:visited {
 	font-size:12px;
 	padding:0;
 	color:#666;
@@ -529,7 +529,7 @@ ul.tabset li a.active2{
 	color:#fff;
 	background:#C0C0C0 !important;
 }
-ul.tabset li a:hover{
+ul.tabset li a:hover {
 	color:#636363;
 	background:#f5f5f5;
 }
@@ -537,33 +537,41 @@ ul.tabset li a:hover{
 .filter{
 	background:#eee;
 	width:100%;
-	clear:both;
 	padding:0 0 8px;
+	clear:none;
 	overflow:hidden;
 }
 
 .table tr.filter {
 	background: none;
 }
-
 .filter ul{
-	display: block;
-	float: right;
+	display: inline;
 	margin:0;
+	float: left;
 	padding:9px 10px 0;
-	clear:both;
+	clear:none;
 	overflow:hidden;
 }
-.filter ul li{
+.filter ul li {
 	padding:0 6px;
 	float:left;
 	list-style:none;
 }
-.filter ul li a,.filter ul li span.formspan {
+.filter ul li a,
+.filter ul li span.formspan {
 	padding:0 9px;
 	color:#5c5c5c;
 	background:#f2f7fa;
 	float:left;
+	line-height:24px;
+	text-decoration:none;
+	border:1px solid #d1d1d1;
+}
+.filter ul fieldset form a {
+	padding:6px 9px;
+	color:#5c5c5c;
+	background:#f2f7fa;
 	line-height:24px;
 	text-decoration:none;
 	border:1px solid #d1d1d1;
@@ -577,6 +585,17 @@ ul.tabset li a:hover{
 	margin:10px 10px 0 10px;
 }
 .filter a.active{background-color: #999; color: #fff; font-weight: bold;}
+.filter ul fieldset form input {
+	padding:4px;
+}
+.filter .date_range a {
+	padding:4px 9px;
+	color:#5c5c5c;
+	background:#f2f7fa;
+	line-height:24px;
+	text-decoration:none;
+	border:1px solid #d1d1d1;
+}
 /*-- filter --*/
 /*-- tabs --*/
 .tab{

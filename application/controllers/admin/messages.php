@@ -48,6 +48,29 @@ class Messages_Controller extends Admin_Controller
 			$this->template->content->reply_to = FALSE;
         }
 
+		$r_from = "";
+		if( isset($_GET['from']) )
+		{
+			$r_from = $this->input->xss_clean($_GET['from']);
+		}
+		$r_to = "";
+		if( isset($_GET['to']) )
+		{
+			$r_to = $this->input->xss_clean($_GET['to']);
+		}
+
+		$filter_range = "";
+		if( isset($r_from) && empty($r_to) )
+		{
+			$filter_range = "message_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d")." 23:59:00\"";
+		} elseif( isset($r_from) && isset($r_to) )
+		{
+			$filter_range = "message_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		} elseif( empty($r_from) && isset($r_to) )
+		{
+			$filter_range = "message_date between \"".date("Y-m-d",1)." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		}
+
         // Is this an Inbox or Outbox Filter?
         if (!empty($_GET['type']))
         {
@@ -92,7 +115,9 @@ class Messages_Controller extends Admin_Controller
 
         // filter by type
         $filter_type = array();
+		$r_filter="";
         if(!empty($_GET['filter'])) {
+		  $r_filter = $this->input->xss_clean($_GET['filter']);
           $filter_form = preg_split('/, ?/', $_GET['filter']);
           foreach($filter_form as $filter_str) {
             $filter_sql = "message.type ";
@@ -126,6 +151,7 @@ class Messages_Controller extends Admin_Controller
           }
         }
         if(empty($filter_type)) $filter_type = array('message.type = 0');
+
         //$type_filter = "message.type ". $filter_type;
         $type_filter = "(".join(" OR ",$filter_type).")";
         $filter .= " AND ". $type_filter;
@@ -135,6 +161,8 @@ class Messages_Controller extends Admin_Controller
         //$filter .= " AND".$rt_filter;
         // filtering reported message
         $filter .= "AND message.incident_id = 0";
+
+        $filter .= ((!empty($filter))? ((!empty($filter_range))? (" AND ".$filter_range):""):$filter_range);
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -274,6 +302,9 @@ class Messages_Controller extends Admin_Controller
                                                         ->count_all();
 
 
+		$this->template->content->from = $r_from;
+		$this->template->content->to = $r_to;
+		$this->template->content->filter = $r_filter;
         $this->template->content->messages = $messages;
         $this->template->content->reporters = $reporters;
         $this->template->content->service_id = $service_id;
