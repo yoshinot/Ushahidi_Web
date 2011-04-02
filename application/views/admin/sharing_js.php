@@ -16,7 +16,7 @@
  */
 ?>
 // Sharing JS
-function fillFields(id, sharing_url, sharing_color, sharing_limits, sharing_type)
+function fillFields(id, sharing_name, sharing_url, sharing_color, sharing_limits, sharing_type)
 {
 	$("#sharing_id").attr("value", decodeURIComponent(id));
 	$("#sharing_name").attr("value", decodeURIComponent(sharing_name));
