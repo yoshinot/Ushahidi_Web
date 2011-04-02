@@ -25,61 +25,59 @@
 						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_approval');?></a></li>
 						<li><a href="?status=v" <?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
 					</ul>
-<script type="text/javascript"> 
-$(function() {
-	$('#down_range').click(function() {
-		$('#form_range').submit();
-	});
-});
-$(function() {
-	var dates = $( "#from, #to" ).datepicker({
-		defaultDate: "-3d",
-		dateFormat: 'yy/mm/dd',
-		changeMonth: true,
-		numberOfMonths: 2,
-		gotoCurrent: true,
-		monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		onSelect: function( selectedDate ) {
-			var option = this.id == "from" ? "minDate" : "maxDate",
-				instance = $( this ).data( "datepicker" ),
-				date = $.datepicker.parseDate(
-					instance.settings.dateFormat ||
-					$.datepicker._defaults.dateFormat,
-					selectedDate, instance.settings );
-			dates.not( this ).datepicker( "option", option, date );
-		}
-	});
-});
-</script>
+					<script type="text/javascript"> 
+					$(function() {
+						$('#down_range').click(function() {
+							$('#form_range').submit();
+						});
+					});
+					$(function() {
+						var dates = $( "#from, #to" ).datepicker({
+							defaultDate: "-3d",
+							dateFormat: 'yy/mm/dd',
+							changeMonth: true,
+							numberOfMonths: 2,
+							gotoCurrent: true,
+							onSelect: function( selectedDate ) {
+								var option = this.id == "from" ? "minDate" : "maxDate",
+									instance = $( this ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+								dates.not( this ).datepicker( "option", option, date );
+							}
+						});
+					});
+					</script>
 					<!-- filter -->
 					<div class="filter">
 						<ul>
-					<fieldset>
+						<fieldset>
 						<legend> Date. </legend>
-<div id="date_range">
-<form id="form_range" method="GET">
-<input type="hidden" name="via" value="<?php echo $via;?>" />
-<input type="hidden" name="order" value="<?php echo $order;?>" />
-<input type="hidden" name="status" value="<?php echo $status;?>" />
-<label for="from">From</label>
-<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
-<label for="to">to</label>
-<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
-<a href="#" id="down_range"><?php echo Kohana::lang('ui_admin.down_range');?></a>
-</form>
-</div>
-					</fieldset>
+							<div id="date_range">
+							<form id="form_range" method="GET">
+							<input type="hidden" name="via" value="<?php echo $via;?>" />
+							<input type="hidden" name="order" value="<?php echo $order;?>" />
+							<input type="hidden" name="status" value="<?php echo $status;?>" />
+							<label for="from">From</label>
+							<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
+							<label for="to">to</label>
+							<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
+							<a href="#" id="down_range"><?php echo Kohana::lang('ui_admin.down_range');?></a>
+							</form>
+							</div>
+						</fieldset>
 						</ul>
 						<ul>
-					<fieldset>
+						<fieldset>
 						<legend> Order. </legend>
 							<li><a <?php if($order == 0 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=0&via=<?php echo $via;?>&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_desc');?></a></li>
 							<li><a <?php if($order == 1 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=1&via=<?php echo $via;?>&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_asc');?></a></li>
-					</fieldset>
+						</fieldset>
 						</ul>
 						<ul>
-					<fieldset>
+						<fieldset>
 						<legend> Via. </legend>
 							<li><a <?php if($via == 0 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=<?php echo $order;?>&from=<?php echo $from;?>&to=<?php echo $to;?>">All</a></li>
 							<li><a <?php if($via == 1 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=<?php echo $order;?>&via=1&from=<?php echo $from;?>&to=<?php echo $to;?>">Web</a></li>

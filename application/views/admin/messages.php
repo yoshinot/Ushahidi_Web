@@ -68,48 +68,46 @@
 						<li><a href="<?php echo url::site()."admin/messages/reporters/index/".$service_id; ?>">Reporters</a></li>
 					</ul>
 					<!-- tab -->
-<script type="text/javascript"> 
-$(function() {
-	$('#down_range').click(function() {
-		$('#form_range').submit();
-	});
-});
-$(function() {
-	var dates = $( "#from, #to" ).datepicker({
-		defaultDate: "-3d",
-		dateFormat: 'yy/mm/dd',
-		changeMonth: true,
-		numberOfMonths: 2,
-		gotoCurrent: true,
-		monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		onSelect: function( selectedDate ) {
-			var option = this.id == "from" ? "minDate" : "maxDate",
-				instance = $( this ).data( "datepicker" ),
-				date = $.datepicker.parseDate(
-					instance.settings.dateFormat ||
-					$.datepicker._defaults.dateFormat,
-					selectedDate, instance.settings );
-			dates.not( this ).datepicker( "option", option, date );
-		}
-	});
-});
-</script>
+					<script type="text/javascript"> 
+					$(function() {
+						$('#down_range').click(function() {
+							$('#form_range').submit();
+						});
+					});
+					$(function() {
+						var dates = $( "#from, #to" ).datepicker({
+							defaultDate: "-3d",
+							dateFormat: 'yy/mm/dd',
+							changeMonth: true,
+							numberOfMonths: 2,
+							gotoCurrent: true,
+							onSelect: function( selectedDate ) {
+								var option = this.id == "from" ? "minDate" : "maxDate",
+									instance = $( this ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+								dates.not( this ).datepicker( "option", option, date );
+							}
+						});
+					});
+					</script>
 					<div class="filter">
 						<ul>
-					<fieldset>
-						<legend> Date. </legend>
-<div id="date_range">
-<form id="form_range" method="GET">
-<input type="hidden" name="filter" value="<?php echo $filter ?>">
-<label for="from">From</label>
-<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
-<label for="to">to</label>
-<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
-<a href="#" id="down_range">絞込み</a>
-</form>
-</div>
-					</fieldset>
+						<fieldset>
+							<legend> Date. </legend>
+								<div id="date_range">
+								<form id="form_range" method="GET">
+								<input type="hidden" name="filter" value="<?php echo $filter ?>">
+								<label for="from">From</label>
+								<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
+								<label for="to">to</label>
+								<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
+								<a href="#" id="down_range"><?php echo Kohana::lang('ui_admin.down_range');?></a>
+								</form>
+								</div>
+						</fieldset>
 						</ul>
 						<ul>
 					<fieldset>

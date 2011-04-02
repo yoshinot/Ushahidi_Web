@@ -26,77 +26,55 @@
 						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.approved');?></a></li>
 						<li><a href="?status=s" <?php if ($status == 's') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.spam');?></a></li>
 					</ul>
-<script type="text/javascript"> 
-$(function() {
-	$('#down_range').click(function() {
-		$('#form_range').submit();
-	});
-});
-$(function() {
-	var dates = $( "#from, #to" ).datepicker({
-		defaultDate: "-3d",
-		dateFormat: 'yy/mm/dd',
-		changeMonth: true,
-		numberOfMonths: 2,
-		gotoCurrent: true,
-		monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-		onSelect: function( selectedDate ) {
-			var option = this.id == "from" ? "minDate" : "maxDate",
-				instance = $( this ).data( "datepicker" ),
-				date = $.datepicker.parseDate(
-					instance.settings.dateFormat ||
-					$.datepicker._defaults.dateFormat,
-					selectedDate, instance.settings );
-			dates.not( this ).datepicker( "option", option, date );
-		}
-	});
-});
-</script>
+					<script type="text/javascript"> 
+					$(function() {
+						$('#down_range').click(function() {
+							$('#form_range').submit();
+						});
+					});
+					$(function() {
+						var dates = $( "#from, #to" ).datepicker({
+							defaultDate: "-3d",
+							dateFormat: 'yy/mm/dd',
+							changeMonth: true,
+							numberOfMonths: 2,
+							gotoCurrent: true,
+							onSelect: function( selectedDate ) {
+								var option = this.id == "from" ? "minDate" : "maxDate",
+									instance = $( this ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+								dates.not( this ).datepicker( "option", option, date );
+							}
+						});
+					});
+					</script>
 					<div class="filter">
 						<ul>
-					<fieldset>
-						<legend> Date. </legend>
-<div id="date_range">
-<form id="form_range" method="GET">
-<input type="hidden" name="order" value="<?php echo $order;?>" />
-<label for="from">From</label>
-<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
-<label for="to">to</label>
-<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
-<a href="#" id="down_range">絞込み</a>
-</form>
-</div>
-					</fieldset>
+						<fieldset>
+							<legend> Date. </legend>
+							<div id="date_range">
+							<form id="form_range" method="GET">
+							<input type="hidden" name="order" value="<?php echo $order;?>" />
+							<label for="from">From</label>
+							<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
+							<label for="to">to</label>
+							<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
+							<a href="#" id="down_range"><?php echo Kohana::lang('ui_admin.down_range');?></a>
+							</form>
+							</div>
+						</fieldset>
 						</ul>
 						<ul>
-					<fieldset>
-						<legend> Order. </legend>
-							<li><a <?php if($order == 0 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=0&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_desc');?></a></li>
-							<li><a <?php if($order == 1 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=1&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_asc');?></a></li>
-					</fieldset>
+						<fieldset>
+							<legend> Order. </legend>
+								<li><a <?php if($order == 0 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=0&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_desc');?></a></li>
+								<li><a <?php if($order == 1 ) echo "class=\"active\""; ?> href="?status=<?php echo $status;?>&order=1&from=<?php echo $from;?>&to=<?php echo $to;?>"><?php echo Kohana::lang('ui_admin.sort_asc');?></a></li>
+						</fieldset>
 						</ul>
 					</div>
-<!--
-					<! -- tab -- >
-					<div class="tab">
-						<ul>
-							<li><a href="#" onclick="commentAction('a','APPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.approve'));?></a></li>
-							<li><a href="#" onclick="commentAction('u','UNAPPROVE', '');"><?php echo strtoupper(Kohana::lang('ui_main.disapprove'));?></a></li>
-							<li><a href="#" onclick="commentAction('s','MARK AS SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
-							<li><a href="#" onclick="commentAction('n','MARK AS NOT SPAM', '');"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
-							<li><a href="#" onclick="commentAction('d','DELETE', '');"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
-							<?php 
-							if ($status == 's')
-							{
-								?>
-								<li><a href="#" onclick="commentAction('x','DELETE ALL SPAM', '000');"><?php echo strtoupper(Kohana::lang('ui_main.delete_spam'));?></a></li>
-								<?php
-							}
-							?>
-						</ul>
-					</div>
--->
 				</div>
 				<?php
 				if ($form_error)
