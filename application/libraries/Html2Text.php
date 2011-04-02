@@ -143,48 +143,48 @@ class Html2Text
      *  @see $replace
      */
     var $search = array(
-        "/\r/",                                  // Non-legal carriage return
-        "/[\n\t]+/",                             // Newlines and tabs
-        '/[ ]{2,}/',                             // Runs of spaces, pre-handling
-        '/<script[^>]*>.*?<\/script>/i',         // <script>s -- which strip_tags supposedly has problems with
-        '/<style[^>]*>.*?<\/style>/i',           // <style>s -- which strip_tags supposedly has problems with
+        "/\r/u",                                  // Non-legal carriage return
+        "/[\n\t]+/u",                             // Newlines and tabs
+        '/[ ]{2,}/u',                             // Runs of spaces, pre-handling
+        '/<script[^>]*>.*?<\/script>/iu',         // <script>s -- which strip_tags supposedly has problems with
+        '/<style[^>]*>.*?<\/style>/iu',           // <style>s -- which strip_tags supposedly has problems with
         //'/<!-- .* -->/',                         // Comments -- which strip_tags might have problem a with
-        '/<h[123][^>]*>(.*?)<\/h[123]>/ie',      // H1 - H3
-        '/<h[456][^>]*>(.*?)<\/h[456]>/ie',      // H4 - H6
-        '/<p[^>]*>/i',                           // <P>
-        '/<br[^>]*>/i',                          // <br>
-        '/<b[^>]*>(.*?)<\/b>/ie',                // <b>
-        '/<strong[^>]*>(.*?)<\/strong>/ie',      // <strong>
-        '/<i[^>]*>(.*?)<\/i>/i',                 // <i>
-        '/<em[^>]*>(.*?)<\/em>/i',               // <em>
-        '/(<ul[^>]*>|<\/ul>)/i',                 // <ul> and </ul>
-        '/(<ol[^>]*>|<\/ol>)/i',                 // <ol> and </ol>
-        '/<li[^>]*>(.*?)<\/li>/i',               // <li> and </li>
-        '/<li[^>]*>/i',                          // <li>
-        '/<a [^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/ie',
+        '/<h[123][^>]*>(.*?)<\/h[123]>/ieu',      // H1 - H3
+        '/<h[456][^>]*>(.*?)<\/h[456]>/ieu',      // H4 - H6
+        '/<p[^>]*>/iu',                           // <P>
+        '/<br[^>]*>/iu',                          // <br>
+        '/<b[^>]*>(.*?)<\/b>/ieu',                // <b>
+        '/<strong[^>]*>(.*?)<\/strong>/ieu',      // <strong>
+        '/<i[^>]*>(.*?)<\/i>/iu',                 // <i>
+        '/<em[^>]*>(.*?)<\/em>/iu',               // <em>
+        '/(<ul[^>]*>|<\/ul>)/iu',                 // <ul> and </ul>
+        '/(<ol[^>]*>|<\/ol>)/iu',                 // <ol> and </ol>
+        '/<li[^>]*>(.*?)<\/li>/iu',               // <li> and </li>
+        '/<li[^>]*>/iu',                          // <li>
+        '/<a [^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/ieu',
                                                  // <a href="">
-        '/<hr[^>]*>/i',                          // <hr>
-        '/(<table[^>]*>|<\/table>)/i',           // <table> and </table>
-        '/(<tr[^>]*>|<\/tr>)/i',                 // <tr> and </tr>
-        '/<td[^>]*>(.*?)<\/td>/i',               // <td> and </td>
-        '/<th[^>]*>(.*?)<\/th>/ie',              // <th> and </th>
-        '/&(nbsp|#160);/i',                      // Non-breaking space
-        '/&(quot|rdquo|ldquo|#8220|#8221|#147|#148);/i',
+        '/<hr[^>]*>/iu',                          // <hr>
+        '/(<table[^>]*>|<\/table>)/iu',           // <table> and </table>
+        '/(<tr[^>]*>|<\/tr>)/iu',                 // <tr> and </tr>
+        '/<td[^>]*>(.*?)<\/td>/iu',               // <td> and </td>
+        '/<th[^>]*>(.*?)<\/th>/ieu',              // <th> and </th>
+        '/&(nbsp|#160);/iu',                      // Non-breaking space
+        '/&(quot|rdquo|ldquo|#8220|#8221|#147|#148);/iu',
 		                                         // Double quotes
-        '/&(apos|rsquo|lsquo|#8216|#8217);/i',   // Single quotes
-        '/&gt;/i',                               // Greater-than
-        '/&lt;/i',                               // Less-than
-        '/&(amp|#38);/i',                        // Ampersand
-        '/&(copy|#169);/i',                      // Copyright
-        '/&(trade|#8482|#153);/i',               // Trademark
-        '/&(reg|#174);/i',                       // Registered
-        '/&(mdash|#151|#8212);/i',               // mdash
-        '/&(ndash|minus|#8211|#8722);/i',        // ndash
-        '/&(bull|#149|#8226);/i',                // Bullet
-        '/&(pound|#163);/i',                     // Pound sign
-        '/&(euro|#8364);/i',                     // Euro sign
-        '/&[^&;]+;/i',                           // Unknown/unhandled entities
-        '/[ ]{2,}/'                              // Runs of spaces, post-handling
+        '/&(apos|rsquo|lsquo|#8216|#8217);/iu',   // Single quotes
+        '/&gt;/iu',                               // Greater-than
+        '/&lt;/iu',                               // Less-than
+        '/&(amp|#38);/iu',                        // Ampersand
+        '/&(copy|#169);/iu',                      // Copyright
+        '/&(trade|#8482|#153);/iu',               // Trademark
+        '/&(reg|#174);/iu',                       // Registered
+        '/&(mdash|#151|#8212);/iu',               // mdash
+        '/&(ndash|minus|#8211|#8722);/iu',        // ndash
+        '/&(bull|#149|#8226);/iu',                // Bullet
+        '/&(pound|#163);/iu',                     // Pound sign
+        '/&(euro|#8364);/iu',                     // Euro sign
+        '/&[^&;]+;/iu',                           // Unknown/unhandled entities
+        '/[ ]{2,}/u'                              // Runs of spaces, post-handling
     );
 
     /**
