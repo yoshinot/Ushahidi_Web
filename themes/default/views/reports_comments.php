@@ -8,10 +8,10 @@
 		<div class="report-comment-box">
 	
 			<div>
-				<strong><?php echo $comment->comment_author; ?></strong>&nbsp;(<?php echo date('M j Y', strtotime($comment->comment_date)); ?>)
+				<strong><?php echo  html::specialchars($comment->comment_author); ?></strong>&nbsp;(<?php echo date('M j Y', strtotime($comment->comment_date)); ?>)
 			</div>
 			
-			<div><?php echo $comment->comment_description; ?></div>
+			<div><?php echo  html::specialchars($comment->comment_description); ?></div>
 	
 	  <div class="credibility">  
 	      <table class="rating-table" cellspacing="0" cellpadding="0" border="0">

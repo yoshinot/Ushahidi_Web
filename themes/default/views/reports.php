@@ -39,8 +39,8 @@
 				foreach ($incidents as $incident)
 				{
 					$incident_id = $incident->id;
-					$incident_title = $incident->incident_title;
-					$incident_description = $incident->incident_description;
+					$incident_title = html::specialchars($incident->incident_title);
+					$incident_description =  html::specialchars($incident->incident_description);
 					//$incident_category = $incident->incident_category;
 					// Trim to 150 characters without cutting words
 					// XXX: Perhaps delcare 150 as constant
@@ -49,7 +49,7 @@
 					$incident_date = date('H:i M d, Y', strtotime($incident->incident_date));
 					//$incident_time = date('H:i', strtotime($incident->incident_date));
 					$location_id = $incident->location_id;
-					$location_name = $incident->location->location_name;
+					$location_name =  html::specialchars($incident->location->location_name);
 					$incident_verified = $incident->incident_verified;
 
 					if ($incident_verified)

@@ -25,7 +25,7 @@
 	
 		<p class="report-when-where">
 			<span class="r_date"><?php echo $incident_time.' '.$incident_date; ?> </span>
-			<span class="r_location"><?php echo $incident_location; ?></span>
+			<span class="r_location"><?php echo  html::specialchars($incident_location); ?></span>
 		</p>
 	
 		<div class="report-category-list">
@@ -57,7 +57,7 @@
 		
 		<div class="report-description-text">
 			<h5><?php echo Kohana::lang('ui_main.reports_description');?></h5>
-			<?php echo $incident_description; 
+			<?php echo  $incident_description; 
                               Event::run('ushahidi_action.report_extra', $incident_id);
                         ?>
 			<?php
@@ -67,7 +67,9 @@
             <?php   
                 foreach ($incident_news as $news)
                     {
-                        echo '<a href="'.$news.'">'.$news.'</a> ';
+                        if(strpos($news, "http", 0) === 0){
+                           echo '<a href="'.$news.'">'.$news.'</a> ';
+                        }
                         if(strpos($news, "http://tasukeai.heroku.com/messages/show/", 0) === 0){
                             $show_comment = false;
                         }
@@ -161,9 +163,9 @@
 			<h4><?php echo Kohana::lang('ui_main.additional_reports');?></h4>
 			<?php foreach($incident_neighbors as $neighbor) { ?>
 			  <div class="rb_report">
-  			  <h5><a href="<?php echo url::site(); ?>reports/view/<?php echo $neighbor->id; ?>"><?php echo $neighbor->incident_title; ?></a></h5>
+  			  <h5><a href="<?php echo url::site(); ?>reports/view/<?php echo $neighbor->id; ?>"><?php echo  html::specialchars($neighbor->incident_title); ?></a></h5>
   			  <p class="r_date r-3 bottom-cap"><?php echo date('H:i M d, Y', strtotime($neighbor->incident_date)); ?></p>
-  			  <p class="r_location"><?php echo $neighbor->location_name.", ".round($neighbor->distance, 2); ?> Kms</p>
+  			  <p class="r_location"><?php echo  html::specialchars($neighbor->location_name).", ".round($neighbor->distance, 2); ?> Kms</p>
   			</div>
       <?php } ?>
 		</div>

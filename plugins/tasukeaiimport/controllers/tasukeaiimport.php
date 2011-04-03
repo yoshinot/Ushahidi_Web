@@ -38,6 +38,8 @@ class Tasukeaiimport_Controller extends Template_Controller {
                     $title = $matches[1];
                 }else if(preg_match("/\s*\[主催\]\s*([^\n]+)\n/", $message->body, $matches)){
                     $title = $matches[1];
+                }else if(preg_match("/\s*\[タイトル\]\s*([^\n]+)\n/", $message->body, $matches)){
+                    $title = $matches[1];
                 }else{
                     $title = "無題";
                     $active = 0;
