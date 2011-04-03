@@ -68,18 +68,59 @@
 						<li><a href="<?php echo url::site()."admin/messages/reporters/index/".$service_id; ?>">Reporters</a></li>
 					</ul>
 					<!-- tab -->
-					<div class="tab">
+					<script type="text/javascript"> 
+					$(function() {
+						$('#down_range').click(function() {
+							$('#form_range').submit();
+						});
+					});
+					$(function() {
+						var dates = $( "#from, #to" ).datepicker({
+							defaultDate: "-3d",
+							dateFormat: 'yy/mm/dd',
+							changeMonth: true,
+							numberOfMonths: 2,
+							gotoCurrent: true,
+							onSelect: function( selectedDate ) {
+								var option = this.id == "from" ? "minDate" : "maxDate",
+									instance = $( this ).data( "datepicker" ),
+									date = $.datepicker.parseDate(
+										instance.settings.dateFormat ||
+										$.datepicker._defaults.dateFormat,
+										selectedDate, instance.settings );
+								dates.not( this ).datepicker( "option", option, date );
+							}
+						});
+					});
+					</script>
+					<div class="filter">
 						<ul>
-							<li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
-							<li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
-							<li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+						<fieldset>
+							<legend> Date. </legend>
+								<div id="date_range">
+								<form id="form_range" method="GET">
+								<input type="hidden" name="filter" value="<?php echo $filter ?>">
+								<label for="from">From</label>
+								<input size="12" type="text" id="from" name="from" value="<?php if(isset($from)) echo $from; ?>"/>
+								<label for="to">to</label>
+								<input size="12" type="text" id="to" name="to" value="<?php if(isset($to)) echo $to; ?>"/>
+								<a href="#" id="down_range"><?php echo Kohana::lang('ui_admin.down_range');?></a>
+								</form>
+								</div>
+						</fieldset>
+						</ul>
+						<ul>
+					<fieldset>
+						<legend> Keyword. </legend>
               <li>
                 <form action="<?php echo url::site()."admin/messages/index/".$service_id ?>" method="GET"> 
                   <span style="padding-top: 0px; padding-bottom: 1px;" class="formspan">
+                    <input type="hidden" name="from" value="<?php echo $from ?>">
+                    <input type="hidden" name="to" value="<?php echo $to ?>">
                     <input type="hidden" name="type" value="<?php echo $type ?>">
                     <input type="hidden" name="level" value="<?php echo $level ?>">
                     ページ番号<input type="text" name="page" value="" size="3">
-                   フィルタ条件： <input type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
+                   フィルタ条件： <input size="15" type="text" name="filter" id="filtertext" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : "" ?>">
                     <input type="submit" />
                     現在担当のユーザ:<div id="user" style='float:right;'></div>
                   </span>
@@ -96,6 +137,7 @@
                   </script>
                 </form>
               </li>
+					</fieldset>
 						</ul>
 					</div>
 				</div>
@@ -132,14 +174,36 @@
 										<?php echo $pagination; ?>
 									</td>
 								</tr>
+          <tr class="tabs">
+									<td colspan="4">
+            <div class="tab">
+              <ul>
+                <li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+                <li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
+                <li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+              </ul>
+            </div>
+									</td>
+          </tr>
 								<tr>
-									<th class="col-1"><input id="checkall" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'message_id[]' )" /></th>
-									<th class="col-2"><?php echo Kohana::lang('ui_main.message_details');?></th>
-									<th class="col-3"><?php echo Kohana::lang('ui_main.date');?></th>
-									<th class="col-4"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-1"><?php echo Kohana::lang('ui_main.message_details');?></th>
+									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
+									<th class="col-3"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-4"><input id="checkall" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'message_id[]' )" /></th>
 								</tr>
 							</thead>
 							<tfoot>
+          <tr class="tabs">
+									<td colspan="4">
+            <div class="tab">
+              <ul>
+                <li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
+                <li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
+                <li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
+              </ul>
+            </div>
+									</td>
+          </tr>
 								<tr class="foot">
 									<td colspan="4">
 										<?php echo $pagination; ?>
@@ -169,7 +233,7 @@
 									$incident_id = $message->incident_id;
 									$message_description = text::auto_link($message->message);
 									$message_detail = nl2br(text::auto_link($message->message_detail));
-									$message_date = date('Y-m-d', strtotime($message->message_date));
+									$message_date = date('Y/m/d', strtotime($message->message_date));
 									$message_type = $message->message_type;
 									$message_level = $message->message_level;
 									
@@ -178,8 +242,7 @@
 									<tr <?php if ($message_level == "99") {
 										echo " class=\"spam_tr\"";
 									} ?>>
-										<td class="col-1"><input name="message_id[]" id="message" value="<?php echo $message_id; ?>" type="checkbox" class="check-box"/></td>
-										<td class="col-2">
+										<td class="col-1">
 											<div class="post">
 												<p><?php echo $message_description; ?></p>
 												<?php
@@ -256,8 +319,8 @@
 												?>
 											</ul>
 										</td>
-										<td class="col-3"><?php echo $message_date; ?></td>
-										<td class="col-4">
+										<td class="col-2"><?php echo $message_date; ?></td>
+										<td class="col-3">
 											<ul>
 												<?php
 												if ($incident_id != 0 && $message_type != 2) {
@@ -265,12 +328,13 @@
 												}
 												elseif ($message_type != 2)
 												{
-													echo "<li class=\"none-separator\"><a target=\"edit\"   href=\"". url::base() . 'admin/reports/edit?mid=' . $message_id ."\">Create Report?</a></li>";
+													echo "<li class=\"none-separator\"><a target=\"edit\"   href=\"". url::base() . 'admin/reports/edit?mid=' . $message_id ."\">".Kohana::lang('ui_admin.create_report')."</a></li>";
 												}
 												?>
 												<li><a href="javascript:messagesAction('d','DELETE','<?php echo(rawurlencode($message_id)); ?>')" class="del"><?php echo Kohana::lang('ui_main.delete');?></a></li>
 											</ul>
 										</td>
+										<td class="col-4"><input name="message_id[]" id="message" value="<?php echo $message_id; ?>" type="checkbox" class="check-box"/></td>
 									</tr>
 									<?php
 								}
@@ -278,17 +342,6 @@
 							</tbody>
 						</table>
 					</div>
-          <!-- tabs -->
-          <div class="tabs">
-            <!-- tab -->
-            <div class="tab">
-              <ul>
-                <li><a href="#" onClick="messagesAction('d', 'DELETE', '')"><?php echo strtoupper(Kohana::lang('ui_main.delete'));?></a></li>
-                <li><a href="#" onClick="messagesAction('s', 'SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.spam'));?></a></li>
-                <li><a href="#" onClick="messagesAction('n', 'NOT SPAM', '')"><?php echo strtoupper(Kohana::lang('ui_main.not_spam'));?></a></li>
-              </ul>
-            </div>
-          </div>
 				<?php print form::close(); ?>
 			</div>
 

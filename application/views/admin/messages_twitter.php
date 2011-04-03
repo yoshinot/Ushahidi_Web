@@ -57,10 +57,10 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th class="col-1"><input id="checkallincidents" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'message_id[]' )" /></th>
-									<th class="col-2"><?php echo Kohana::lang('ui_main.message_details');?></th>
-									<th class="col-3"><?php echo Kohana::lang('ui_main.date');?></th>
-									<th class="col-4"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-1"><?php echo Kohana::lang('ui_main.message_details');?></th>
+									<th class="col-2"><?php echo Kohana::lang('ui_main.date');?></th>
+									<th class="col-3"><?php echo Kohana::lang('ui_main.actions');?></th>
+									<th class="col-4"><input id="checkallincidents" type="checkbox" class="check-box" onclick="CheckAll( this.id, 'message_id[]' )" /></th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -94,8 +94,7 @@
 									$tweet_date = date('Y-m-d', strtotime($tweet->tweet_date));
 									?>
 									<tr>
-										<td class="col-1"><input name="message_id[]" id="message_id" value="<?php echo $tweet_id; ?>" type="checkbox" class="check-box"/></td>
-										<td class="col-2">
+										<td class="col-1">
 											<div class="post">
 												<p><?php echo $tweet_description; ?></p>
 											</div>
@@ -110,8 +109,8 @@
 												?>
 											</ul>
 										</td>
-										<td class="col-3"><?php echo $tweet_date; ?></td>
-										<td class="col-4">
+										<td class="col-2"><?php echo $tweet_date; ?></td>
+										<td class="col-3">
 											<ul>
 												<?php
 												if ($incident_id != 0) {
@@ -126,6 +125,7 @@
                                                 <!-- <a href="<?php echo url::site().'admin/messages/delete/'.$tweet_id ?>" onclick="return confirm("<?php echo Kohana::lang('ui_main.action_confirm');?>")" class="del"><?php echo Kohana::lang('ui_main.delete');?></a> --></li>
 											</ul>
 										</td>
+										<td class="col-4"><input name="message_id[]" id="message_id" value="<?php echo $tweet_id; ?>" type="checkbox" class="check-box"/></td>
 									</tr>
 									<?php
 								}

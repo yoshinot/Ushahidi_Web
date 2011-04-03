@@ -39,32 +39,65 @@ class Reports_Controller extends Admin_Controller
         $this->template->content = new View('admin/reports');
         $this->template->content->title = Kohana::lang('ui_admin.reports');
 
+		$r_from = "";
+		if( isset($_GET['from']) )
+		{
+			$r_from = $this->input->xss_clean($_GET['from']);
+		}
+		$r_to = "";
+		if( isset($_GET['to']) )
+		{
+			$r_to = $this->input->xss_clean($_GET['to']);
+		}
 
+		$filter_range = "";
+		if( isset($r_from) && empty($r_to) )
+		{
+			$filter_range = "incident_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d")." 23:59:00\"";
+		} elseif( isset($r_from) && isset($r_to) )
+		{
+			$filter_range = "incident_date between \"".date("Y-m-d",strtotime($r_from))." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		} elseif( empty($r_from) && isset($r_to) )
+		{
+			$filter_range = "incident_date between \"".date("Y-m-d",1)." 00:00:00\" and \"".date("Y-m-d",strtotime($r_to))." 23:59:00\"";
+		}
+
+		$filter = '';
+
+		$status = "0";
+		$filter_status = '';
         if (!empty($_GET['status']))
         {
-            $status = $_GET['status'];
+			$status = strtolower($_GET['status']);
+            if ($status == 'a')
+            {
+                $filter_status = 'incident_active = 0';
+            }
+            elseif ($status == 'v')
+            {
+                $filter_status = 'incident_verified = 0';
+            }
+			else
+			{
+				$status = "0";
+				$filter_status = '';
+			}
+        }
 
-            if (strtolower($status) == 'a')
-            {
-                $filter = 'incident_active = 0';
-            }
-            elseif (strtolower($status) == 'v')
-            {
-                $filter = 'incident_verified = 0';
-            }
-            else
-            {
-                $status = "0";
-                $filter = '1=1';
-            }
-        }
-        else
-        {
-            $status = "0";
-            $filter = "1=1";
-        }
+		$filter_via = '';
+		$via = "";
+		if(!empty($_GET['via']))
+		{
+			$tmp_via = intval($this->input->xss_clean($_GET['via']));
+			if ($tmp_via != 0)
+			{
+				$filter_via = 'incident_mode = '.$tmp_via;
+			}
+			$via = $tmp_via;
+		}
 
         // Get Search Keywords (If Any)
+		$filter_kw = '';
         if (isset($_GET['k']))
         {
             //  Brute force input sanitization
@@ -78,13 +111,19 @@ class Reports_Controller extends Admin_Controller
             // Phase 3 - Invoke Kohana's XSS cleaning mechanism just incase an outlier wasn't caught
             // in the first 2 steps
             $keyword_raw = $this->input->xss_clean($keyword_raw);
-            
-            $filter .= " AND (".$this->_get_searchstring($keyword_raw).")";
+
+			$filter_kw = "(".$this->_get_searchstring($keyword_raw).")";
         }
-        else
-        {
-            $keyword_raw = "";
-        }
+
+		// filter string build.
+        $filter = $filter_status;
+        $filter .= ((!empty($filter))? ((!empty($filter_via))? (" AND ".$filter_via):""):$filter_via);
+        $filter .= ((!empty($filter))? ((!empty($filter_kw))? (" AND ".$filter_kw):""):$filter_kw);
+        $filter .= ((!empty($filter))? ((!empty($filter_range))? (" AND ".$filter_range):""):$filter_range);
+		if (empty($filter))
+		{
+			$filter = "1=1";
+		}
 
         // check, has the form been submitted?
         $form_error = FALSE;
@@ -251,6 +290,22 @@ class Reports_Controller extends Admin_Controller
 
         }
 
+		$order = 0;
+		$order_string = "desc";
+		if( isset($_GET['order']) )
+		{
+			$order = intval($_GET['order']);
+			if ( $order == 0 )
+			{
+				$order_string = "desc";
+			} elseif ( $order == 1 ) {
+				$order_string = "asc";
+			} else {
+				$order = 0;
+				$order_string = "desc";
+			}
+		}
+
         // Pagination
         $pagination = new Pagination(array(
             'query_string'   => 'page',
@@ -261,11 +316,11 @@ class Reports_Controller extends Admin_Controller
 				->count_all()
             ));
 
-        $incidents = ORM::factory('incident')
-			->join('location', 'incident.location_id', 'location.id','INNER')
-			->where($filter)
-			->orderby('incident_dateadd', 'desc')
-			->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
+		$incidents = ORM::factory('incident')
+				->join('location', 'incident.location_id', 'location.id','INNER')
+				->where($filter)
+				->orderby('incident_date', $order_string)
+				->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);
 
         $location_ids = array();
         foreach ($incidents as $incident)
@@ -303,6 +358,10 @@ class Reports_Controller extends Admin_Controller
             $countries[$country->id] = $this_country;
         }
 
+		$this->template->content->from = $r_from;
+		$this->template->content->to = $r_to;
+		$this->template->content->order = $order;
+		$this->template->content->filter = $filter_range;
         $this->template->content->countries = $countries;
         $this->template->content->incidents = $incidents;
         $this->template->content->pagination = $pagination;
@@ -312,6 +371,9 @@ class Reports_Controller extends Admin_Controller
 
         // Total Reports
         $this->template->content->total_items = $pagination->total_items;
+
+		// via
+		$this->template->content->via = $via;
 
         // Status Tab
         $this->template->content->status = $status;
