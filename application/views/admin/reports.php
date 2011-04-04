@@ -283,7 +283,7 @@
 												<li class="none-separator"><?php echo Kohana::lang('ui_main.location');?>: <strong><?php echo $incident_location; ?></strong>, <strong><?php echo $countries[Kohana::config('settings.default_country')]; ?></strong></li>
 												<li><?php echo Kohana::lang('ui_main.submitted_by');?> <strong><?php echo $submit_by; ?></strong> via <strong><?php echo $submit_mode; ?></strong><?php
 												if($tasukeai){
-												    echo "<font color='red'>[助け合いJapan]</font>";
+												    echo "<font color='red'>[Tasukeai Japan]</font>";
 												}
 												
 												?></li>
