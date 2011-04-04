@@ -1,5 +1,6 @@
 .*swp
 .htaccess
+!*/.htaccess
 *~
 application/logs/*
 application/cache/*
