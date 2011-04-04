@@ -124,7 +124,6 @@ class Reports_Controller extends Admin_Controller
 		{
 			$filter = "1=1";
 		}
-
         // check, has the form been submitted?
         $form_error = FALSE;
         $form_saved = FALSE;
@@ -318,6 +317,7 @@ class Reports_Controller extends Admin_Controller
 
 		$incidents = ORM::factory('incident')
 				->join('location', 'incident.location_id', 'location.id','INNER')
+				->join('media', 'incident.id', 'media.incident_id','INNER')
 				->where($filter)
 				->orderby('incident_date', $order_string)
 				->find_all((int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset);

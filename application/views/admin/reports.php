@@ -222,7 +222,14 @@
 										$submit_mode = "LACONICA";
 										$submit_by = $incident->message->message_from;
 									}
-
+									$tasukeai = false;
+									foreach ($incident->media as $media)
+                                    {
+                                        $link = $media->media_link;
+                                        if(strpos($link, "http://tasukeai.heroku.com/messages/show/", 0) === 0){
+                                            $tasukeai = true;
+                                        }
+                                    }
 									$incident_location = $locations[$incident->location_id];
 
 									// Retrieve Incident Categories
@@ -261,7 +268,12 @@
 										$incident_translation .= "</div>";
 									}
 									?>
-									<tr>
+									<tr <?php
+									if($tasukeai){
+									    echo "style='background-color:#cccccc;'";
+									}
+									
+									?>>
 										<td class="col-1">
 											<div class="post">
 												<h4><a href="<?php echo url::site() . 'admin/reports/edit/' . $incident_id; ?>" class="more"><?php echo $incident_title; ?></a></h4>
@@ -269,7 +281,12 @@
 											</div>
 											<ul class="info">
 												<li class="none-separator"><?php echo Kohana::lang('ui_main.location');?>: <strong><?php echo $incident_location; ?></strong>, <strong><?php echo $countries[Kohana::config('settings.default_country')]; ?></strong></li>
-												<li><?php echo Kohana::lang('ui_main.submitted_by');?> <strong><?php echo $submit_by; ?></strong> via <strong><?php echo $submit_mode; ?></strong></li>
+												<li><?php echo Kohana::lang('ui_main.submitted_by');?> <strong><?php echo $submit_by; ?></strong> via <strong><?php echo $submit_mode; ?></strong><?php
+												if($tasukeai){
+												    echo "<font color='red'>[助け合いJapan]</font>";
+												}
+												
+												?></li>
 											</ul>
 											<ul class="links">
 												<li class="none-separator"><?php echo Kohana::lang('ui_main.categories');?>:<?php echo $incident_category; ?></li>
