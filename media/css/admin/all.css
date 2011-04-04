@@ -86,6 +86,7 @@ a:hover{ text-decoration:none;}
 	float:right;
 }
 .top ul li {
+	display:inline;
 	font-size:12px;
 	color:#fff;
 	padding:0 3px 0 10px;
