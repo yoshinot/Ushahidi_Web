@@ -92,7 +92,10 @@ a:hover{ text-decoration:none;}
 	background:url(../../img/admin/top-separator.gif) no-repeat 0 8px;
 	list-style:none;
 }
-.top ul li.none-separator { padding-left:0;}
+.top ul li.none-separator {
+    float:left;
+	padding-left:0;
+}
 .top ul li a{
 	color:#ffa9a9;
 }
