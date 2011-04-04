@@ -152,8 +152,7 @@
 				?>
 				<ul>
 					<li class="none-separator"> <?php echo Kohana::lang('ui_admin.welcome');echo $admin_name; ?>!</li>
-					<li class="none-separator"><a href="<?php echo url::site() ?>" title="View the home page">
-						<?php echo Kohana::lang('ui_admin.view_site');?></a>					
+					<li class="none-separator"><a href="<?php echo url::site() ?>" title="View the home page"><?php echo Kohana::lang('ui_admin.view_site');?></a>
 					<li class="none-separator"><a href="<?php echo url::site()."admin/profile/" ?>"><?php echo Kohana::lang('ui_admin.my_profile');?></a></li>
 					<li class="none-separotor"><a href="<?php echo url::site()."admin/";?>log_out"><?php echo Kohana::lang('ui_admin.logout');?></a></li>
 				</ul>
