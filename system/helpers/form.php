@@ -476,7 +476,7 @@ class form_Core {
 		if (empty($attr))
 			return '';
 
-		if (isset($attr['name']) AND empty($attr['id']))
+		if (isset($attr['name']) AND empty($attr['id']) AND strpos($attr['name'], '[') === FALSE)
 		{
 			if ($type === NULL AND ! empty($attr['type']))
 			{
