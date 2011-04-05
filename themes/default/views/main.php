@@ -8,7 +8,7 @@
 		</div>
 		<div class="help-box">
 		<p>このサイトは震災情報をみんなで集め公開しているサイトです。<br>
-		被災地復興を願うボランティアスタッフが運用しています。<a href="http://wiki.openstreetmap.org/wiki/JA:Sinsai_info_user_help">ご利用方法はこちら</a></p>
+		被災地復興を願うボランティアスタッフが運用しています。<a href="http://www.sinsai.info/ushahidi/page/index/4">ご利用方法はこちら</a></p>
 		</div>
 		<div class="mobile-box">
 		    <div class="mobile-box-qr">
