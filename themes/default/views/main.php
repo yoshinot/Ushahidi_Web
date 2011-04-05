@@ -33,7 +33,7 @@
 		
 			<ul id="category_switch" class="category-filters">
             <!--<li>カテゴリーを選択してください</li>-->
-				<li><a class="active" id="cat_0" href="#"><img style='float:left;' src="<?php echo url::base() ?>/media/img/all.png" width='16' height='16'/><span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
+				<li><a class="active" id="cat_0" href="#"><img style='float:left;margin-left:2px;margin-right:7px;' src="<?php echo url::base() ?>/media/img/all.png" width='16' height='16'/> <span class="category-title"><?php echo Kohana::lang('ui_main.all_categories');?></span></a></li>
 				<?php
 					foreach ($categories as $category => $category_info)
 					{
