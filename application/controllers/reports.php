@@ -609,6 +609,8 @@ class Reports_Controller extends Main_Controller {
 
 		$api_akismet = Kohana::config('settings.api_akismet');
 
+		$clientip = $_SERVER['X_FORWARDED_FOR']? $_SERVER['X_FORWARDED_FOR']:$_SERVER['REMOTE_ADDR'];
+
 		if ( !$id )
 		{
 
@@ -678,7 +680,7 @@ class Reports_Controller extends Main_Controller {
 							'email' => $post->comment_email,
 							'website' => "",
 							'body' => $post->comment_description,
-							'user_ip' => $_SERVER['REMOTE_ADDR']
+							'user_ip' => $clientip
 						);
 
 						$config = array(
@@ -732,7 +734,7 @@ class Reports_Controller extends Main_Controller {
 					$comment->comment_author = strip_tags($post->comment_author);
 					$comment->comment_description = strip_tags($post->comment_description);
 					$comment->comment_email = strip_tags($post->comment_email);
-					$comment->comment_ip = $_SERVER['REMOTE_ADDR'];
+					$comment->comment_ip = $clientip;
 					$comment->comment_date = date("Y-m-d H:i:s",time());
 
 					// Activate comment for now
@@ -934,6 +936,7 @@ class Reports_Controller extends Main_Controller {
 	{
 		$this->template = "";
 		$this->auto_render = FALSE;
+		$clientip = $_SERVER['X_FORWARDED_FOR']? $_SERVER['X_FORWARDED_FOR']:$_SERVER['REMOTE_ADDR'];
 
 		if (!$id)
 		{
@@ -967,14 +970,14 @@ class Reports_Controller extends Main_Controller {
 					{
 						$previous = ORM::factory('rating')
 												->where('incident_id',$id)
-												->where('rating_ip',$_SERVER['REMOTE_ADDR'])
+												->where('rating_ip',$clientip)
 												->find();
 					}
 					elseif ($type == 'comment')
 					{
 						$previous = ORM::factory('rating')
 												->where('comment_id',$id)
-												->where('rating_ip',$_SERVER['REMOTE_ADDR'])
+												->where('rating_ip',$clientip)
 												->find();
 					}
 
@@ -992,7 +995,7 @@ class Reports_Controller extends Main_Controller {
 					}
 
 					$rating->rating = $action;
-					$rating->rating_ip = $_SERVER['REMOTE_ADDR'];
+					$rating->rating_ip = $clientip;
 					$rating->rating_date = date("Y-m-d H:i:s",time());
 					$rating->save();
 
