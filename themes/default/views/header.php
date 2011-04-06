@@ -21,12 +21,20 @@ Event::run('ushahidi_action.header_scripts');
 <!-- searchbox -->
 <div id="searchbox">
 <!-- languages -->
-<?php echo $languages;?>
+<!-- <?php echo $languages;?> -->
 <!-- / languages -->
-
 <!-- searchform -->
 <?php echo $search; ?>
 <!-- / searchform -->
+<br sytle="clear:both;"/>
+<div id="nations">
+<?php
+$nations = array("ja_JP","en_US","ko_KR","zh_CN","de_DE","fr_FR","it_IT");
+foreach ($nations as $nation){
+    echo "<a href='?l=".$nation."'><img src='".url::base()."/media/img/flags/".$nation.".png' ></a>";
+}
+?>
+</div>
 
 </div>
 <!-- / searchbox -->
